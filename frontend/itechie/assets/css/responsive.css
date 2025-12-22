@@ -272,6 +272,13 @@
 		text-align: center;
 		margin-top: 20px;
 	}
+	.about-mask-bg-wrap-1 .shape-image {
+		position: relative;
+		width: 100%;
+		left: 0;
+		top: 0;
+		margin-bottom: 30px;
+	}
 }
 @media all and (max-width: 767px) {
 	.td-search-popup.active .search-form {

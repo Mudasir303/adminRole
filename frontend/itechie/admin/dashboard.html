@@ -782,7 +782,7 @@
                 <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
               </svg>
             </div>
-            <h2 class="card-title">Create New Blog</h2>
+            <h2 class="card-title" id="cardTitle">Create New Blog</h2>
           </div>
 
           <div class="form-group">
@@ -817,7 +817,7 @@
             <input id="image" type="file" accept="image/*">
           </div>
 
-          <button class="btn-primary" onclick="addBlog()">
+          <button class="btn-primary" id="publishBtn" onclick="handleBlogSubmit()">
             <svg class="icon" viewBox="0 0 24 24">
               <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
               <polyline points="14 2 14 8 20 8" />
@@ -826,6 +826,7 @@
             </svg>
             Publish Blog
           </button>
+          <button class="btn-danger" style="margin-left: 10px;" onclick="resetForm()">Cancel</button>
         </div>
 
         <!-- Manage Blogs Card -->
@@ -1004,6 +1005,8 @@
     // State
     const token = localStorage.getItem("token");
     const role = localStorage.getItem("role");
+    let allBlogs = []; // Store blogs for editing
+    let editingBlogId = null; // Track edit mode
 
     // Charts
     let userChartInstance = null;
@@ -1061,6 +1064,7 @@
       try {
         const res = await fetch(API, { headers: { "Authorization": "Bearer " + token } });
         const blogs = await res.json();
+        allBlogs = blogs; // Store globally
         renderBlogs(blogs);
         updateStats(blogs);
         renderCharts(blogs);
@@ -1075,14 +1079,49 @@
                         <h4 style="margin-bottom: 4px;">${blog.title}</h4>
                         <span style="font-size: 0.85rem; color: var(--text-muted);">${new Date(blog.createdAt).toLocaleDateString()} • ${blog.category || 'General'}</span>
                     </div>
-                    <div>
+                    <div style="display: flex; gap: 10px;">
+                        <button class="btn-primary" style="padding: 6px 12px; font-size: 0.85rem;" onclick="editBlog('${blog._id}')">Edit</button>
                         <button class="btn-danger" onclick="deleteBlog('${blog._id}')">Delete</button>
                     </div>
                 </div>
             `).join('');
     }
 
-    async function addBlog() {
+    // Populate form for editing
+    function editBlog(id) {
+      const blog = allBlogs.find(b => b._id === id);
+      if (!blog) return;
+
+      editingBlogId = id;
+      document.getElementById('title').value = blog.title;
+      document.getElementById('content').value = blog.content;
+      document.getElementById('author').value = blog.author || 'Admin';
+      document.getElementById('category').value = blog.category || 'Technology';
+
+      // Update Button Text
+      document.getElementById('publishBtn').innerHTML = `
+            <svg class="icon" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            Update Blog
+        `;
+      document.getElementById('cardTitle').innerText = 'Edit Blog';
+
+      // Scroll to form
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function resetForm() {
+      editingBlogId = null;
+      document.getElementById('title').value = '';
+      document.getElementById('content').value = '';
+      document.getElementById('image').value = '';
+      document.getElementById('publishBtn').innerHTML = `
+            <svg class="icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+            Publish Blog
+        `;
+      document.getElementById('cardTitle').innerText = 'Create New Blog';
+    }
+
+    async function handleBlogSubmit() {
       const title = document.getElementById('title').value;
       const content = document.getElementById('content').value;
       const author = document.getElementById('author').value || 'Admin';
@@ -1099,19 +1138,55 @@
       if (imageInput.files[0]) formData.append("image", imageInput.files[0]);
 
       try {
-        const res = await fetch(API, {
+        let url = API;
+        let method = "POST";
+
+        if (editingBlogId) {
+          url = `${API}/${editingBlogId}`;
+          method = "PUT";
+          // Note: If using FormData for PUT, backend must support mulitpart/form-data for PUT as well.
+          // If the existing 'upload.single' middleware is only on POST, we might need adjustments in backend. 
+          // Assuming the router logic I saw: router.put("/:id", auth, admin, ...) does NOT have 'upload.single'.
+          // So if sending image on update, it might fail or not be handled.
+          // For now, let's send JSON for update if no image is changed, or try FormData.
+          // Looking at backend: router.put does NOT have upload middleware. It accepts req.body.
+          // Use JSON for PUT.
+
+          const payload = {
+            title, content, author, category
+          };
+          // Image update not supported in current backend PUT route. Skipping image for update.
+          const res = await fetch(url, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": "Bearer " + token
+            },
+            body: JSON.stringify(payload)
+          });
+
+          if (res.ok) {
+            alert("Blog Updated!");
+            resetForm();
+            fetchBlogs();
+          } else {
+            alert("Error updating blog");
+          }
+          return;
+        }
+
+        // CREATE (POST) uses FormData
+        const res = await fetch(url, {
           method: "POST",
           headers: { "Authorization": "Bearer " + token },
           body: formData
         });
         if (res.ok) {
           alert("Blog Published!");
+          resetForm();
           fetchBlogs();
-          document.getElementById('title').value = '';
-          document.getElementById('content').value = '';
-          document.getElementById('image').value = '';
         }
-      } catch (err) { alert("Error publishing"); }
+      } catch (err) { alert("Error processsing request"); }
     }
 
     async function deleteBlog(id) {
