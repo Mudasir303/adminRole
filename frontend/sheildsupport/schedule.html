@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Schedule Meeting | Shield Support</title>
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+
+  <style>
+    :root {
+      --primary-color: #2563eb;
+      --primary-hover: #1d4ed8;
+      --bg-color: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --border-color: #e2e8f0;
+      --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      --radius-lg: 24px;
+      --radius-md: 12px;
+      --transition: all 0.2s ease-in-out;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      font-family: 'Inter', sans-serif;
+      color: var(--text-main);
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .schedule-wrapper {
+      max-width: 1050px;
+      width: 100%;
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    @media (min-width: 900px) {
+      .schedule-wrapper {
+        flex-direction: row;
+        min-height: 650px;
+      }
+    }
+
+    /* --- Sidebar --- */
+    .schedule-left {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #fff;
+      padding: 48px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    @media(min-width: 900px) {
+      .schedule-left {
+        width: 35%;
+        max-width: 380px;
+      }
+    }
+
+    /* Abstract Shapes */
+    .schedule-left::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      right: -80px;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, rgba(56, 189, 248, 0) 70%);
+      border-radius: 50%;
+      filter: blur(40px);
+    }
+
+    .schedule-left::after {
+      content: '';
+      position: absolute;
+      bottom: -50px;
+      left: -50px;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(99, 102, 241, 0) 70%);
+      border-radius: 50%;
+      filter: blur(40px);
+    }
+
+    .branding .logo-circle {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 24px;
+      color: #fff;
+      margin-bottom: 32px;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+      position: relative;
+      z-index: 2;
+    }
+
+    .branding h4 {
+      font-weight: 700;
+      margin-bottom: 16px;
+      font-size: 1.75rem;
+      letter-spacing: -0.02em;
+      position: relative;
+      z-index: 2;
+    }
+
+    .branding p {
+      color: #94a3b8;
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 32px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .feature-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    .feature-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      color: #e2e8f0;
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    .feature-list li svg {
+      width: 20px;
+      height: 20px;
+      fill: #38bdf8;
+      /* Light blue tick */
+    }
+
+    .security-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      color: #64748b;
+      margin-top: auto;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 8px 12px;
+      border-radius: 99px;
+      width: fit-content;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* --- Main Content --- */
+    .schedule-right {
+      flex: 1;
+      padding: 48px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header-area {
+      margin-bottom: 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .header-area h2 {
+      font-weight: 800;
+      font-size: 1.75rem;
+      color: var(--text-main);
+      letter-spacing: -0.03em;
+      margin: 0;
+    }
+
+    .step-badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--primary-color);
+      background: #eff6ff;
+      padding: 6px 12px;
+      border-radius: 99px;
+    }
+
+    /* --- Calendar UI --- */
+    .calendar-container {
+      background: #fff;
+    }
+
+    .calendar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .calendar-month-label {
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: var(--text-main);
+    }
+
+    .nav-btn-group {
+      display: flex;
+      gap: 8px;
+      background: #f1f5f9;
+      padding: 4px;
+      border-radius: 99px;
+    }
+
+    .calendar-nav-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: none;
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text-muted);
+      transition: var(--transition);
+    }
+
+    .calendar-nav-btn:hover {
+      background: #fff;
+      color: var(--primary-color);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .calendar-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0 4px;
+    }
+
+    .calendar-table th {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #94a3b8;
+      font-weight: 700;
+      padding-bottom: 16px;
+      text-align: center;
+    }
+
+    .calendar-day {
+      width: 44px;
+      height: 44px;
+      font-size: 0.95rem;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+      /* Bouncy */
+      color: var(--text-main);
+      position: relative;
+    }
+
+    /* Animation for appearing days */
+    @keyframes popIn {
+      from {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .calendar-day.animate {
+      animation: popIn 0.3s backwards;
+    }
+
+    .calendar-day:hover:not(.disabled):not(.past):not(.selected) {
+      background-color: #f1f5f9;
+      color: var(--primary-color);
+      transform: scale(1.1);
+    }
+
+    .calendar-day.selected {
+      background-color: var(--primary-color);
+      color: #fff;
+      box-shadow: 0 8px 16px -4px rgba(37, 99, 235, 0.4);
+      transform: scale(1.05);
+    }
+
+    /* Selected indicator dot */
+    .calendar-day.selected::after {
+      content: '';
+      position: absolute;
+      bottom: 6px;
+      width: 4px;
+      height: 4px;
+      background: #fff;
+      border-radius: 50%;
+    }
+
+    .calendar-day.past,
+    .calendar-day.disabled {
+      color: #cbd5e1;
+      /* Lighter grey */
+      cursor: not-allowed;
+      font-weight: 400;
+    }
+
+    /* --- Duration Cards --- */
+    .duration-selector h6 {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #94a3b8;
+      margin-bottom: 16px;
+      font-weight: 700;
+    }
+
+    .slot-length-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 20px;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      margin-bottom: 12px;
+      cursor: pointer;
+      transition: var(--transition);
+      background: #fff;
+    }
+
+    .slot-length-card:hover {
+      border-color: #93c5fd;
+      background: #eff6ff;
+      transform: translateX(4px);
+    }
+
+    .slot-length-card.active {
+      border-color: var(--primary-color);
+      background: #eff6ff;
+      box-shadow: 0 0 0 2px var(--primary-color) inset;
+      /* Inset border */
+    }
+
+    .slot-length-card .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .dot.red {
+      background-color: #ef4444;
+    }
+
+    .dot.blue {
+      background-color: #3b82f6;
+    }
+
+    .dot.yellow {
+      background-color: #facc15;
+    }
+
+    .slot-length-card span {
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--text-main);
+    }
+
+    /* --- Time Slots Grid --- */
+    .time-slot-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    @media (min-width: 992px) {
+      .time-slot-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .time-slot-btn {
+      padding: 14px;
+      border: 1px solid var(--border-color);
+      background: #fff;
+      border-radius: var(--radius-md);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-main);
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .time-slot-btn::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: var(--primary-color);
+      opacity: 0;
+      transition: opacity 0.2s;
+      z-index: 0;
+    }
+
+    .time-slot-btn>* {
+      position: relative;
+      z-index: 1;
+    }
+
+    .time-slot-btn:hover {
+      border-color: var(--primary-color);
+      color: var(--primary-color);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .time-slot-btn.selected {
+      background: var(--primary-color);
+      color: #fff;
+      border-color: var(--primary-color);
+      box-shadow: 0 8px 16px -4px rgba(37, 99, 235, 0.4);
+      transform: scale(1.02);
+    }
+
+    .time-slot-btn span.day-label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      opacity: 0.7;
+    }
+
+    /* --- Form Styling with Icons --- */
+    .form-group-icon {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .form-group-icon svg {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 18px;
+      height: 18px;
+      fill: #94a3b8;
+      transition: fill 0.2s;
+      pointer-events: none;
+    }
+
+    .form-control {
+      padding: 14px 16px 14px 48px;
+      /* Left padding for icon */
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: var(--transition);
+      background-color: #f8fafc;
+      color: var(--text-main);
+    }
+
+    .form-control:focus {
+      background-color: #fff;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+      outline: none;
+    }
+
+    .form-control:focus+svg,
+    .form-group-icon:focus-within svg {
+      fill: var(--primary-color);
+    }
+
+    .form-control::placeholder {
+      color: #94a3b8;
+      font-weight: 400;
+    }
+
+    /* --- Buttons --- */
+    .btn-primary {
+      background-color: var(--primary-color);
+      border: none;
+      padding: 14px 28px;
+      font-weight: 600;
+      border-radius: 12px;
+      transition: var(--transition);
+      box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+
+    .btn-outline-secondary {
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 12px 24px;
+      font-weight: 600;
+      border-radius: 12px;
+      background: transparent;
+    }
+
+    .btn-outline-secondary:hover {
+      background-color: #f1f5f9;
+      color: var(--text-main);
+      border-color: #cbd5e1;
+    }
+
+    /* --- Animations --- */
+    .fade-in {
+      animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Section Titles in Step 2 */
+    .section-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #94a3b8;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="schedule-wrapper">
+    <!-- LEFT PANEL: Branding & Info -->
+    <div class="schedule-left col-md-4 d-none d-md-flex">
+      <div class="branding">
+        <div class="logo-circle">
+          <!-- Simple SVG Logo Placeholder -->
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+          </svg>
+        </div>
+        <h4>Schedule a Meeting</h4>
+        <p>Choose a time for a consultation. Let's discuss your project goals.</p>
+
+        <ul class="feature-list">
+          <li>
+            <svg viewBox="0 0 24 24">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Expert Consultation
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            No Strings Attached
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            30-min Strategy Call
+          </li>
+        </ul>
+      </div>
+
+      <div class="security-badge">
+        <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor">
+          <path
+            d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z" />
+        </svg>
+        <span>Secure Scheduling</span>
+      </div>
+    </div>
+
+    <!-- RIGHT PANEL: Interactive Calendar -->
+    <div class="schedule-right col-md-8 col-12">
+
+      <div class="header-area">
+        <h2 id="mainTitle">Select a Date & Time</h2>
+        <div id="stepLabel" class="step-badge">Step 1 of 2</div>
+      </div>
+
+      <div id="scheduleAlert" class="alert alert-danger d-none fade-in" style="border-radius:12px;"></div>
+
+      <!-- STEP 1: Date & Duration -->
+      <div id="step1" class="fade-in">
+        <div class="row">
+          <!-- Calendar -->
+          <div class="col-lg-7 mb-4 mb-lg-0">
+            <div class="calendar-container">
+              <div class="calendar-header">
+                <div id="calendarMonthLabel" class="calendar-month-label"></div>
+                <!-- Clean Nav Arrows -->
+                <div class="nav-btn-group">
+                  <button id="prevMonthBtn" class="calendar-nav-btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M15 18l-6-6 6-6" />
+                    </svg>
+                  </button>
+                  <button id="nextMonthBtn" class="calendar-nav-btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M9 18l6-6-6-6" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <table class="calendar-table">
+                <thead>
+                  <tr>
+                    <th>Sun</th>
+                    <th>Mon</th>
+                    <th>Tue</th>
+                    <th>Wed</th>
+                    <th>Thu</th>
+                    <th>Fri</th>
+                    <th>Sat</th>
+                  </tr>
+                </thead>
+                <tbody id="calendarBody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Duration Selector -->
+          <div class="col-lg-5 ps-lg-4">
+            <div class="duration-selector">
+              <h6>Duration</h6>
+              <div class="slot-length-card" data-duration="45">
+                <div class="dot red"></div>
+                <span>45 min</span>
+              </div>
+              <div class="slot-length-card" data-duration="30">
+                <div class="dot blue"></div>
+                <span>30 min</span>
+              </div>
+              <div class="slot-length-card" data-duration="15">
+                <div class="dot yellow"></div>
+                <span>15 min</span>
+              </div>
+            </div>
+
+            <div class="mt-4 text-end">
+              <button id="goToStep2Btn" class="btn btn-primary w-100 py-3">
+                Continue
+                <span style="font-size:1.2em; vertical-align:middle; margin-left:5px;">&rarr;</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 2: Time Slots & Details -->
+      <div id="step2" class="d-none fade-in">
+        <div class="row h-100">
+          <!-- Time Slots -->
+          <div class="col-lg-5 mb-5 mb-lg-0">
+            <div class="section-label">Available Times</div>
+            <div id="confirmDateLabel" class="fw-bold mb-4 text-primary fs-5"></div>
+            <div id="timeSlotsContainer" class="time-slot-grid pe-2"></div>
+          </div>
+
+          <!-- Form with Icons -->
+          <div class="col-lg-7 ps-lg-4" style="border-left: 1px solid #f1f5f9;">
+            <div class="section-label">Your Details</div>
+
+            <form id="meetingDetailsForm">
+              <div class="form-group-icon">
+                <input id="fullNameInput" class="form-control" placeholder="Full Name" required>
+                <!-- User Icon -->
+                <svg viewBox="0 0 24 24">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+              </div>
+
+              <div class="form-group-icon">
+                <input id="emailInput" class="form-control" type="email" placeholder="Email Address" required>
+                <!-- Mail Icon -->
+                <svg viewBox="0 0 24 24">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                  <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+              </div>
+
+              <div class="form-group-icon">
+                <input id="subjectInput" class="form-control" placeholder="Meeting Subject" required>
+                <!-- Tag Icon -->
+                <svg viewBox="0 0 24 24">
+                  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+                  <line x1="7" y1="7" x2="7.01" y2="7"></line>
+                </svg>
+              </div>
+
+              <div class="form-group-icon">
+                <input id="phoneInput" class="form-control" placeholder="Phone Number" required>
+                <!-- Phone Icon -->
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.12 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                  </path>
+                </svg>
+              </div>
+
+              <div class="form-group-icon">
+                <input id="websiteInput" class="form-control" placeholder="Website URL" required>
+                <!-- Globe Icon -->
+                <svg viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="2" y1="12" x2="22" y2="12"></line>
+                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                  </path>
+                </svg>
+              </div>
+
+              <div class="d-flex justify-content-between mt-4 align-items-center">
+                <button type="button" id="backToStep1Btn" class="btn btn-outline-secondary border-0 ps-0 text-muted">
+                  &larr; Back
+                </button>
+                <button type="submit" class="btn btn-primary px-5">Confirm Booking</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    (function () {
+      const timeSlots = {
+        "45": ["07:30 pm", "08:15 pm", "09:00 pm", "09:45 pm", "10:30 pm", "11:15 pm"],
+        "30": ["07:30 pm", "08:00 pm", "08:30 pm", "09:00 pm", "09:30 pm"],
+        "15": ["07:30 pm", "07:45 pm", "08:00 pm", "08:15 pm", "08:30 pm"]
+      };
+
+      // Helper for Time Zone Conversion
+      function getAbsoluteDateFromIST(dateObj, timeStr) {
+        const [time, period] = timeStr.split(" ");
+        let [hours, minutes] = time.split(":").map(Number);
+        if (period === "pm" && hours !== 12) hours += 12;
+        if (period === "am" && hours === 12) hours = 0;
+
+        const y = dateObj.getFullYear();
+        const m = String(dateObj.getMonth() + 1).padStart(2, '0');
+        const d = String(dateObj.getDate()).padStart(2, '0');
+
+        // IST Offset is +05:30
+        const isoStr = `${y}-${m}-${d}T${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:00+05:30`;
+        return new Date(isoStr);
+      }
+
+      const months = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+      ];
+      const days = [
+        "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
+      ];
+
+      let currentMonth = new Date(); currentMonth.setDate(1);
+      let selectedDate = null, selectedDuration = null;
+      let selectedFullDateTime = null; // Stores precise local time object
+
+      const calendarBody = document.getElementById("calendarBody");
+      const calendarMonthLabel = document.getElementById("calendarMonthLabel");
+      const prevMonthBtn = document.getElementById("prevMonthBtn");
+      const nextMonthBtn = document.getElementById("nextMonthBtn");
+      const durationCards = document.querySelectorAll(".slot-length-card");
+      const timeSlotsContainer = document.getElementById("timeSlotsContainer");
+      const goToStep2Btn = document.getElementById("goToStep2Btn");
+      const backToStep1Btn = document.getElementById("backToStep1Btn");
+      const confirmDateLabel = document.getElementById("confirmDateLabel");
+      const step1 = document.getElementById("step1");
+      const step2 = document.getElementById("step2");
+      const stepLabel = document.getElementById("stepLabel");
+      const alertBox = document.getElementById("scheduleAlert");
+      const form = document.getElementById("meetingDetailsForm");
+
+      function showError(t) {
+        alertBox.textContent = t;
+        alertBox.classList.remove("d-none");
+        setTimeout(() => alertBox.classList.add("d-none"), 3000); // Auto hide
+      }
+      function clearError() { alertBox.classList.add("d-none") }
+
+      function renderCalendar() {
+        const y = currentMonth.getFullYear();
+        const m = currentMonth.getMonth();
+        calendarMonthLabel.textContent = months[m] + " " + y;
+        calendarBody.innerHTML = "";
+        const first = new Date(y, m, 1).getDay();
+        const total = new Date(y, m + 1, 0).getDate();
+        let row = document.createElement("tr");
+        const now = new Date(); now.setHours(0, 0, 0, 0);
+
+        for (let i = 0; i < first; i++) row.appendChild(document.createElement("td"));
+
+        for (let d = 1; d <= total; d++) {
+          let date = new Date(y, m, d);
+          let td = document.createElement("td");
+          let btn = document.createElement("div");
+          btn.textContent = d;
+          btn.className = "calendar-day animate"; // Add animate class for pop-in effect
+
+          // Stagger animation slightly
+          btn.style.animationDelay = `${d * 0.02}s`;
+
+          if (date < now) btn.classList.add("past");
+          if (date.getDay() == 0) btn.classList.add("disabled");
+
+          btn.onclick = function () {
+            if (btn.classList.contains("past") || btn.classList.contains("disabled")) return;
+            selectedDate = date;
+            document.querySelectorAll(".calendar-day").forEach(e => e.classList.remove("selected"));
+            btn.classList.add("selected");
+          };
+
+          td.appendChild(btn);
+          row.appendChild(td);
+          if (date.getDay() == 6) { calendarBody.appendChild(row); row = document.createElement("tr") }
+        }
+        if (row.children.length) calendarBody.appendChild(row);
+      }
+
+      document.addEventListener("DOMContentLoaded", renderCalendar);
+
+      prevMonthBtn.onclick = () => { currentMonth.setMonth(currentMonth.getMonth() - 1); renderCalendar(); }
+      nextMonthBtn.onclick = () => { currentMonth.setMonth(currentMonth.getMonth() + 1); renderCalendar(); }
+
+      durationCards.forEach(c => {
+        c.onclick = () => {
+          durationCards.forEach(x => x.classList.remove("active"));
+          c.classList.add("active");
+          selectedDuration = c.dataset.duration;
+        }
+      });
+
+      goToStep2Btn.onclick = () => {
+        if (!selectedDate) return showError("Please select a date first.");
+        if (!selectedDuration) return showError("Please select a duration.");
+        clearError();
+
+        // Update Step Indicator
+        stepLabel.textContent = "Step 2 of 2";
+
+        // Show Nice Date Label
+        confirmDateLabel.textContent = days[selectedDate.getDay()] + ", " + months[selectedDate.getMonth()] + " " + selectedDate.getDate();
+
+        timeSlotsContainer.innerHTML = "";
+
+        // Generate Slots with Time Zone Conversion
+        const slotsIST = timeSlots[selectedDuration];
+        slotsIST.forEach((istTimeStr, index) => {
+          const localDateObj = getAbsoluteDateFromIST(selectedDate, istTimeStr);
+          const localTimeStr = localDateObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+          const istDay = selectedDate.getDate();
+
+          let dayLabel = "";
+          // Robust next/prev day check
+          if (localDateObj.getDate() !== istDay) {
+            const diff = localDateObj.getDate() - istDay;
+            if (diff === 1 || diff < -20) dayLabel = "(+1 Day)";
+            else if (diff === -1 || diff > 20) dayLabel = "(-1 Day)";
+          }
+
+          const b = document.createElement("button");
+          b.type = "button";
+          b.className = "time-slot-btn fade-in";
+          b.style.animationDelay = `${index * 0.05}s`; // Stagger slots
+          b.innerHTML = `<div>${localTimeStr}</div><span class="day-label">${dayLabel}</span>`;
+
+          b.onclick = function () {
+            document.querySelectorAll(".time-slot-btn").forEach(e => e.classList.remove("selected"));
+            b.classList.add("selected");
+            selectedFullDateTime = localDateObj;
+          };
+          timeSlotsContainer.appendChild(b);
+        });
+
+        // Toggle Steps with Fade
+        step1.classList.add("d-none");
+        step2.classList.remove("d-none");
+      };
+
+      backToStep1Btn.onclick = () => {
+        step2.classList.add("d-none");
+        step1.classList.remove("d-none");
+        stepLabel.textContent = "Step 1 of 2";
+      };
+
+      form.onsubmit = e => {
+        e.preventDefault();
+        if (!selectedFullDateTime) return showError("Please select a time slot.");
+
+        const name = document.getElementById("fullNameInput").value.trim();
+        const email = document.getElementById("emailInput").value.trim();
+        const subject = document.getElementById("subjectInput").value.trim();
+        const website = document.getElementById("websiteInput").value.trim();
+        const phone = document.getElementById("phoneInput").value.trim();
+
+        if (!name || !email || !subject || !phone || !website) return showError("Please fill in all required fields.");
+
+        // Show Loading State
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalBtnText = submitBtn.textContent;
+        submitBtn.textContent = "Booking...";
+        submitBtn.disabled = true;
+
+        // Data Storage
+        const meetingData = {
+          name, email, subject, website, phone,
+          date: selectedFullDateTime.toDateString(),
+          time: selectedFullDateTime.toLocaleTimeString(),
+          isoDate: selectedFullDateTime.toISOString(), // Changed key to match backend
+          duration: selectedDuration,
+          timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
+        };
+        // Send to Backend
+        fetch('http://localhost:5000/api/meetings', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(meetingData)
+        })
+          .then(response => {
+            if (!response.ok) throw new Error("Failed to save booking");
+            return response.json();
+          })
+          .then(data => {
+            console.log("Booking Saved to DB:", data);
+
+            // Save to LocalStorage for persistence/backup
+            localStorage.setItem("scheduledMeeting", JSON.stringify(meetingData));
+
+            // Google Calendar Link
+            const start = selectedFullDateTime;
+            const end = new Date(start.getTime() + parseInt(selectedDuration) * 60000);
+            function fmt(d) { return d.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z" }
+
+            const url = "https://calendar.google.com/calendar/r/eventedit?" +
+              "text=" + encodeURIComponent("Meeting - " + subject) +
+              "&details=" + encodeURIComponent(`Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nWebsite: ${website}`) +
+              "&dates=" + fmt(start) + "/" + fmt(end);
+
+            // Open Calendar & Reset
+            window.open(url, "_blank");
+            alert("Meeting scheduled successfully!");
+            location.reload();
+          })
+          .catch(err => {
+            console.error(err);
+            showError("Server Error: Could not save booking. Please try again.");
+            submitBtn.textContent = originalBtnText;
+            submitBtn.disabled = false;
+          });
+      };
+
+    })();
+  </script>
+
+  <style>
+    /* Mobile Override */
+    @media(max-width:767px) {
+      .schedule-wrapper {
+        margin: 0;
+        border-radius: 0;
+        min-height: 100vh;
+        border: none;
+      }
+
+      body {
+        padding: 0;
+        background: #fff;
+      }
+
+      .branding {
+        margin-bottom: 24px;
+        text-align: center;
+      }
+
+      .branding .logo-circle {
+        margin: 0 auto 16px;
+      }
+
+      .schedule-left {
+        display: none;
+      }
+
+      /* keep hidden on mobile for simplicity */
+      .schedule-right {
+        padding: 24px 20px;
+      }
+
+      /* On mobile, stack cols */
+      .col-lg-5,
+      .col-lg-7 {
+        padding-left: 0 !important;
+        border-left: none !important;
+      }
+
+      .time-slot-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+      }
+    }
+  </style>
+</body>
+
+</html>

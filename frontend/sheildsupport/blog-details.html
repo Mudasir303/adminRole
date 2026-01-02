@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog Details - Shield Support</title>
+  <meta name="description" content="Read our latest insights on technology, security, and digital transformation.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="assets/css/animate.min.css" />
+  <link rel="stylesheet" href="assets/css/fontawesome.min.css" />
+  <link rel="stylesheet" href="assets/css/custom-icon.css" />
+  <link rel="stylesheet" href="assets/css/nice-select.min.css" />
+  <link rel="stylesheet" href="assets/css/magnific.min.css" />
+  <link rel="stylesheet" href="assets/css/owl.min.css" />
+  <link rel="stylesheet" href="assets/css/slick.min.css" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/responsive.css" />
+  <link rel="stylesheet" href="assets/css/masks.css" />
+
+
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --secondary: #8b5cf6;
+      --accent: #ec4899;
+      --success: #10b981;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+      --info: #3b82f6;
+      --bg-dark: #0f172a;
+      --bg-card: rgba(30, 41, 59, 0.85);
+      --bg-input: rgba(51, 65, 85, 0.6);
+      --text-primary: #f1f5f9;
+      --text-secondary: #cbd5e1;
+      --text-muted: #94a3b8;
+      --border: rgba(148, 163, 184, 0.2);
+      --shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+      --shadow-lg: 0 25px 60px rgba(0, 0, 0, 0.5);
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+      min-height: 100vh;
+      color: var(--text-primary);
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Animated background gradient */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 50%);
+      animation: gradientShift 20s ease infinite;
+      z-index: -1;
+    }
+
+    @keyframes gradientShift {
+
+      0%,
+      100% {
+        transform: translate(0, 0) rotate(0deg);
+      }
+
+      50% {
+        transform: translate(-20px, -20px) rotate(180deg);
+      }
+    }
+
+    /* Floating orbs */
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.3;
+      animation: float 20s ease-in-out infinite;
+      z-index: -1;
+    }
+
+    .orb-1 {
+      width: 400px;
+      height: 400px;
+      background: var(--primary);
+      top: -200px;
+      left: -200px;
+      animation-delay: 0s;
+    }
+
+    .orb-2 {
+      width: 300px;
+      height: 300px;
+      background: var(--secondary);
+      bottom: -150px;
+      right: -150px;
+      animation-delay: 5s;
+    }
+
+    .orb-3 {
+      width: 250px;
+      height: 250px;
+      background: var(--accent);
+      top: 50%;
+      right: -125px;
+      animation-delay: 10s;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      33% {
+        transform: translate(30px, -30px) scale(1.1);
+      }
+
+      66% {
+        transform: translate(-20px, 20px) scale(0.9);
+      }
+    }
+
+    /* Blog Details Section */
+    .blog-details-area {
+      padding: 120px 0;
+    }
+
+    .blog-details-content {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 40px;
+      margin-bottom: 40px;
+      backdrop-filter: blur(10px);
+    }
+
+    .blog-details-thumb {
+      margin-bottom: 30px;
+      border-radius: 15px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .blog-details-thumb img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+
+    .blog-meta {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 20px;
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    .meta-item i {
+      color: var(--primary);
+    }
+
+    .blog-title {
+      font-size: 36px;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 25px;
+    }
+
+    .blog-content p {
+      margin-bottom: 20px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      font-size: 16px;
+    }
+
+    .blog-content h3 {
+      font-size: 24px;
+      color: var(--text-primary);
+      margin: 30px 0 15px;
+    }
+
+    .blog-content ul {
+      list-style: disc;
+      margin-left: 20px;
+      margin-bottom: 20px;
+      color: var(--text-secondary);
+    }
+
+    .blog-content ul li {
+      margin-bottom: 10px;
+      line-height: 1.6;
+    }
+
+    blockquote {
+      background: rgba(99, 102, 241, 0.1);
+      border-left: 4px solid var(--primary);
+      padding: 20px;
+      margin: 30px 0;
+      border-radius: 0 10px 10px 0;
+      font-style: italic;
+      color: var(--text-primary);
+    }
+
+    /* Sidebar - SCOPED to blog-details-area avoids footer conflict */
+    .blog-details-area .widget {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 30px;
+      margin-bottom: 30px;
+      backdrop-filter: blur(10px);
+    }
+
+    .blog-details-area .widget-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 25px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+
+    .blog-details-area .widget-title::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 50px;
+      height: 2px;
+      background: var(--primary);
+    }
+
+    .recent-post-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .recent-post-list li:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .post-thumb {
+      width: 80px;
+      height: 80px;
+      border-radius: 10px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .post-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .post-content h6 {
+      font-size: 15px;
+      line-height: 1.4;
+      margin-bottom: 8px;
+    }
+
+    .post-content a {
+      color: var(--text-primary);
+      transition: 0.3s;
+    }
+
+    .post-content a:hover {
+      color: var(--primary);
+    }
+
+    .post-date {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 991px) {
+      .blog-details-content {
+        padding: 25px;
+      }
+
+      .blog-title {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+
+<body class="sc5">
+  <!-- preloader area start -->
+  <div class="preloader" id="preloader">
+    <div class="preloader-inner">
+      <div class="spinner">
+        <div class="dot1"></div>
+        <div class="dot2"></div>
+      </div>
+    </div>
+  </div>
+  <!-- preloader area end -->
+
+  <!-- search popup start-->
+  <div class="td-search-popup" id="td-search-popup">
+    <form action="#" class="search-form">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Search....." />
+      </div>
+      <button type="submit" class="submit-btn">
+        <i class="fa fa-search"></i>
+      </button>
+    </form>
+  </div>
+  <!-- search popup end-->
+  <div class="body-overlay" id="body-overlay"></div>
+
+  <!-- Floating orbs -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <!-- navbar start -->
+  <div class="navbar-top">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <ul class="topbar-right text-md-start text-center">
+            <li class="d-none d-none d-lg-inline-block">
+              <p>
+                <i class="far fa-clock"></i> Opening Hour 9:00am - 10:00pm
+              </p>
+            </li>
+            <li>
+              <p>
+                <i class="far fa-envelope"></i>
+                <a href="mailto:care@shieldsupportllc.com">care@shieldsupportllc.com</a>
+              </p>
+            </li>
+          </ul>
+        </div>
+        <div class="col-sm-6">
+          <ul class="topbar-right text-md-end text-center">
+            <li class="d-none d-none d-lg-inline-block">
+              <p>Hot Line: <span>+1 (732) 702-7324</span></p>
+            </li>
+            <li class="social-area">
+              <p class="d-inline-block">Follow Us On:</p>
+              <a href="#"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+              <a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+              <a href="#"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+              <a href="#"><i class="fab fa-pinterest" aria-hidden="true"></i></a>
+              <a href="#"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <nav class="navbar navbar-area navbar-area-1 navbar-expand-lg">
+    <div class="container nav-container navbar-bg">
+      <div class="responsive-mobile-menu">
+        <button class="menu toggle-btn d-block d-lg-none" data-target="#Iitechie_main_menu" aria-expanded="false"
+          aria-label="Toggle navigation">
+          <span class="icon-left"></span>
+          <span class="icon-right"></span>
+        </button>
+      </div>
+      <div class="logo">
+        <a href="index.html"><img src="assets/img/SheildSupportLogo.png" alt="img" /></a>
+      </div>
+      <div class="collapse navbar-collapse" id="Iitechie_main_menu">
+        <ul class="navbar-nav menu-open text-lg-end">
+          <li>
+            <a href="index.html">Home</a>
+          </li>
+          <li class="menu-item-has-children">
+            <a href="#">Services</a>
+            <ul class="sub-menu">
+              <li><a href="service-personal.html">Personal Help Desk</a></li>
+              <li><a href="service-backend.html">Backend Support</a></li>
+              <li><a href="service-cyber.html">Cyber Security</a></li>
+              <li><a href="service-digital.html">Digital Marketing</a></li>
+              <li><a href="service-dedicated.html">Dedicated Resource Services</a></li>
+              <li><a href="service-brand.html">Brand Design & Strategy</a></li>
+              <li><a href="service-development.html">Web & App Development</a></li>
+              <li><a href="service-hosting.html">Hosting</a></li>
+              <li><a href="service-staffing.html">Staffing & Recruitment</a></li>
+            </ul>
+          </li>
+          <li class="menu-item-has-children">
+            <a href="service-staffing.html">Staffing</a>
+            <ul class="sub-menu">
+              <li><a href="staffing-services/noc-staffing.html">NOC</a></li>
+              <li><a href="staffing-services/cyber-security-staffing.html">Cyber Security</a></li>
+              <li><a href="staffing-services/cloud-computing-staffing.html">Cloud Computing</a></li>
+              <li><a href="staffing-services/help-desk-staffing.html">Help Desk</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="about.html">About Us</a>
+          </li>
+          <li>
+            <a href="blog-details.html">Blog</a>
+          </li>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <!-- <li> <a href="account.html">Account</a></li> -->
+        </ul>
+      </div>
+      <div class="nav-right-part nav-right-part-desktop align-self-center">
+        <a class="btn btn-base" href="schedule.html">Schedule
+          Meeting</a>
+      </div>
+    </div>
+  </nav>
+  <!-- navbar end -->
+
+  <!-- breadcrumb area start -->
+  <section class="breadcrumb-area" style="background-image: url('assets/img/bg/2.png');">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="breadcrumb-inner">
+            <h1 class="page-title">Blog Details</h1>
+            <ul class="page-list">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="blog-details.html">Blog</a></li>
+              <li>Details</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- breadcrumb area end -->
+
+  <!-- Blog Details Section -->
+  <section class="blog-details-area">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8" id="blogContentContainer">
+          <!-- Loading State -->
+          <div class="text-center py-5">
+            <div class="spinner-border text-primary" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="widget">
+            <h4 class="widget-title">Recent Posts</h4>
+            <ul class="recent-post-list" id="recentPostsContainer">
+              <!-- Recent posts will be loaded here -->
+            </ul>
+          </div>
+
+          <div class="widget">
+            <h4 class="widget-title">Categories</h4>
+            <ul class="recent-post-list">
+              <li><a href="blog.html?category=Technology">Technology</a></li>
+              <li><a href="blog.html?category=Security">Cyber Security</a></li>
+              <li><a href="blog.html?category=Services">Managed Services</a></li>
+              <li><a href="blog.html?category=News">Company News</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- footer area start -->
+  <footer class="footer-area bg-black bg-cover" style="background-image: url('assets/img/bg/2.png')">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-md-6">
+          <div class="widget widget_about">
+            <h4 class="widget-title">About Company</h4>
+            <div class="details">
+              <p>We are a leading provider of IT and support in the United States.</p>
+              <p class="mt-2 text-white"><strong>USA Office</strong></p>
+              <p>2035 Sunset Lake Road, Suite B-2, Newark, DE 19702</p>
+              <p class="mt-2 text-white"><strong>Malaysia Office</strong></p>
+              <p>RR Gemini Services No-7 Jalan Kesum 24/37 seksyen, 24 Shah Alam Selangor, Malaysia-40300</p>
+              <ul class="social-media">
+                <li><a class="facebook" href="#"><i class="fab fa-facebook-f"></i></a></li>
+                <li><a class="twitter" href="#"><i class="fab fa-twitter"></i></a></li>
+                <li><a class="instagram" href="#"><i class="fab fa-instagram"></i></a></li>
+                <li><a class="youtube" href="#"><i class="fab fa-youtube"></i></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="widget widget_nav_menu">
+            <h4 class="widget-title">Service</h4>
+            <ul>
+              <li><a href="service-personal.html">Personal Help Desk</a></li>
+              <li><a href="service-backend.html">Backend Support</a></li>
+              <li><a href="service-cyber.html">Cyber Security</a></li>
+              <li><a href="service-digital.html">Digital Marketing</a></li>
+              <li><a href="service-staffing.html">Staffing Services</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="widget widget_nav_menu">
+            <h4 class="widget-title">Useful Links</h4>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="service.html">Services</a></li>
+              <li><a href="blog-details.html">Blog</a></li>
+              <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="widget widget_subscribe">
+            <h4 class="widget-title">Contact us</h4>
+            <div class="single-input-inner style-border style-bg-none">
+              <input type="text" placeholder="Your Email" />
+              <button><i class="fa fa-arrow-right"></i></button>
+            </div>
+            <label><input type="checkbox" /> By checking this, you agree to our Terms & Data Policy.</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom text-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 align-self-center">
+            <p>© 2025 Shield Support LLC. All Rights Reserved</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- footer area end -->
+
+
+  <!-- back to top area start -->
+  <div class="back-to-top">
+    <span class="back-top"><i class="fa fa-angle-up"></i></span>
+  </div>
+  <!-- back to top area end -->
+
+  <!-- Scripts -->
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/bootstrap.min.js"></script>
+  <script src="assets/js/fontawesome.min.js"></script>
+  <script src="assets/js/nice-select.min.js"></script>
+  <script src="assets/js/magnific.min.js"></script>
+  <script src="assets/js/isolate.min.js"></script>
+  <script src="assets/js/imageload.min.js"></script>
+  <script src="assets/js/owl.min.js"></script>
+  <script src="assets/js/slick.min.js"></script>
+  <script src="assets/js/tweenmax.min.js"></script>
+  <script src="assets/js/waypoint.js"></script>
+  <script src="assets/js/counterup.js"></script>
+  <script src="assets/js/main.js"></script>
+
+  <script>
+    const API_URL = "http://localhost:5000/api/blogs";
+    const BACKEND_URL = "http://localhost:5000";
+
+    // Fallback Data if API fails
+    const FALLBACK_BLOGS = [
+      {
+        _id: "1",
+        title: "The Importance of Cyber Security in 2025",
+        content: `
+             <p>As we navigate the complexities of the digital age, cyber security remains a paramount concern for businesses and individuals alike. In 2025, the threat landscape continues to evolve with more sophisticated attacks utilizing AI and machine learning.</p>
+             <p>At Shield Support, we understand that a proactive defense strategy is the best offense. Businesses must implement multi-factor authentication, regular security audits, and employee training to mitigate risks.</p>
+             <h3>Key Threats to Watch For</h3>
+             <ul>
+               <li><strong>Ransomware as a Service (RaaS):</strong> Attackers are becoming more organized, renting out ransomware tools to affiliates.</li>
+               <li><strong>Phishing Attacks:</strong> Social engineering remains a top vector for initial compromise.</li>
+               <li><strong>IoT Vulnerabilities:</strong> With more connected devices, the attack surface expands significantly.</li>
+             </ul>
+             <blockquote>"Security is not a product, but a process." - Bruce Schneier</blockquote>
+             <p>Protecting your digital assets requires a comprehensive approach, combining technology, processes, and people. Partnering with a managed security service provider (MSSP) like Shield Support can provide the expertise and tools needed to stay ahead of threats.</p>
+           `,
+        image: "assets/img/blog/2.png",
+        author: "Admin",
+        category: "Security",
+        createdAt: "2025-10-15T00:00:00.000Z"
+      },
+      {
+        _id: "2",
+        title: "Maximizing Efficiency with Managed IT Services",
+        content: `
+             <p>In a competitive business environment, efficiency is key to staying ahead. Managed IT services offer a strategic way to optimize your technology infrastructure while reducing costs and improving reliability.</p>
+             <p>By outsourcing IT management to experts, internal teams can focus on core business objectives rather than troubleshooting technical issues. This shift not only boosts productivity but also ensures that systems are always up-to-date and secure.</p>
+             <h3>Benefits of Managed IT</h3>
+             <ul>
+               <li><strong>Cost Predictability:</strong> Flat-rate monthly fees help in budgeting and avoiding unexpected expenses.</li>
+               <li><strong>24/7 Monitoring:</strong> Proactive monitoring detects and resolves issues before they impact business operations.</li>
+               <li><strong>Access to Expertise:</strong> Gain access to a team of specialized professionals without the overhead of hiring full-time staff.</li>
+             </ul>
+             <p>Shield Support offers tailored managed IT solutions that grow with your business. From help desk support to cloud migration, we have you covered.</p>
+           `,
+        image: "assets/img/blog/1.png",
+        author: "John Doe",
+        category: "Services",
+        createdAt: "2025-11-20T00:00:00.000Z"
+      },
+      {
+        _id: "3",
+        title: "Cloud Computing Trends Transforming Business",
+        content: `
+             <p>Cloud computing has revolutionized the way we do business, offering scalability, flexibility, and collaboration opportunities that were previously unimaginable. As we look to the future, several trends are shaping the cloud landscape.</p>
+             <h3>Hybrid and Multi-Cloud Strategies</h3>
+             <p>Organizations are increasingly adopting hybrid and multi-cloud strategies to avoid vendor lock-in and optimize performance. This approach allows flexibility in choosing the best services from different providers.</p>
+             <h3>Edge Computing</h3>
+             <p>With the rise of IoT, edge computing is gaining traction. Processing data closer to where it is generated reduces latency and bandwidth usage, enabling real-time insights.</p>
+             <p>Shield Support helps businesses navigate the cloud journey, ensuring seamless integration and security across all platforms.</p>
+           `,
+        image: "assets/img/blog/3.png",
+        author: "Jane Smith",
+        category: "Technology",
+        createdAt: "2025-12-05T00:00:00.000Z"
+      }
+    ];
+
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+    function formatDate(dateString) {
+      const options = { year: 'numeric', month: 'long', day: 'numeric' };
+      return new Date(dateString).toLocaleDateString('en-US', options);
+    }
+
+    function getImageUrl(imagePath) {
+      if (!imagePath) return 'assets/img/blog/2.png';
+      if (imagePath.startsWith('http')) return imagePath;
+      if (imagePath.startsWith('assets')) return imagePath; // Local assets
+      return `${BACKEND_URL}${imagePath}`;
+    }
+
+    async function fetchBlogDetails() {
+      const blogId = getQueryParam('id');
+      const container = document.getElementById('blogContentContainer');
+      const recentContainer = document.getElementById('recentPostsContainer');
+
+      try {
+        let blog;
+        let recentBlogs;
+
+        // Try fetching from API
+        try {
+          const res = await fetch(`${API_URL}/${blogId}`);
+          if (res.ok) {
+            blog = await res.json();
+          } else {
+            throw new Error("API not found");
+          }
+
+          // Fetch recent
+          const resRecent = await fetch(API_URL);
+          if (resRecent.ok) {
+            recentBlogs = await resRecent.json();
+          }
+        } catch (e) {
+          console.log("API failed, using fallback data");
+          // Fallback logic
+          blog = FALLBACK_BLOGS.find(b => b._id === blogId) || FALLBACK_BLOGS[0]; // Default to first if ID not found/provided
+          recentBlogs = FALLBACK_BLOGS;
+        }
+
+        if (!blog) {
+          container.innerHTML = `<div class="alert alert-danger">Blog post not found.</div>`;
+          return;
+        }
+
+        // Render Blog Details
+        document.title = `${blog.title} - Shield Support`;
+        const imageUrl = getImageUrl(blog.image);
+
+        container.innerHTML = `
+          <div class="blog-details-content">
+            <div class="blog-details-thumb">
+              <img src="${imageUrl}" alt="${blog.title}" onerror="this.src='assets/img/blog/2.png'">
+            </div>
+            <div class="blog-meta">
+              <div class="meta-item">
+                <i class="fas fa-user"></i>
+                <span>${blog.author || 'Admin'}</span>
+              </div>
+              <div class="meta-item">
+                 <i class="fas fa-calendar-alt"></i>
+                 <span>${formatDate(blog.createdAt)}</span>
+              </div>
+              <div class="meta-item">
+                 <i class="fas fa-tag"></i>
+                 <span>${blog.category || 'Technology'}</span>
+              </div>
+            </div>
+            <h2 class="blog-title">${blog.title}</h2>
+            <div class="blog-content">
+              ${blog.content}
+            </div>
+          </div>
+        `;
+
+        // Render Recent Posts (exclude current)
+        const recentHtml = recentBlogs
+          .filter(b => b._id !== blog._id)
+          .slice(0, 3)
+          .map(b => `
+                <li>
+                    <div class="post-thumb">
+                        <a href="blog-details.html?id=${b._id}">
+                            <img src="${getImageUrl(b.image)}" alt="${b.title}" onerror="this.src='assets/img/blog/2.png'">
+                        </a>
+                    </div>
+                    <div class="post-content">
+                        <h6><a href="blog-details.html?id=${b._id}">${b.title}</a></h6>
+                        <span class="post-date">${formatDate(b.createdAt)}</span>
+                    </div>
+                </li>
+            `).join('');
+
+        recentContainer.innerHTML = recentHtml || '<li>No recent posts</li>';
+
+      } catch (error) {
+        console.error('Error:', error);
+        container.innerHTML = `<div class="alert alert-danger">Failed to load content.</div>`;
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', fetchBlogDetails);
+  </script>
+</body>
+
+</html>

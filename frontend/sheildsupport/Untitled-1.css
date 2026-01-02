@@ -1,0 +1,35 @@
+/* :root {
+  /* ----------------------------------- */
+/* Color Palette - Vibrant & Accessible */
+/* ----------------------------------- */
+--main-color: #0060FF;
+/* Electric Blue: Retaining your brand core */
+--main-color2: #EE0020;
+/* energetic Red: For accents */
+
+/* Text Colors - Higher Contrast */
+--heading-color: #111827;
+/* Deep Gray (almost black) for sharper headings */
+--paragraph-color: #4B5563;
+/* Cool Gray for better readability on white */
+/* ----------------------------------- */
+/* Typography - "Inter" Universality   */
+/* ----------------------------------- */
+/* Inter provides the cleanest look for both UI and Text */
+--body-font: "Inter",
+sans-serif;
+--heading-font: "Inter",
+sans-serif;
+/* Layout & Spacing */
+--body-font-size: 16px;
+--line-height30: 1.6;
+/* Optimized for Inter */
+/* ----------------------------------- */
+/* Modern Utilities (New)             */
+/* ----------------------------------- */
+--border-radius-md: 8px;
+/* Smooth corners */
+--shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+--shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+--transition: all 0.3s ease-in-out;
+}

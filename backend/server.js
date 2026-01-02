@@ -17,6 +17,8 @@ app.use("/api/blogs", require("./routes/blog"));
 
 app.use("/api/users", require("./routes/users"));
 app.use("/api/tickets", require("./routes/tickets"));
+app.use("/api/meetings", require("./routes/meetings"));
+app.use("/api/subscribers", require("./routes/subscribers"));
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.listen(process.env.PORT || 5000, () => {

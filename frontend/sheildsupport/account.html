@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account - Login & Sign Up</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      /* Brand Colors */
+      --primary: #0f172a;
+      /* Slate 900 */
+      --primary-hover: #1e293b;
+      /* Slate 800 */
+      --accent: #3b82f6;
+      /* Blue 500 */
+      --accent-hover: #2563eb;
+      /* Blue 600 */
+
+      /* Backgrounds */
+      --bg-body: #f8fafc;
+      --bg-white: #ffffff;
+
+      /* Text */
+      --text-main: #0f172a;
+      --text-secondary: #64748b;
+      --text-light: #94a3b8;
+
+      /* Borders & Shadows */
+      --border-color: #e2e8f0;
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+      /* States */
+      --success-bg: #dcfce7;
+      --success-text: #166534;
+      --error-bg: #fee2e2;
+      --error-text: #991b1b;
+
+      --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      font-size: 16px;
+      overflow-x: hidden;
+    }
+
+    /* SPLIT SCREEN LAYOUT */
+    .split-container {
+      display: flex;
+      width: 100%;
+      min-height: 100vh;
+    }
+
+    /* LEFT SIDE - FORM */
+    .form-section {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+      background: var(--bg-white);
+      position: relative;
+    }
+
+    .form-wrapper {
+      width: 100%;
+      max-width: 440px;
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    /* RIGHT SIDE - HERO */
+    .hero-section {
+      width: 50%;
+      background: var(--primary);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+      padding: 60px;
+    }
+
+    /* Abstract shapes for background */
+    .hero-bg-shape {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.1;
+      background: linear-gradient(45deg, var(--accent), #8b5cf6);
+    }
+
+    .shape-1 {
+      width: 400px;
+      height: 400px;
+      top: -100px;
+      right: -100px;
+    }
+
+    .shape-2 {
+      width: 300px;
+      height: 300px;
+      bottom: -50px;
+      left: -50px;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 500px;
+    }
+
+    .hero-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .hero-text {
+      font-size: 1.1rem;
+      color: #cbd5e1;
+      line-height: 1.6;
+    }
+
+    /* LOGO */
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 40px;
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--primary);
+    }
+
+    .brand-logo svg {
+      width: 32px;
+      height: 32px;
+      color: var(--accent);
+    }
+
+    /* FORMS */
+    .form-header {
+      margin-bottom: 32px;
+    }
+
+    .form-header h2 {
+      font-size: 1.875rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    .form-header p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    .input-group {
+      position: relative;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 12px 16px 12px 44px;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: var(--text-main);
+      background-color: #fff;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .input-group input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+    }
+
+    .input-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-light);
+      pointer-events: none;
+      transition: color 0.2s;
+    }
+
+    .input-group input:focus+.input-icon,
+    .input-group input:focus~.input-icon {
+      color: var(--accent);
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-light);
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .toggle-password:hover {
+      color: var(--text-secondary);
+    }
+
+    /* BUTTONS */
+    .btn-primary {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 14px;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #fff;
+      background-color: var(--primary);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.2);
+    }
+
+    .btn-primary:not(:disabled):hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 8px -1px rgba(15, 23, 42, 0.25);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    /* UTILS */
+    .text-link {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .text-link:hover {
+      text-decoration: underline;
+      color: var(--accent-hover);
+    }
+
+    .switch-text {
+      text-align: center;
+      margin-top: 24px;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* MESSAGES */
+    .alert {
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 24px;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .alert-error {
+      background-color: var(--error-bg);
+      color: var(--error-text);
+      border: 1px solid #fca5a5;
+    }
+
+    .alert-success {
+      background-color: var(--success-bg);
+      color: var(--success-text);
+      border: 1px solid #86efac;
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .loading-spinner {
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: #fff;
+      animation: spin 1s linear infinite;
+      margin-right: 8px;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .split-container {
+        flex-direction: column;
+      }
+
+      .form-section {
+        width: 100%;
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .hero-section {
+        display: none;
+        /* Hide hero on mobile for focus */
+      }
+    }
+
+    /* Mobile Schedule Bar */
+    .mobile-schedule-bar {
+      display: none;
+    }
+
+    @media (max-width: 767px) {
+      .mobile-schedule-bar {
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 64px;
+        background: linear-gradient(90deg, #0d6efd, #2563eb);
+        color: #fff;
+        align-items: center;
+        padding: 0 12px;
+        z-index: 1100;
+        box-shadow: 0 -8px 24px rgba(15, 23, 42, 0.12);
+        font-family: var(--font-family);
+      }
+
+      .mobile-schedule-bar .label {
+        flex: 1;
+        font-weight: 600;
+        padding-left: 8px;
+        font-size: 0.95rem;
+      }
+
+      .mobile-schedule-bar .btn-schedule {
+        background: #fff;
+        color: #0d6efd;
+        border-radius: 10px;
+        padding: 8px 14px;
+        font-weight: 700;
+        text-decoration: none;
+        margin-left: 8px;
+        box-shadow: 0 4px 10px rgba(13, 110, 253, 0.18);
+        font-size: 0.9rem;
+      }
+
+      /* Add padding to form section so content isn't hidden behind bar */
+      .form-section {
+        padding-bottom: 80px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <div class="split-container">
+
+    <!-- LEFT SIDE: FORM -->
+    <div class="form-section">
+      <div class="form-wrapper">
+
+        <!-- Brand on Mobile only (or top) -->
+        <div class="brand-logo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+          </svg>
+          <span>Shield Support</span>
+        </div>
+
+        <!-- LOGIN FORM -->
+        <div id="loginBox">
+          <div class="form-header">
+            <h2>Welcome back</h2>
+            <p>Please enter your details to sign in.</p>
+          </div>
+
+          <div id="loginAlert" class="hidden"></div>
+
+          <form onsubmit="event.preventDefault(); login();">
+            <div class="form-group">
+              <label class="form-label">Email Address</label>
+              <div class="input-group">
+                <svg class="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                  <polyline points="22,6 12,13 2,6" />
+                </svg>
+                <input type="email" id="loginEmail" placeholder="Enter your email" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Password</label>
+              <div class="input-group">
+                <svg class="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                </svg>
+                <input type="password" id="loginPassword" placeholder="••••••••" required>
+                <div class="toggle-password" onclick="togglePassword('loginPassword')">
+                  <svg id="eye-loginPassword" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                    <circle cx="12" cy="12" r="3" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <button type="submit" id="loginBtn" class="btn-primary">
+              Sign In
+            </button>
+          </form>
+
+          <p class="switch-text">
+            Don't have an account?
+            <a onclick="showSignup()" class="text-link">Create account</a>
+          </p>
+        </div>
+
+        <!-- SIGNUP FORM -->
+        <div id="signupBox" class="hidden">
+          <div class="form-header">
+            <h2>Create an account</h2>
+            <p>Start your journey with us today.</p>
+          </div>
+
+          <div id="signupAlert" class="hidden"></div>
+
+          <form onsubmit="event.preventDefault(); signup();">
+            <div class="form-group">
+              <label class="form-label">Full Name</label>
+              <div class="input-group">
+                <svg class="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg>
+                <input type="text" id="signupName" placeholder="Enter your full name" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Email Address</label>
+              <div class="input-group">
+                <svg class="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                  <polyline points="22,6 12,13 2,6" />
+                </svg>
+                <input type="email" id="signupEmail" placeholder="Enter your email" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Password</label>
+              <div class="input-group">
+                <svg class="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                </svg>
+                <input type="password" id="signupPassword" placeholder="Create a password (min 6 chars)" required>
+                <div class="toggle-password" onclick="togglePassword('signupPassword')">
+                  <svg id="eye-signupPassword" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                    <circle cx="12" cy="12" r="3" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <button type="submit" id="signupBtn" class="btn-primary">
+              Create Account
+            </button>
+          </form>
+
+          <p class="switch-text">
+            Already have an account?
+            <a onclick="showLogin()" class="text-link">Sign in</a>
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RIGHT SIDE: HERO -->
+    <div class="hero-section">
+      <div class="hero-bg-shape shape-1"></div>
+      <div class="hero-bg-shape shape-2"></div>
+
+      <div class="hero-content">
+        <h1 class="hero-title">Secure, Reliable, and Fast.</h1>
+        <p class="hero-text">
+          Join thousands of companies that trust Shield Support for their enterprise needs.
+          Experience the future of management today.
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const API_URL = "http://localhost:5000/api/auth";
+
+    /* --- UI TOGGLES --- */
+
+    function showSignup() {
+      // Fade out effect could be added here
+      document.getElementById("loginBox").classList.add("hidden");
+      document.getElementById("signupBox").classList.remove("hidden");
+      clearAlerts();
+    }
+
+    function showLogin() {
+      document.getElementById("signupBox").classList.add("hidden");
+      document.getElementById("loginBox").classList.remove("hidden");
+      clearAlerts();
+    }
+
+    function togglePassword(inputId) {
+      const input = document.getElementById(inputId);
+      const icon = document.getElementById('eye-' + inputId);
+
+      if (input.type === 'password') {
+        input.type = 'text';
+        // Eye Off SVG
+        icon.innerHTML = '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>';
+      } else {
+        input.type = 'password';
+        // Eye SVG
+        icon.innerHTML = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';
+      }
+    }
+
+    /* --- ALERTS --- */
+
+    function showAlert(boxId, type, message) {
+      const alertBox = document.getElementById(boxId);
+      alertBox.className = `alert alert-${type}`;
+      alertBox.innerHTML = type === 'error'
+        ? `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> ${message}`
+        : `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> ${message}`;
+      alertBox.classList.remove('hidden');
+    }
+
+    function clearAlerts() {
+      document.getElementById('loginAlert').className = 'hidden';
+      document.getElementById('signupAlert').className = 'hidden';
+    }
+
+    /* --- AUTH ACTIONS --- */
+
+    async function login() {
+      const email = document.getElementById('loginEmail').value.trim();
+      const password = document.getElementById('loginPassword').value;
+      const btn = document.getElementById('loginBtn');
+      const originalBtnText = btn.innerHTML;
+
+      clearAlerts();
+
+      if (!email || !password) {
+        showAlert('loginAlert', 'error', 'Please fill in all fields.');
+        return;
+      }
+
+      setLoading(btn, true, 'Signing in...');
+
+      try {
+        const response = await fetch(`${API_URL}/login`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password })
+        });
+        const data = await response.json();
+
+        if (response.ok && data.token) {
+          localStorage.setItem("token", data.token);
+          localStorage.setItem("role", data.role);
+          localStorage.setItem("name", data.name);
+
+          showAlert('loginAlert', 'success', 'Login successful! Redirecting...');
+
+          setTimeout(() => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const redirectUrl = urlParams.get('redirect');
+            if (redirectUrl) {
+              window.location.href = redirectUrl;
+            } else {
+              window.location.href = data.role === "admin" ? "admin/dashboard.html" : "user/dashboard.html";
+            }
+          }, 1000);
+        } else {
+          showAlert('loginAlert', 'error', data.message || 'Invalid credentials');
+          setLoading(btn, false, originalBtnText);
+        }
+      } catch (error) {
+        showAlert('loginAlert', 'error', 'Network error. Please try again.');
+        setLoading(btn, false, originalBtnText);
+      }
+    }
+
+    async function signup() {
+      const name = document.getElementById('signupName').value.trim();
+      const email = document.getElementById('signupEmail').value.trim();
+      const password = document.getElementById('signupPassword').value;
+      const btn = document.getElementById('signupBtn');
+      const originalBtnText = btn.innerHTML;
+
+      clearAlerts();
+
+      if (!name || !email || !password) {
+        showAlert('signupAlert', 'error', 'Please fill in all fields.');
+        return;
+      }
+
+      if (password.length < 6) {
+        showAlert('signupAlert', 'error', 'Password must be at least 6 characters.');
+        return;
+      }
+
+      setLoading(btn, true, 'Creating account...');
+
+      try {
+        const response = await fetch(`${API_URL}/signup`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, email, password })
+        });
+        const data = await response.json();
+
+        if (response.ok) {
+          showAlert('signupAlert', 'success', 'Account created! Please sign in.');
+          document.getElementById('signupName').value = '';
+          document.getElementById('signupEmail').value = '';
+          document.getElementById('signupPassword').value = '';
+          setLoading(btn, false, originalBtnText);
+          setTimeout(showLogin, 2000);
+        } else {
+          showAlert('signupAlert', 'error', data.message || 'Signup failed');
+          setLoading(btn, false, originalBtnText);
+        }
+      } catch (error) {
+        showAlert('signupAlert', 'error', 'Network error. Please try again.');
+        setLoading(btn, false, originalBtnText);
+      }
+    }
+
+    function setLoading(btn, isLoading, text) {
+      if (isLoading) {
+        btn.disabled = true;
+        btn.innerHTML = `<div class="loading-spinner"></div> ${text}`;
+      } else {
+        btn.disabled = false;
+        btn.innerHTML = text; // Reset with original text (or just a reasonable default if "Sign In")
+        if (text.includes('Sign In')) btn.innerText = "Sign In";
+        if (text.includes('Create')) btn.innerText = "Create Account";
+      }
+    }
+  </script>
+  <div class="mobile-schedule-bar">
+    <span class="label">Ready to start?</span>
+    <a href="schedule.html" target="_blank" class="btn-schedule">Schedule Meeting</a>
+  </div>
+</body>
+
+</html>
+

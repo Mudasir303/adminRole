@@ -1,0 +1,47 @@
+/*--------------------------------------------------------------
+# Industries We Serve
+--------------------------------------------------------------*/
+.industry-area .nav-pills .nav-link {
+    background: #fff;
+    color: var(--heading-color);
+    font-weight: 600;
+    padding: 12px 30px;
+    border-radius: 30px;
+    margin: 0 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    border: 1px solid #eee;
+    transition: all 0.3s ease;
+}
+
+.industry-area .nav-pills .nav-link:hover {
+    color: var(--main-color);
+    transform: translateY(-2px);
+}
+
+.industry-area .nav-pills .nav-link.active {
+    background: var(--main-color);
+    color: #fff;
+    box-shadow: 0 10px 25px rgba(0, 96, 255, 0.3);
+    border-color: var(--main-color);
+}
+
+.industry-area .tab-pane .thumb img {
+    width: 100%;
+    object-fit: cover;
+    transition: all 0.4s ease;
+}
+
+.industry-area .tab-pane .thumb:hover img {
+    transform: scale(1.02);
+}
+
+.industry-area .check-list li {
+    font-size: 16px;
+    margin-bottom: 12px;
+    color: var(--paragraph-color);
+}
+
+.industry-area .check-list li strong {
+    color: var(--heading-color);
+    font-weight: 600;
+}
