@@ -1,0 +1,81 @@
+<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+<head>
+<meta charset="utf-8">
+<title>Staffing Detailed Overview</title>
+<style>
+body { font-family: Arial, sans-serif; line-height: 1.6; }
+h1 { color: #2E5BFF; }
+h2 { color: #333; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+ul { margin-bottom: 20px; }
+li { margin-bottom: 10px; }
+strong { color: #000; }
+.footer { margin-top: 50px; font-size: 0.9em; color: #666; border-top: 1px solid #ddd; padding-top: 20px; }
+</style>
+</head>
+<body>
+
+<h1>Shield Support - Staffing Detailed Overview</h1>
+
+<h2>2. Staffing Services</h2>
+<p>Specialized staffing tiers to build your ideal technical team.</p>
+
+<ul>
+    <li>
+        <strong>NOC Staffing (Network Operations Center)</strong>
+        <br><em>Description:</em> Expert teams dedicated to the 24/7 monitoring and management of your network infrastructure.
+        <br><em>Roles & Responsibilities:</em>
+        <ul>
+            <li>Continuous monitoring of network health and performance.</li>
+            <li>Incident response and fault management.</li>
+            <li>Reporting and documentation of network events.</li>
+            <li>Coordination with third-party vendors and ISPs.</li>
+        </ul>
+        <em>Ideal For:</em> MSPs and enterprises needing round-the-clock eyes on their critical infrastructure.
+    </li>
+
+    <li>
+        <strong>Cyber Security Staffing</strong>
+        <br><em>Description:</em> Highly trained security professionals focused on protecting your digital environment.
+        <br><em>Roles & Responsibilities:</em>
+        <ul>
+            <li>Security Operations Center (SOC) analysts.</li>
+            <li>Threat hunters and incident responders.</li>
+            <li>Compliance analysts (HIPAA, GDPR, SOC2).</li>
+            <li>Security engineers for tool implementation.</li>
+        </ul>
+        <em>Ideal For:</em> Organizations with strict compliance needs or those facing high threat levels.
+    </li>
+
+    <li>
+        <strong>Cloud Computing Staffing</strong>
+        <br><em>Description:</em> Specialists in designing, migrating, and managing cloud environments.
+        <br><em>Roles & Responsibilities:</em>
+        <ul>
+            <li>Cloud Architects (AWS, Azure, Google Cloud).</li>
+            <li>DevOps engineers for automation and CI/CD pipelines.</li>
+            <li>Cloud migration specialists.</li>
+            <li>Infrastructure-as-Code (IaC) developers.
+        </ul>
+        <em>Ideal For:</em> Businesses moving to the cloud or optimizing their existing cloud footprint.
+    </li>
+
+    <li>
+        <strong>Help Desk Staffing</strong>
+        <br><em>Description:</em> Front-line support agents who serve as the face of your IT department.
+        <br><em>Roles & Responsibilities:</em>
+        <ul>
+            <li><strong>Level 1:</strong> Ticket triage, password resets, basic troubleshooting.</li>
+            <li><strong>Level 2:</strong> Desktop support, software installation, complex issue resolution.</li>
+            <li><strong>Level 3:</strong> Advanced problem solving, server-side troubleshooting, root cause analysis.
+        </ul>
+        <em>Ideal For:</em> Scaling support teams to handle increased ticket volume and improving customer satisfaction scores.
+    </li>
+</ul>
+
+<div class="footer">
+    <p><strong>Shield Support LLC</strong><br>
+    2035 Sunset Lake Road, Suite B-2, Newark, DE, USA-19702</p>
+</div>
+
+</body>
+</html>

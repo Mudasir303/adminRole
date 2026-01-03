@@ -60,4 +60,26 @@ router.delete('/:id', async (req, res) => {
     }
 });
 
+// @route   PUT api/meetings/:id
+// @desc    Update a meeting (e.g. admin notes)
+// @access  Public (Should be protected)
+router.put('/:id', async (req, res) => {
+    const { adminUpdate } = req.body;
+
+    try {
+        let meeting = await Meeting.findById(req.params.id);
+        if (!meeting) return res.status(404).json({ msg: 'Meeting not found' });
+
+        // Update fields
+        if (adminUpdate !== undefined) meeting.adminUpdate = adminUpdate;
+
+        await meeting.save();
+        res.json(meeting);
+    } catch (err) {
+        console.error(err.message);
+        if (err.kind === 'ObjectId') return res.status(404).json({ msg: 'Meeting not found' });
+        res.status(500).send('Server Error');
+    }
+});
+
 module.exports = router;

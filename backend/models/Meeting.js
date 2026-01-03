@@ -41,6 +41,10 @@ const MeetingSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  adminUpdate: {
+    type: String,
+    default: ''
+  },
   createdAt: {
     type: Date,
     default: Date.now

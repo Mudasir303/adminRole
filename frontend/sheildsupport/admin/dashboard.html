@@ -1405,11 +1405,46 @@
                 </div>
             </div>
 
+            <div style="margin-top: 20px;">
+                <label style="color:var(--text-muted); font-size:0.85rem; font-weight:500; display:block; margin-bottom:4px;">Admin Update / Review</label>
+                <textarea id="adminNote-${meeting._id}" rows="3" style="width:100%; padding:10px; border:1px solid #e2e8f0; border-radius:8px; font-family:inherit; font-size:0.95rem;">${meeting.adminUpdate || ''}</textarea>
+                <div style="display:flex; justify-content:flex-end; margin-top:8px;">
+                     <button class="btn-primary" style="padding:6px 12px; font-size:0.85rem;" onclick="saveMeetingUpdate('${meeting._id}')">Save Note</button>
+                </div>
+            </div>
+
             <div style="margin-top: 30px; display: flex; justify-content: flex-end;">
                 <button class="btn-primary" onclick="closeMeetingModal()" style="background:#e2e8f0; color:#64748b; padding:10px 25px;">Close details</button>
             </div>
         `;
       document.getElementById('meetingModal').classList.add('show');
+    }
+
+    function saveMeetingUpdate(id) {
+      const note = document.getElementById(`adminNote-${id}`).value;
+
+      fetch(`http://localhost:5000/api/meetings/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + localStorage.getItem('token')
+        },
+        body: JSON.stringify({ adminUpdate: note })
+      })
+        .then(res => {
+          if (res.ok) {
+            alert("Note saved successfully!");
+            // Optimistically update local data so valid without reload
+            const m = allMeetings.find(x => x._id === id);
+            if (m) m.adminUpdate = note;
+          } else {
+            alert("Error saving note.");
+          }
+        })
+        .catch(err => {
+          console.error(err);
+          alert("Error saving note.");
+        });
     }
 
     function closeMeetingModal() {

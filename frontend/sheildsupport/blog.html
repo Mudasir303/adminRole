@@ -531,18 +531,7 @@
     }
 
     /* Footer */
-    footer {
-      background: var(--bg-card) !important;
-      backdrop-filter: blur(20px);
-      border-top: 1px solid var(--border);
-      padding: 2rem 0 !important;
-      margin-top: 3rem;
-    }
 
-    footer p {
-      color: var(--text-muted) !important;
-      margin: 0;
-    }
 
     /* Responsive */
     @media (max-width: 768px) {
@@ -721,7 +710,7 @@
             </ul> -->
 
           <li>
-            <a href="blog-details.html">Blog</a>
+            <a href="blog.html">Blog</a>
           </li>
           <li><a href="contact.html">Contact Us</a></li>
           <li><a href="resources.html">Resources</a></li>
@@ -777,15 +766,83 @@
   <footer class="footer-area bg-black bg-cover" style="background-image: url('assets/img/bg/2.png')">
     <div class="container">
       <div class="row">
+        <!-- Column 1: About & Subscribe (Col-3) -->
         <div class="col-lg-3 col-md-6">
           <div class="widget widget_about">
-            <h4 class="widget-title">About Company</h4>
+            <a href="index.html" class="footer-logo">
+              <img src="assets/img/SheildSupportLogo.png" alt="Shield Support LLC"
+                style="max-width: 250px; margin-bottom: 2rem;">
+            </a>
             <div class="details">
-              <p>We are a leading provider of IT and support in the United States.</p>
+              <p>We are a leading provider of IT and support in the United States. We work with clients all over the
+                world.</p>
+            </div>
+          </div>
+          <div class="widget widget_subscribe mt-4">
+            <h4 class="widget-title">Subscribe</h4>
+            <div class="single-input-inner style-border style-bg-none">
+              <input type="text" placeholder="Your email address" />
+              <button><i class="fa fa-arrow-right"></i></button>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Column 2: Quick Links (Col-2) -->
+        <div class="col-lg-2 col-md-4 col-sm-6">
+          <div class="widget widget_nav_menu">
+            <h4 class="widget-title">Quick Links</h4>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="blog.html">Blog</a></li>
+              <li><a href="resources.html">Resources</a></li>
+              <li><a href="contact.html">Contact Us</a></li>
+              <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Column 3: IT Services (Col-2) -->
+        <div class="col-lg-2 col-md-4 col-sm-6">
+          <div class="widget widget_nav_menu">
+            <h4 class="widget-title">IT Services</h4>
+            <ul>
+              <li><a href="service-personal.html">Personal Help Desk</a></li>
+              <li><a href="service-backend.html">Backend Support</a></li>
+              <li><a href="service-cyber.html">Cyber Security</a></li>
+              <li><a href="service-digital.html">Digital Marketing</a></li>
+              <li><a href="service-development.html">Web & App Development</a></li>
+              <li><a href="service-staffing.html">Staffing & Recruitment</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Column 4: Staffing (Col-2) -->
+        <div class="col-lg-2 col-md-4 col-sm-6">
+          <div class="widget widget_nav_menu">
+            <h4 class="widget-title">Staffing</h4>
+            <ul>
+              <li><a href="staffing-services/noc-staffing.html">NOC Staffing</a></li>
+              <li><a href="staffing-services/cyber-security-staffing.html">Cyber Staffing</a></li>
+              <li><a href="staffing-services/cloud-computing-staffing.html">Cloud Staffing</a></li>
+              <li><a href="staffing-services/help-desk-staffing.html">Help Desk Staffing</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Column 5: Get In Touch (Col-3) -->
+        <div class="col-lg-3 col-md-6">
+          <div class="widget widget_about">
+            <h4 class="widget-title">Get In Touch</h4>
+            <div class="details">
               <p class="mt-2 text-white"><strong>USA Office</strong></p>
-              <p>2035 Sunset Lake Road, Suite B-2, Newark, DE 19702</p>
-              <p class="mt-2 text-white"><strong>Malaysia Office</strong></p>
+              <p>2035 Sunset Lake Road, Suite B-2, Newark, DE, USA-19702</p>
+
+              <p class="mt-2 text-white"><strong>Malaysian Office</strong></p>
               <p>RR Gemini Services No-7 Jalan Kesum 24/37 seksyen, 24 Shah Alam Selangor, Malaysia-40300</p>
+
+              <p class="mt-2 text-white"><strong>Follow Us</strong></p>
               <ul class="social-media">
                 <li><a class="facebook" href="#"><i class="fab fa-facebook-f"></i></a></li>
                 <li><a class="twitter" href="#"><i class="fab fa-twitter"></i></a></li>
@@ -793,40 +850,6 @@
                 <li><a class="youtube" href="#"><i class="fab fa-youtube"></i></a></li>
               </ul>
             </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-          <div class="widget widget_nav_menu">
-            <h4 class="widget-title">Service</h4>
-            <ul>
-              <li><a href="service-personal.html">Personal Help Desk</a></li>
-              <li><a href="service-backend.html">Backend Support</a></li>
-              <li><a href="service-cyber.html">Cyber Security</a></li>
-              <li><a href="service-digital.html">Digital Marketing</a></li>
-              <li><a href="service-staffing.html">Staffing Services</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-          <div class="widget widget_nav_menu">
-            <h4 class="widget-title">Useful Links</h4>
-            <ul>
-              <li><a href="index.html">Home</a></li>
-              <li><a href="about.html">About Us</a></li>
-              <li><a href="service.html">Services</a></li>
-              <li><a href="blog-details.html">Blog</a></li>
-              <li><a href="contact.html">Contact Us</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-          <div class="widget widget_subscribe">
-            <h4 class="widget-title">Contact us</h4>
-            <div class="single-input-inner style-border style-bg-none">
-              <input type="text" placeholder="Your Email" />
-              <button><i class="fa fa-arrow-right"></i></button>
-            </div>
-            <label><input type="checkbox" /> By checking this, you agree to our Terms & Data Policy.</label>
           </div>
         </div>
       </div>
@@ -927,7 +950,7 @@
         return `
             <div class="blog-card">
               <div class="blog-card-image">
-                <a href="blog-details.html?id=${blog._id}">
+                <a href="blog.html?id=${blog._id}">
                   <img src="${imageUrl}" alt="${blog.title}" onerror="this.src='assets/img/blog/2.png'">
                   <div class="image-overlay"></div>
                 </a>
@@ -935,7 +958,7 @@
               <div class="blog-card-body">
                 <span class="blog-category">${category}</span>
                 
-                <h2 class="blog-title"><a href="blog-details.html?id=${blog._id}" style="color:inherit; text-decoration:none;">${blog.title}</a></h2>
+                <h2 class="blog-title"><a href="blog.html?id=${blog._id}" style="color:inherit; text-decoration:none;">${blog.title}</a></h2>
                 
                 <div class="blog-meta">
                   <div class="meta-item">
@@ -951,7 +974,7 @@
                 <p class="blog-excerpt">${excerpt}</p>
                 
                 <div class="blog-footer">
-                  <a href="blog-details.html?id=${blog._id}" class="read-more-btn">
+                  <a href="blog.html?id=${blog._id}" class="read-more-btn">
                     <span>Read More</span>
                     <i class="fas fa-arrow-right"></i>
                   </a>

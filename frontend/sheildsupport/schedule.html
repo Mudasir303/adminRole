@@ -743,22 +743,46 @@
               </div>
 
               <div class="form-group-icon">
-                <input id="subjectInput" class="form-control" placeholder="Meeting Subject" required>
+                <textarea id="subjectInput" class="form-control" placeholder="Meeting Subject / Description" rows="4"
+                  required style="resize: none;"></textarea>
                 <!-- Tag Icon -->
-                <svg viewBox="0 0 24 24">
+                <svg viewBox="0 0 24 24" style="top: 20px; transform: none;">
                   <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
                   <line x1="7" y1="7" x2="7.01" y2="7"></line>
                 </svg>
               </div>
 
-              <div class="form-group-icon">
-                <input id="phoneInput" class="form-control" placeholder="Phone Number" required>
-                <!-- Phone Icon -->
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.12 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
-                  </path>
-                </svg>
+              <div class="form-group-icon" style="display: flex; gap: 10px; align-items: stretch;">
+                <div style="position: relative; width: 110px;">
+                  <select id="countryCode" class="form-control"
+                    style="height: 100%; padding: 0 30px 0 12px; appearance: none; -webkit-appearance: none; background-color: #f8fafc; cursor: pointer;">
+                    <option value="+1">🇺🇸 +1</option>
+                    <option value="+91">🇮🇳 +91</option>
+                    <option value="+44">🇬🇧 +44</option>
+                    <option value="+61">🇦🇺 +61</option>
+                    <option value="+81">🇯🇵 +81</option>
+                    <option value="+49">🇩🇪 +49</option>
+                    <option value="+33">🇫🇷 +33</option>
+                    <option value="+86">🇨🇳 +86</option>
+                    <option value="+971">🇦🇪 +971</option>
+                  </select>
+                  <svg viewBox="0 0 24 24"
+                    style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); width: 14px; height: 14px; pointer-events: none; fill: #64748b;">
+                    <path d="M7 10l5 5 5-5z" />
+                  </svg>
+                </div>
+
+                <div style="position: relative; flex: 1;">
+                  <input id="phoneInput" class="form-control" placeholder="Phone Number (10 digits)" maxlength="10"
+                    required oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                  <!-- Phone Icon -->
+                  <svg viewBox="0 0 24 24"
+                    style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); width: 18px; height: 18px; fill: #94a3b8;">
+                    <path
+                      d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.12 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                    </path>
+                  </svg>
+                </div>
               </div>
 
               <div class="form-group-icon">
@@ -792,8 +816,12 @@
     (function () {
       const timeSlots = {
         "45": ["07:30 pm", "08:15 pm", "09:00 pm", "09:45 pm", "10:30 pm", "11:15 pm"],
-        "30": ["07:30 pm", "08:00 pm", "08:30 pm", "09:00 pm", "09:30 pm"],
-        "15": ["07:30 pm", "07:45 pm", "08:00 pm", "08:15 pm", "08:30 pm"]
+        "30": ["07:30 pm", "08:00 pm", "08:30 pm", "09:00 pm", "09:30 pm", "10:00 pm", "10:30 pm", "11:00 pm", "11:30 pm"],
+        "15": [
+          "07:30 pm", "07:45 pm", "08:00 pm", "08:15 pm", "08:30 pm", "08:45 pm",
+          "09:00 pm", "09:15 pm", "09:30 pm", "09:45 pm", "10:00 pm", "10:15 pm",
+          "10:30 pm", "10:45 pm", "11:00 pm", "11:15 pm", "11:30 pm", "11:45 pm"
+        ]
       };
 
       // Helper for Time Zone Conversion
@@ -961,8 +989,17 @@
         const subject = document.getElementById("subjectInput").value.trim();
         const website = document.getElementById("websiteInput").value.trim();
         const phone = document.getElementById("phoneInput").value.trim();
+        const countryCode = document.getElementById("countryCode").value;
 
         if (!name || !email || !subject || !phone || !website) return showError("Please fill in all required fields.");
+
+        // Strict Validation
+        if (phone.length !== 10) return showError("Phone number must be exactly 10 digits.");
+        const urlPattern = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
+        if (!urlPattern.test(website)) return showError("Please enter a valid website URL.");
+
+        // Combined Phone
+        const fullPhone = `${countryCode} ${phone}`;
 
         // Show Loading State
         const submitBtn = form.querySelector('button[type="submit"]');
@@ -972,7 +1009,8 @@
 
         // Data Storage
         const meetingData = {
-          name, email, subject, website, phone,
+          name, email, subject, website,
+          phone: fullPhone, // Send combined phone
           date: selectedFullDateTime.toDateString(),
           time: selectedFullDateTime.toLocaleTimeString(),
           isoDate: selectedFullDateTime.toISOString(), // Changed key to match backend
