@@ -1423,7 +1423,7 @@
     function saveMeetingUpdate(id) {
       const note = document.getElementById(`adminNote-${id}`).value;
 
-      fetch(`http://localhost:5000/api/meetings/${id}`, {
+      fetch(`https://adminrole-qg65.onrender.com/api/meetings/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -1489,7 +1489,7 @@
 
     // --- SUBSCRIBERS ---
     function loadSubscribers() {
-      fetch('http://localhost:5000/api/subscribers', {
+      fetch('https://adminrole-qg65.onrender.com/api/subscribers', {
         headers: {
           // 'Authorization': 'Bearer ' + token // Uncomment if you protect the route
         }
@@ -1516,7 +1516,7 @@
     function deleteSubscriber(id) {
       if (!confirm('Are you sure you want to remove this subscriber?')) return;
 
-      fetch(`http://localhost:5000/api/subscribers/${id}`, {
+      fetch(`https://adminrole-qg65.onrender.com/api/subscribers/${id}`, {
         method: 'DELETE',
         headers: {
           // 'Authorization': 'Bearer ' + token

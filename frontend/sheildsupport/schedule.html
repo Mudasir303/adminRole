@@ -1018,7 +1018,7 @@
           timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
         };
         // Send to Backend
-        fetch('http://localhost:5000/api/meetings', {
+        fetch('https://adminrole-qg65.onrender.com/api/meetings', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(meetingData)
