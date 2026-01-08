@@ -68,10 +68,18 @@
 		border-radius: 0 0 5px 5px;
 	}
 
+
 	.navbar-area-1 .nav-right-part .btn {
 		border-radius: 0 0 5px 0;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		padding: 0 30px;
+		margin: 0;
 	}
 }
+
+
 
 @media all and (max-width: 1199px) {
 	.single-blog-inner .details h2 {
@@ -117,6 +125,26 @@
 
 	.section-title.bg-base.style-white .btn {
 		padding: 0 16px;
+	}
+}
+
+@media all and (min-width: 992px) and (max-width: 1290px) {
+	.navbar-area-1 .nav-container .navbar-collapse .navbar-nav li {
+		margin-right: 5px !important;
+		margin-left: 5px !important;
+	}
+
+	.navbar-area-1 .nav-container .navbar-collapse .navbar-nav li a {
+		font-size: 14px !important;
+	}
+
+	.navbar-area-1 .nav-right-part .btn {
+		padding: 0 15px;
+		font-size: 14px;
+	}
+
+	.navbar-area-1 .nav-container .navbar-collapse .navbar-nav {
+		margin-left: 10px;
 	}
 }
 

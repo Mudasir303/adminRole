@@ -235,7 +235,8 @@
             <li>
               <p>
                 <i class="far fa-envelope"></i>
-                <a href="mailto:care@shieldsupportllc.com">care@shieldsupportllc.com</a>
+                <a
+                  href="https://mail.google.com/mail/?view=cm&fs=1&to=care@shieldsupportllc.com">care@shieldsupportllc.com</a>
               </p>
             </li>
           </ul>
@@ -243,14 +244,16 @@
         <div class="col-sm-6">
           <ul class="topbar-right text-md-end text-center">
             <li class="d-none d-lg-inline-block">
-              <p>Hot Line: <span>+1 (732) 702-7324</span></p>
+              <p>Hot Line: <span><a href="tel:+17327027324">+1 (732) 702-7324</a></span></p>
             </li>
             <li class="social-area">
-                            <p class="d-inline-block">Follow Us On:</p>
-                            <a href="https://www.linkedin.com/company/shieldsupport/posts/?feedView=all" target="_blank"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
-                            <a href="https://wa.me/17327027324" target="_blank"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
-                            <a href="mailto:care@shieldsupportllc.com"><i class="far fa-envelope" aria-hidden="true"></i></a>
-                        </li>
+              <p class="d-inline-block">Follow Us On:</p>
+              <a href="https://www.linkedin.com/company/shieldsupport/posts/?feedView=all" target="_blank"><i
+                  class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+              <a href="https://wa.me/17327027324" target="_blank"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
+              <a href="https://mail.google.com/mail/?view=cm&fs=1&to=care@shieldsupportllc.com"><i
+                  class="far fa-envelope" aria-hidden="true"></i></a>
+            </li>
           </ul>
         </div>
       </div>
@@ -287,7 +290,7 @@
               <li><a href="service-hosting.html">Hosting</a></li>
               <li><a href="service-staffing.html">Staffing & Recruitment</a></li>
             </ul>
-                
+
           </li>
           <li class="menu-item-has-children">
             <a href="service-staffing.html">Staffing</a>
@@ -308,7 +311,7 @@
           <li><a href="resources.html">Resources</a></li>
           <!-- <li> <a href="account.html">Account</a></li> -->
         </ul>
-                </div>
+      </div>
       <div class="nav-right-part nav-right-part-desktop align-self-center">
         <a class="btn btn-base" href="schedule.html">Schedule
           Meeting</a>
@@ -446,10 +449,13 @@
 
               <p class="mt-2 text-white"><strong>Follow Us</strong></p>
               <ul class="social-media">
-                                <li><a href="https://www.linkedin.com/company/shieldsupport/posts/?feedView=all" target="_blank" class="linkedin"><i class="fab fa-linkedin-in"></i></a></li>
-                                <li><a href="https://wa.me/17327027324" target="_blank" class="whatsapp"><i class="fab fa-whatsapp"></i></a></li>
-                                <li><a href="mailto:care@shieldsupportllc.com" class="email"><i class="far fa-envelope"></i></a></li>
-                            </ul>
+                <li><a href="https://www.linkedin.com/company/shieldsupport/posts/?feedView=all" target="_blank"
+                    class="linkedin"><i class="fab fa-linkedin-in"></i></a></li>
+                <li><a href="https://wa.me/17327027324" target="_blank" class="whatsapp"><i
+                      class="fab fa-whatsapp"></i></a></li>
+                <li><a href="https://mail.google.com/mail/?view=cm&fs=1&to=care@shieldsupportllc.com" class="email"><i
+                      class="far fa-envelope"></i></a></li>
+              </ul>
             </div>
           </div>
         </div>
@@ -549,7 +555,9 @@
         container.innerHTML = `
   <div class="blog-details-inner">
     <!-- Header Section -->
-    <div class="blog-header text-center mb-5">
+  <div class="blog-details-inner">
+    <!-- Header Section -->
+    <div class="blog-header mb-5">
       <div class="thumb mb-4">
         <img src="${imageUrl}" class="rounded-3 shadow-lg" alt="${blog.title}"
                          onerror="this.src='assets/img/blog/2.png'" 
@@ -559,12 +567,26 @@
         <span class="badge bg-primary text-white me-2 px-3 py-2">${blog.category || 'Technology'}</span>
                     <span class="text-muted ms-2 small"><i class="far fa-calendar-alt me-1"></i> ${formatDate(blog.createdAt)}</span>
       </div>
-      <h1 class="title display-4 fw-bold text-dark mb-4">${blog.title}</h1>
+      <h1 class="title fw-bold text-dark mb-4" style="font-size: 2.5rem;">${blog.title}</h1>
+      
+      <!-- Short Description -->
+      ${blog.shortDescription ? `<p class="text-muted mb-4" style="font-size: 1.1rem; line-height: 1.6;">${blog.shortDescription}</p>` : ''}
     </div>
 
     <!-- Content Body -->
     <div class="content-body text-dark" style="font-size: 1.15rem; line-height: 1.9; color: #444;">
       <div class="ql-editor" style="padding:0;">${blog.content || ''}</div>
+    </div>
+
+    <!-- Dynamic Sections -->
+    <div class="blog-sections mt-5">
+      ${blog.sections && blog.sections.length > 0 ? blog.sections.map(section => `
+        <div class="blog-section mb-5">
+             ${section.heading ? `<h3 class="fw-bold mb-3">${section.heading}</h3>` : ''}
+             ${section.image ? `<div class="mb-4"><img src="${getImageUrl(section.image)}" class="img-fluid rounded shadow-sm" alt="${section.heading || 'Section Image'}"></div>` : ''}
+             ${section.content ? `<div class="ql-editor" style="padding:0; font-size: 1.1rem; line-height: 1.8;">${section.content}</div>` : ''}
+        </div>
+      `).join('') : ''}
     </div>
 
     <!-- About the Author (Stabilized Layout) -->
@@ -645,16 +667,15 @@
   </script>
   <!-- Fixed Social Sidebar Start -->
   <div class="fixed-sidebar-right">
-        <ul class="list-unstyled mb-0">
-          <li><a href="https://www.linkedin.com/company/shieldsupport/posts/?feedView=all" target="_blank" class="linkedin"><i class="fab fa-linkedin-in"></i></a></li>
-          <li><a href="https://wa.me/17327027324" target="_blank" class="whatsapp"><i class="fab fa-whatsapp"></i></a></li>
-          <li><a href="mailto:care@shieldsupportllc.com" class="email"><i class="far fa-envelope"></i></a></li>
-        </ul>
-      </div>
+    <ul class="list-unstyled mb-0">
+      <li><a href="https://www.linkedin.com/company/shieldsupport/posts/?feedView=all" target="_blank"
+          class="linkedin"><i class="fab fa-linkedin-in"></i></a></li>
+      <li><a href="https://wa.me/17327027324" target="_blank" class="whatsapp"><i class="fab fa-whatsapp"></i></a></li>
+      <li><a href="https://mail.google.com/mail/?view=cm&fs=1&to=care@shieldsupportllc.com" class="email"><i
+            class="far fa-envelope"></i></a></li>
+    </ul>
+  </div>
   <!-- Fixed Social Sidebar End -->
 </body>
 
 </html>
-
-
-

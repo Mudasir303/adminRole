@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -627,7 +627,7 @@
 <body>
 
   <script>
-    // ðŸ” Protect page
+    // 🔐 Protect page
     if (localStorage.getItem("role") !== "admin") {
       window.location.href = "../account.html";
     }
@@ -1254,7 +1254,7 @@
                 <div style="padding: 15px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
                     <div>
                         <h4 style="margin-bottom: 4px;">${blog.title}</h4>
-                        <span style="font-size: 0.85rem; color: var(--text-muted);">${new Date(blog.createdAt).toLocaleDateString()} â€¢ ${blog.category || 'General'}</span>
+                        <span style="font-size: 0.85rem; color: var(--text-muted);">${new Date(blog.createdAt).toLocaleDateString()} • ${blog.category || 'General'}</span>
                     </div>
                     <div style="display: flex; gap: 10px;">
                         <button class="btn-primary" style="padding: 6px 12px; font-size: 0.85rem; background-color: var(--primary-light); border:none;" onclick="window.open('../blog-details.html?id=${blog._id}', '_blank')">View</button>
@@ -1752,17 +1752,17 @@
       });
     });
   </script>
-<!-- Fixed Social Sidebar Start -->
-      <div class="fixed-sidebar-right">
-        <ul class="list-unstyled mb-0">
-          <li><a href="https://www.linkedin.com/company/shieldsupport/posts/?feedView=all" target="_blank" class="linkedin"><i class="fab fa-linkedin-in"></i></a></li>
-          <li><a href="https://wa.me/17327027324" target="_blank" class="whatsapp"><i class="fab fa-whatsapp"></i></a></li>
-          <li><a href="mailto:care@shieldsupportllc.com" class="email"><i class="far fa-envelope"></i></a></li>
-        </ul>
-      </div>
-      <!-- Fixed Social Sidebar End -->
+  <!-- Fixed Social Sidebar Start -->
+  <div class="fixed-sidebar-right">
+    <ul class="list-unstyled mb-0">
+      <li><a href="https://www.linkedin.com/company/shieldsupport/posts/?feedView=all" target="_blank"
+          class="linkedin"><i class="fab fa-linkedin-in"></i></a></li>
+      <li><a href="https://wa.me/17327027324" target="_blank" class="whatsapp"><i class="fab fa-whatsapp"></i></a></li>
+      <li><a href="https://mail.google.com/mail/?view=cm&fs=1&to=care@shieldsupportllc.com" class="email"><i
+            class="far fa-envelope"></i></a></li>
+    </ul>
+  </div>
+  <!-- Fixed Social Sidebar End -->
 </body>
 
 </html>
-
-
