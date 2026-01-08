@@ -424,7 +424,7 @@
             $btn.prop('disabled', true).html('<i class="fa fa-spinner fa-spin"></i>');
 
             $.ajax({
-                url: 'https://adminrole-qg65.onrender.com/api/subscribers',
+                url: 'http://localhost:5000/api/subscribers',
                 method: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify({ email: email }),

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -13,6 +13,7 @@
 
   <!-- Bootstrap -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/fontawesome.min.css">
 
   <style>
     :root {
@@ -580,6 +581,76 @@
       font-weight: 700;
       margin-bottom: 16px;
     }
+
+    /* Fixed Social Sidebar Styles */
+    .fixed-sidebar-right {
+      position: fixed;
+      right: 0;
+      top: 35%;
+      transform: translateY(-50%);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      background-color: transparent;
+      padding: 15px 10px 15px 15px;
+      border-top-left-radius: 30px;
+      border-bottom-left-radius: 30px;
+      box-shadow: none;
+    }
+
+    .fixed-sidebar-right ul li {
+      margin-bottom: 15px;
+    }
+
+    .fixed-sidebar-right ul li:last-child {
+      margin-bottom: 0;
+    }
+
+    .fixed-sidebar-right a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      color: #fff;
+      font-size: 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .fixed-sidebar-right a:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+      color: #fff;
+    }
+
+    .fixed-sidebar-right .whatsapp {
+      background-color: #25d366;
+    }
+
+    .fixed-sidebar-right .linkedin {
+      background-color: #0077b5;
+    }
+
+    .fixed-sidebar-right .email {
+      background-color: #ff3b30;
+    }
+
+    @media (max-width: 767px) {
+      .fixed-sidebar-right {
+        right: 10px;
+      }
+
+      .fixed-sidebar-right a {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+      }
+    }
   </style>
 </head>
 
@@ -811,6 +882,7 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/config.js"></script>
 
   <script>
     (function () {
@@ -1017,8 +1089,17 @@
           duration: selectedDuration,
           timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
         };
+
+        // Open window immediately to avoid popup blocker
+        const calendarWindow = window.open('', '_blank');
+        if (calendarWindow) {
+          calendarWindow.document.title = "Booking...";
+        }
+
+        form.reset();
+
         // Send to Backend
-        fetch('https://adminrole-qg65.onrender.com/api/meetings', {
+        fetch(AppConfig.API_BASE_URL + '/api/meetings', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(meetingData)
@@ -1043,13 +1124,22 @@
               "&details=" + encodeURIComponent(`Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nWebsite: ${website}`) +
               "&dates=" + fmt(start) + "/" + fmt(end);
 
-            // Open Calendar & Reset
-            window.open(url, "_blank");
+            // Redirect the pre-opened window
+            if (calendarWindow) {
+              calendarWindow.location.href = url;
+            } else {
+              // Fallback just in case
+              window.open(url, "_blank");
+            }
+
             alert("Meeting scheduled successfully!");
-            location.reload();
+            // location.reload(); // Removed: Form is already reset and user stays on page
           })
           .catch(err => {
             console.error(err);
+            // Close the pre-opened window if booking failed
+            if (calendarWindow) calendarWindow.close();
+
             showError("Server Error: Could not save booking. Please try again.");
             submitBtn.textContent = originalBtnText;
             submitBtn.disabled = false;
@@ -1105,6 +1195,7 @@
       }
     }
   </style>
+ 
 </body>
 
 </html>

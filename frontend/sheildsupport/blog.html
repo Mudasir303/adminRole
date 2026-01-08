@@ -25,7 +25,6 @@
   <link rel="stylesheet" href="assets/css/style.css" />
   <link rel="stylesheet" href="assets/css/responsive.css" />
   <link rel="stylesheet" href="assets/css/masks.css" />
-
   <style>
     * {
       margin: 0;
@@ -219,14 +218,17 @@
 
     /* Blog Card */
     .blog-card {
-      background: var(--bg-card);
-      backdrop-filter: blur(20px);
-      border: 1px solid var(--border);
+      background: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 20px;
       overflow: hidden;
       transition: all 0.4s ease;
       position: relative;
       animation: slideUp 0.6s ease backwards;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
     }
 
     .blog-card:nth-child(1) {
@@ -323,6 +325,9 @@
 
     .blog-card-body {
       padding: 2rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
     }
 
     .blog-meta {
@@ -337,7 +342,8 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      color: var(--text-muted);
+      color: #64748b;
+      /* Darker Slate for white bg */
       font-size: 0.9rem;
     }
 
@@ -348,7 +354,7 @@
     .blog-category {
       display: inline-block;
       padding: 0.4rem 1rem;
-      background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.2));
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
       border: 1px solid rgba(99, 102, 241, 0.3);
       border-radius: 20px;
       font-size: 0.85rem;
@@ -359,14 +365,15 @@
     }
 
     .blog-category:hover {
-      background: linear-gradient(135deg, rgba(99, 102, 241, 0.3), rgba(139, 92, 246, 0.3));
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.2));
       transform: scale(1.05);
     }
 
     .blog-title {
       font-size: 1.5rem;
       font-weight: 700;
-      color: var(--text-primary);
+      color: #1e293b;
+      /* Dark text */
       margin-bottom: 1rem;
       line-height: 1.4;
       transition: color 0.3s ease;
@@ -380,7 +387,8 @@
     }
 
     .blog-excerpt {
-      color: var(--text-secondary);
+      color: #475569;
+      /* Darker grey text */
       line-height: 1.7;
       margin-bottom: 1.5rem;
       font-size: 0.95rem;
@@ -392,6 +400,7 @@
       align-items: center;
       padding-top: 1rem;
       border-top: 1px solid var(--border);
+      margin-top: auto;
     }
 
     .read-more-btn {
@@ -616,7 +625,7 @@
       <div class="row">
         <div class="col-sm-6">
           <ul class="topbar-right text-md-start text-center">
-            <li class="d-none d-none d-lg-inline-block">
+            <li class="d-none d-lg-inline-block">
               <p>
                 <i class="far fa-clock"></i> Opening Hour 9:00am - 10:00pm
               </p>
@@ -632,17 +641,15 @@
         </div>
         <div class="col-sm-6">
           <ul class="topbar-right text-md-end text-center">
-            <li class="d-none d-none d-lg-inline-block">
+            <li class="d-none d-lg-inline-block">
               <p>Hot Line: <span>+1 (732) 702-7324</span></p>
             </li>
             <li class="social-area">
               <p class="d-inline-block">Follow Us On:</p>
-              <a href="#"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
-              <a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a>
-              <a href="#"><i class="fab fa-instagram" aria-hidden="true"></i></a>
-              <a href="#"><i class="fab fa-pinterest" aria-hidden="true"></i></a>
-              <a href="#"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
-
+              <a href="https://www.linkedin.com/company/shieldsupport/posts/?feedView=all" target="_blank"><i
+                  class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+              <a href="https://wa.me/17327027324" target="_blank"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
+              <a href="mailto:care@shieldsupportllc.com"><i class="far fa-envelope" aria-hidden="true"></i></a>
             </li>
           </ul>
         </div>
@@ -684,6 +691,7 @@
               <li><a href="service-hosting.html">Hosting</a></li>
               <li><a href="service-staffing.html">Staffing & Recruitment</a></li>
             </ul>
+
           </li>
           <li class="menu-item-has-children">
             <a href="service-staffing.html">Staffing</a>
@@ -736,7 +744,7 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
-          <div class="breadcrumb-inner">
+          <div class="breadcrumb-inner text-center">
             <h1 class="page-title">Our Blog</h1>
             <ul class="page-list">
               <li><a href="index.html">Home</a></li>
@@ -799,6 +807,7 @@
               <li><a href="resources.html">Resources</a></li>
               <li><a href="contact.html">Contact Us</a></li>
               <li><a href="privacy-policy.html">Privacy Policy</a></li>
+              <li><a href="sitemap.html">Sitemap</a></li>
             </ul>
           </div>
         </div>
@@ -844,10 +853,11 @@
 
               <p class="mt-2 text-white"><strong>Follow Us</strong></p>
               <ul class="social-media">
-                <li><a class="facebook" href="#"><i class="fab fa-facebook-f"></i></a></li>
-                <li><a class="twitter" href="#"><i class="fab fa-twitter"></i></a></li>
-                <li><a class="instagram" href="#"><i class="fab fa-instagram"></i></a></li>
-                <li><a class="youtube" href="#"><i class="fab fa-youtube"></i></a></li>
+                <li><a href="https://www.linkedin.com/company/shieldsupport/posts/?feedView=all" target="_blank"
+                    class="linkedin"><i class="fab fa-linkedin-in"></i></a></li>
+                <li><a href="https://wa.me/17327027324" target="_blank" class="whatsapp"><i
+                      class="fab fa-whatsapp"></i></a></li>
+                <li><a href="mailto:care@shieldsupportllc.com" class="email"><i class="far fa-envelope"></i></a></li>
               </ul>
             </div>
           </div>
@@ -858,7 +868,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12 align-self-center">
-            <p>© 2025 Shield Support LLC. All Rights Reserved</p>
+            <p>&copy; 2025 Shield Support LLC. All Rights Reserved</p>
           </div>
         </div>
       </div>
@@ -866,145 +876,7 @@
   </footer>
   <!-- footer area end -->
 
-  <script>
-    const API_URL = "https://adminrole-qg65.onrender.com/api/blogs";
-    const BACKEND_URL = "https://adminrole-qg65.onrender.com";
-    const blogContainer = document.getElementById("blogContainer");
 
-    // Fallback Data
-    const FALLBACK_BLOGS = [
-      {
-        _id: "1",
-        title: "The Importance of Cyber Security in 2025",
-        content: "As we navigate the complexities of the digital age, cyber security remains a paramount concern...",
-        image: "assets/img/blog/2.png",
-        author: "Admin",
-        category: "Security",
-        createdAt: "2025-10-15T00:00:00.000Z"
-      },
-      {
-        _id: "2",
-        title: "Maximizing Efficiency with Managed IT Services",
-        content: "In a competitive business environment, efficiency is key to staying ahead. Managed IT services offer...",
-        image: "assets/img/blog/1.png",
-        author: "John Doe",
-        category: "Services",
-        createdAt: "2025-11-20T00:00:00.000Z"
-      },
-      {
-        _id: "3",
-        title: "Cloud Computing Trends Transforming Business",
-        content: "Cloud computing has revolutionized the way we do business, offering scalability, flexibility...",
-        image: "assets/img/blog/3.png",
-        author: "Jane Smith",
-        category: "Technology",
-        createdAt: "2025-12-05T00:00:00.000Z"
-      }
-    ];
-
-    // Calculate reading time based on content length
-    function calculateReadingTime(content) {
-      const wordsPerMinute = 200;
-      const words = content.trim().split(/\s+/).length;
-      const minutes = Math.ceil(words / wordsPerMinute);
-      return minutes;
-    }
-
-    // Get category from blog data (fallback to 'Technology' if not set)
-    function getCategory(blog) {
-      return blog.category || 'Technology';
-    }
-
-    // Format date
-    function formatDate(dateString) {
-      const options = { year: 'numeric', month: 'short', day: 'numeric' };
-      return new Date(dateString).toLocaleDateString('en-US', options);
-    }
-
-    // Get image URL
-    function getImageUrl(imagePath) {
-      if (!imagePath) return 'assets/img/blog/2.png';
-      if (imagePath.startsWith('http')) return imagePath;
-      if (imagePath.startsWith('assets')) return imagePath;
-      return `${BACKEND_URL}${imagePath}`;
-    }
-
-    function renderBlogs(blogs) {
-      if (!blogs || blogs.length === 0) {
-        blogContainer.innerHTML = `
-            <div class="empty-state">
-              <div class="empty-state-icon">📝</div>
-              <h3>No blogs yet</h3>
-              <p>Check back soon for exciting content!</p>
-            </div>
-          `;
-        return;
-      }
-
-      const blogsHTML = blogs.map((blog, index) => {
-        const readingTime = calculateReadingTime(blog.content);
-        const category = getCategory(blog);
-        const excerpt = blog.content.replace(/<[^>]*>/g, '').substring(0, 150) + '...';
-        const imageUrl = getImageUrl(blog.image);
-
-        return `
-            <div class="blog-card">
-              <div class="blog-card-image">
-                <a href="blog.html?id=${blog._id}">
-                  <img src="${imageUrl}" alt="${blog.title}" onerror="this.src='assets/img/blog/2.png'">
-                  <div class="image-overlay"></div>
-                </a>
-              </div>
-              <div class="blog-card-body">
-                <span class="blog-category">${category}</span>
-                
-                <h2 class="blog-title"><a href="blog.html?id=${blog._id}" style="color:inherit; text-decoration:none;">${blog.title}</a></h2>
-                
-                <div class="blog-meta">
-                  <div class="meta-item">
-                    <i class="fas fa-user"></i>
-                    <span>${blog.author || 'Admin'}</span>
-                  </div>
-                  <div class="meta-item">
-                    <i class="fas fa-calendar-alt"></i>
-                    <span>${formatDate(blog.createdAt)}</span>
-                  </div>
-                </div>
-                
-                <p class="blog-excerpt">${excerpt}</p>
-                
-                <div class="blog-footer">
-                  <a href="blog.html?id=${blog._id}" class="read-more-btn">
-                    <span>Read More</span>
-                    <i class="fas fa-arrow-right"></i>
-                  </a>
-                  <div class="reading-time">
-                    <i class="fas fa-clock"></i>
-                    <span>${readingTime} min read</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          `;
-      }).join('');
-
-      blogContainer.innerHTML = `<div class="blog-grid">${blogsHTML}</div>`;
-    }
-
-    // Fetch and display blogs
-    fetch(API_URL)
-      .then(res => {
-        if (!res.ok) throw new Error("API Offline");
-        return res.json();
-      })
-      .then(blogs => {
-        renderBlogs(blogs);
-      })
-      .catch(err => {
-        console.log('API failed, using fallback data:', err);
-        renderBlogs(FALLBACK_BLOGS);
-      });
-  </script>
 
   <!-- back to top area start -->
   <div class="back-to-top">
@@ -1027,11 +899,147 @@
   <script src="assets/js/counterup.js"></script>
 
   <!-- main js  -->
+  <script src="assets/js/config.js"></script>
   <script src="assets/js/main.js"></script>
+  <script>
+    // Ensure AppConfig is available or default to localhost
+    // const BACKEND_URL = (typeof AppConfig !== 'undefined' && AppConfig.API_BASE_URL) ? AppConfig.API_BASE_URL : "http://localhost:5000";
+    // const API_URL = `${BACKEND_URL}/api/blogs`;
+    const API_URL = AppConfig.API_BASE_URL + "/api/blogs";
+    const BACKEND_URL = AppConfig.API_BASE_URL;
+
+    const blogContainer = document.getElementById("blogContainer");
+
+    // Calculate reading time based on content length
+    function calculateReadingTime(content) {
+      if (!content) return 0;
+      const wordsPerMinute = 200;
+      const words = content.trim().split(/\s+/).length;
+      const minutes = Math.ceil(words / wordsPerMinute);
+      return minutes;
+    }
+
+    // Get category from blog data (fallback to 'Technology' if not set)
+    function getCategory(blog) {
+      return blog.category || 'Technology';
+    }
+
+    // Format date
+    function formatDate(dateString) {
+      const options = { year: 'numeric', month: 'short', day: 'numeric' };
+      return new Date(dateString).toLocaleDateString('en-US', options);
+    }
+
+    // Get image URL
+    function getImageUrl(imagePath) {
+      if (!imagePath) return '';
+      if (imagePath.startsWith('http')) return imagePath;
+      if (imagePath.startsWith('assets')) return imagePath;
+      return `${BACKEND_URL}${imagePath}`;
+    }
+
+    function renderBlogs(blogs) {
+      if (!blogs || blogs.length === 0) {
+        blogContainer.innerHTML = `
+        <div class="empty-state">
+          <div class="empty-state-icon">??</div>
+          <h3>No blogs yet</h3>
+          <p>Check back soon for exciting content!</p>
+        </div>
+        `;
+        return;
+      }
+
+      const blogsHTML = blogs.map((blog, index) => {
+        const readingTime = calculateReadingTime(blog.content);
+        const category = getCategory(blog);
+        // Use shortDescription if available, otherwise fallback to truncated content
+        // Limit description to 120 characters for consistent card size
+        let rawExcerpt = blog.shortDescription || (blog.content ? blog.content.replace(/<[^>]*>/g, '') : '');
+        if (rawExcerpt.length > 120) {
+          rawExcerpt = rawExcerpt.substring(0, 120) + '...';
+        }
+        const excerpt = rawExcerpt || 'No preview available';
+        const imageUrl = getImageUrl(blog.image);
+
+        return `
+        <div class="blog-card">
+          <div class="blog-card-image">
+            <a href="blog-details.html?id=${blog._id}">
+              <img src="${imageUrl}" alt="${blog.title}" onerror="this.src='assets/img/blog/2.png'">
+              <div class="image-overlay"></div>
+            </a>
+          </div>
+          <div class="blog-card-body">
+            <span class="blog-category">${category}</span>
+
+                <h2 class="blog-title"><a href="blog-details.html?id=${blog._id}" style="color:inherit; text-decoration:none;">${blog.title}</a></h2>
+
+            <div class="blog-meta">
+              <div class="meta-item">
+                <i class="fas fa-user"></i>
+                <span>${blog.author || 'Admin'}</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-calendar-alt"></i>
+                <span>${formatDate(blog.createdAt)}</span>
+              </div>
+            </div>
+
+            <p class="blog-excerpt">${excerpt}</p>
+
+            <div class="blog-footer">
+              <a href="blog-details.html?id=${blog._id}" class="read-more-btn">
+                <span>Read More</span>
+                <i class="fas fa-arrow-right"></i>
+              </a>
+              <div class="reading-time">
+                <i class="fas fa-clock"></i>
+                <span>${readingTime} min read</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        `;
+      }).join('');
+
+      blogContainer.innerHTML = `<div class="blog-grid">${blogsHTML}</div>`;
+    }
+
+    // Fetch and display blogs
+    fetch(API_URL)
+      .then(res => {
+        if (!res.ok) throw new Error("API Offline");
+        return res.json();
+      })
+      .then(blogs => {
+        renderBlogs(blogs);
+      })
+      .catch(err => {
+        console.log('API failed:', err);
+        blogContainer.innerHTML = `
+        <div class="error-state">
+          <div class="error-state-icon">??</div>
+          <h3>Unable to load blogs</h3>
+          <p>Please check if the backend server is running.</p>
+        </div>
+        `;
+      });
+  </script>
   <div class="mobile-schedule-bar">
     <span class="label">Ready to start?</span>
     <a href="schedule.html" target="_blank" class="btn-schedule">Schedule Meeting</a>
   </div>
+  <!-- Fixed Social Sidebar Start -->
+  <div class="fixed-sidebar-right">
+    <ul class="list-unstyled mb-0">
+      <li><a href="https://www.linkedin.com/company/shieldsupport/posts/?feedView=all" target="_blank"
+          class="linkedin"><i class="fab fa-linkedin-in"></i></a></li>
+      <li><a href="https://wa.me/17327027324" target="_blank" class="whatsapp"><i class="fab fa-whatsapp"></i></a></li>
+      <li><a href="mailto:care@shieldsupportllc.com" class="email"><i class="far fa-envelope"></i></a></li>
+    </ul>
+  </div>
+  <!-- Fixed Social Sidebar End -->
 </body>
 
 </html>
