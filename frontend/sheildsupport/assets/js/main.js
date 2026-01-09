@@ -424,7 +424,7 @@
             $btn.prop('disabled', true).html('<i class="fa fa-spinner fa-spin"></i>');
 
             $.ajax({
-                url: 'http://localhost:5000/api/subscribers',
+                url: `${AppConfig.API_BASE_URL}/api/subscribers`,
                 method: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify({ email: email }),
