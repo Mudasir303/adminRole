@@ -389,6 +389,10 @@
 		width: 90%;
 	}
 
+	.back-to-top {
+		bottom: 85px;
+	}
+
 	.breadcrumb-area .page-title {
 		font-size: 50px;
 	}
@@ -533,7 +537,7 @@
 
 	.back-to-top {
 		right: 15px;
-		bottom: 20px;
+		bottom: 85px;
 	}
 
 	/* Responsive CTA Section */

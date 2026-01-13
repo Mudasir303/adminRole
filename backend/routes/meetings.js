@@ -6,6 +6,7 @@ const Meeting = require('../models/Meeting');
 // @desc    Schedule a new meeting
 // @access  Public
 const sendEmail = require('../utils/sendEmail');
+const { createCalendarEvent } = require('../utils/googleCalendar');
 
 // @route   POST api/meetings
 // @desc    Schedule a new meeting
@@ -27,9 +28,38 @@ router.post('/', async (req, res) => {
             timeZone
         });
 
+        // --- Google Calendar Integration ---
+        // Calculate End Time
+        const startDateTime = new Date(isoDate);
+        const durationMinutes = parseInt(duration) || 30;
+        const endDateTime = new Date(startDateTime.getTime() + durationMinutes * 60000);
+
+        // Create Event in Google Calendar
+        const calendarResult = await createCalendarEvent({
+            summary: `Meeting: ${subject} with ${name}`,
+            description: `Scheduled via Shield Support.\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nWebsite: ${website}\n\nSubject: ${subject}`,
+            startTime: startDateTime.toISOString(),
+            endTime: endDateTime.toISOString(),
+            attendees: [] // User manually saves, only Admin gets auto-save (via Calendar ownership)
+        });
+
+        let finalMeetLink = '';
+
+        if (calendarResult && calendarResult.meetLink) {
+            newMeeting.meetLink = calendarResult.meetLink;
+            newMeeting.googleEventId = calendarResult.eventId;
+            finalMeetLink = calendarResult.meetLink;
+        } else {
+            // Fallback: This should technically not happen if DWD is working, 
+            // but if it does, check the calendar.
+            finalMeetLink = "Check Google Calendar";
+            newMeeting.meetLink = "";
+        }
+        // -----------------------------------
+
         const meeting = await newMeeting.save();
 
-        // Construct Email Message
+        // Construct Email Message for Admin
         const message = `
             <h3>New Meeting Scheduled</h3>
             <p><strong>Name:</strong> ${name}</p>
@@ -39,6 +69,8 @@ router.post('/', async (req, res) => {
             <p><strong>Date & Time:</strong> ${date} at ${time} (${timeZone})</p>
             <p><strong>Duration:</strong> ${duration}</p>
             <p><strong>Website:</strong> ${website}</p>
+            <p><strong>Meeting Link:</strong> <a href="${finalMeetLink}" target="_blank">${finalMeetLink}</a></p>
+            ${!calendarResult ? '<p><small>(Note: Using Jitsi Meet because Google Calendar integration is not fully configured)</small></p>' : ''}
         `;
 
         try {
@@ -59,9 +91,9 @@ router.post('/', async (req, res) => {
                     <li><strong>Date:</strong> ${date}</li>
                     <li><strong>Time:</strong> ${time} (${timeZone})</li>
                     <li><strong>Duration:</strong> ${duration}</li>
-                    <li><strong>Phone Provided:</strong> ${phone}</li>
+                    <li><strong>Meeting Link:</strong> <a href="${finalMeetLink}" target="_blank">${finalMeetLink}</a></li>
                 </ul>
-                <p>We look forward to speaking with you.</p>
+                <p>Please click the link above at the scheduled time to join the meeting.</p>
                 <p>Best regards,<br>Shield Support Team</p>
             `;
 
@@ -88,7 +120,7 @@ router.post('/', async (req, res) => {
 // @access  Public (Should be protected in real app)
 router.get('/', async (req, res) => {
     try {
-        const meetings = await Meeting.find().sort({ isoDate: 1 }); // Sort by meeting date ascending
+        const meetings = await Meeting.find().sort({ createdAt: -1 }); // Sort by creation date descending
         res.json(meetings);
     } catch (err) {
         console.error(err.message);

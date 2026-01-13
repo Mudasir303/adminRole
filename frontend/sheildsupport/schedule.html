@@ -1119,9 +1119,13 @@
             const end = new Date(start.getTime() + parseInt(selectedDuration) * 60000);
             function fmt(d) { return d.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z" }
 
+            let details = `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nWebsite: ${website}`;
+            if (data.meetLink) details += `\n\nGoogle Meet Link: ${data.meetLink}`;
+
             const url = "https://calendar.google.com/calendar/r/eventedit?" +
               "text=" + encodeURIComponent("Meeting - " + subject) +
-              "&details=" + encodeURIComponent(`Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nWebsite: ${website}`) +
+              "&details=" + encodeURIComponent(details) +
+              "&location=" + encodeURIComponent(data.meetLink || "") +
               "&dates=" + fmt(start) + "/" + fmt(end);
 
             // Redirect the pre-opened window

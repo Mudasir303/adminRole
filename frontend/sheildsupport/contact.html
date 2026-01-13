@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zxx">
 
 
@@ -201,102 +201,85 @@
   <!-- page title end -->
 
   <!-- team area start -->
-  <section class="contact-info-area pd-top-100 pd-bottom-100">
+  <section class="contact-info-area contact-section-modern pd-top-100 pd-bottom-100">
     <div class="container">
-      <div class="row">
+      <div class="row align-items-center">
 
-        <!-- LEFT SIDE -->
-        <div class="col-lg-6 col-md-12">
-          <h2 class="mb-4">Contact Info</h2>
-          <p class="mb-5">
-            We Help You with Your Strategies So You Can Focus On Your Business
-          </p>
+        <!-- LEFT SIDE: Contact Info Cards -->
+        <div class="col-lg-6 col-md-12 mb-5 mb-lg-0 contact-equal-col">
+          <div class="section-title mb-4">
+            <h5 class="sub-title left-border">Contact Info</h5>
+            <h2 class="title" style="font-size: 36px;">Get In Touch</h2>
+            <p class="content mt-3">We Help You with Your Strategies So You Can Focus On Your Business.</p>
+          </div>
 
-          <div class="row">
-
+          <div class="row g-4">
             <!-- Location -->
-            <div class="col-md-6 mb-4">
-              <div class="d-flex align-items-start">
-                <i class="icomoon-pin" style="font-size:32px;color:#0066ff;margin-right:12px;"></i>
-                <div>
-                  <h5 class="mb-1">Location</h5>
-                  <p class="mb-0">
-                    2035 Sunset Lake Road<br>
-                    Suite B-2Newark, Delaware,<br>
-                    USA-19702
-                  </p>
+            <div class="col-md-12">
+              <div class="contact-info-card d-flex align-items-center">
+                <div class="icon-circle">
+                  <i class="icomoon-pin"></i>
+                </div>
+                <div class="ps-4">
+                  <h5>Location</h5>
+                  <p class="mb-0">2035 Sunset Lake Road, Suite B-2<br>Newark, Delaware, USA-19702</p>
                 </div>
               </div>
             </div>
 
             <!-- Email -->
-            <div class="col-md-6 mb-4">
-              <div class="d-flex align-items-start">
-                <i class="icomoon-email" style="font-size:32px;color:#0066ff;margin-right:12px;"></i>
-                <div>
-                  <h5 class="mb-1">Email</h5>
-                  <p class="mb-0">
-                    <a
-                      href="https://mail.google.com/mail/?view=cm&fs=1&to=care@shieldsupportllc.com">care@shieldsupportllc.com</a><br>
-                    www.shieldsupportllc.com
-                  </p>
+            <div class="col-md-12">
+              <div class="contact-info-card d-flex align-items-center">
+                <div class="icon-circle">
+                  <i class="icomoon-email"></i>
+                </div>
+                <div class="ps-4">
+                  <h5>Email</h5>
+                  <p class="mb-0">care@shieldsupportllc.com<br>www.shieldsupportllc.com</p>
                 </div>
               </div>
             </div>
 
             <!-- Phone -->
-            <div class="col-md-6 mb-4">
-              <div class="d-flex align-items-start">
-                <i class="icomoon-telephone" style="font-size:32px;color:#0066ff;margin-right:12px;"></i>
-                <div>
-                  <h5 class="mb-1">Phone</h5>
+            <div class="col-md-12">
+              <div class="contact-info-card d-flex align-items-center">
+                <div class="icon-circle">
+                  <i class="icomoon-telephone"></i>
+                </div>
+                <div class="ps-4">
+                  <h5>Phone</h5>
                   <p class="mb-0">+1 (732) 702-7324</p>
                 </div>
               </div>
             </div>
-
-            <!-- Website -->
-            <div class="col-md-6 mb-4">
-              <div class="d-flex align-items-start">
-                <i class="icomoon-world" style="font-size:32px;color:#0066ff;margin-right:12px;"></i>
-                <div>
-                  <h5 class="mb-1">Website</h5>
-                  <p class="mb-0">www.shieldsupportllc.com</p>
-                </div>
-              </div>
-            </div>
-
           </div>
         </div>
 
-        <!-- RIGHT SIDE FORM -->
-        <div class="col-lg-6 col-md-12">
-          <h2 class="mb-4">Get in Touch</h2>
-          <form id="contactForm" class="contact-form-wrap">
-            <div class="row">
-
-              <div class="col-md-6 mb-3">
-                <input type="text" id="name" class="form-control" placeholder="Name *" required>
+        <!-- RIGHT SIDE: Form -->
+        <div class="col-lg-6 col-md-12 contact-equal-col">
+          <div class="modern-form-wrap">
+            <h2 class="text-center">Send Us a Message</h2>
+            <form id="contactForm">
+              <div class="row">
+                <div class="col-md-6">
+                  <input type="text" id="name" class="form-control" placeholder="Your Name" required>
+                </div>
+                <div class="col-md-6">
+                  <input type="email" id="email" class="form-control" placeholder="Your Email" required>
+                </div>
+                <div class="col-md-12">
+                  <input type="text" id="subject" class="form-control" placeholder="Subject" required>
+                </div>
+                <div class="col-md-12">
+                  <textarea id="message" class="form-control" rows="5" placeholder="Write your message here..."
+                    required></textarea>
+                </div>
+                <div class="col-md-12 mt-3 btn-modern-centered-wrap">
+                  <button type="submit" class="btn-modern-submit">SEND DETAILS</button>
+                </div>
               </div>
-
-              <div class="col-md-6 mb-3">
-                <input type="email" id="email" class="form-control" placeholder="Email *" required>
-              </div>
-
-              <div class="col-md-12 mb-3">
-                <input type="text" id="subject" class="form-control" placeholder="Subject *" required>
-              </div>
-
-              <div class="col-md-12 mb-3">
-                <textarea id="message" class="form-control" rows="4" placeholder="Your message *" required></textarea>
-              </div>
-
-              <div class="col-md-12">
-                <button type="submit" class="btn btn-base w-100">SEND YOUR MESSAGE</button>
-              </div>
-
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
 
       </div>
@@ -310,21 +293,17 @@
   </div>
 
   <!-- call to action start -->
-  <div class="call-to-action-area pd-top-120 pd-bottom-120 text-center bg-overlay-base"
-    style="background-image: url('assets/img/bg/5.png')">
+  <div class="cta-section-modern bg-blue">
     <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-lg-6 col-md-8">
-          <div class="single-call-to-action-inner style-white">
-            <h5>We are here to answer your questions 24/7</h5>
-            <h2>Need for it solution services</h2>
-            <a class="btn btn-black mt-3" href="contact.html">Contact With Us</a>
-          </div>
-        </div>
+      <div class="cta-content-glass">
+        <span class="cta-subtitle">We are here to answer your questions 24/7</span>
+        <h2 class="cta-title">Need IT Solution Services?</h2>
+        <a class="cta-btn-modern" href="contact.html">Contact Us</a>
       </div>
     </div>
   </div>
-  <!-- call to action start -->
+  <!-- call to action end -->
+
 
   <!-- footer area start -->
   <footer class="footer-area bg-black bg-cover" style="background-image: url('assets/img/bg/2.png')">
@@ -334,8 +313,8 @@
         <div class="col-lg-3 col-md-6">
           <div class="widget widget_about">
             <a href="index.html" class="footer-logo">
-              <img src="assets/img/SheildSupportLogo.png" alt="Shield Support LLC"
-                style="max-width: 250px; margin-bottom: 2rem;">
+              <img src="assets/img/unnamed footer logo.webp" alt="Shield Support LLC"
+                style="max-width: 180px; margin-bottom: 2rem;">
             </a>
             <div class="details">
               <p>We are a leading provider of IT and support in the United States. We work with clients all over the

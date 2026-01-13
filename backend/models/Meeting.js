@@ -41,6 +41,14 @@ const MeetingSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  meetLink: {
+    type: String,
+    default: ''
+  },
+  googleEventId: {
+    type: String,
+    default: ''
+  },
   adminUpdate: {
     type: String,
     default: ''

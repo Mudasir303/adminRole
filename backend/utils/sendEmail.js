@@ -19,7 +19,7 @@ const sendEmail = async (options) => {
     });
 
     const mailOptions = {
-        from: `${process.env.FROM_NAME || 'Sheild Support'} <${process.env.EMAIL_USER}>`,
+        from: `${process.env.FROM_NAME || 'Shield Support'} <${process.env.EMAIL_USER}>`,
         to: options.to,
         subject: options.subject,
         html: options.html,

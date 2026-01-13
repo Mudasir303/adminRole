@@ -1,4 +1,4 @@
-$rootPath = "c:\Users\hp\Desktop\workspace\adminRole\frontend\sheildsupport"
+$rootPath = "c:\Users\hp\Desktop\workspace\adminRole\adminRole\frontend\sheildsupport"
 $files = Get-ChildItem -Path $rootPath -Recurse -Filter *.html
 
 $footerTemplate = @"
@@ -10,7 +10,7 @@ $footerTemplate = @"
             <div class="col-lg-3 col-md-6">
               <div class="widget widget_about">
                 <a href="{{PATH_PREFIX}}index.html" class="footer-logo">
-                  <img src="{{PATH_PREFIX}}assets/img/SheildSupportLogo.png" alt="Shield Support LLC" style="max-width: 250px; margin-bottom: 2rem;">
+                  <img src="{{PATH_PREFIX}}assets/img/unnamed footer logo.webp" alt="Shield Support LLC" style="max-width: 180px; margin-bottom: 2rem;">
                 </a>
                 <div class="details">
                   <p>We are a leading provider of IT and support in the United States. We work with clients all over the world.</p>
