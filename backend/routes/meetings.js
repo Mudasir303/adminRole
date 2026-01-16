@@ -15,99 +15,88 @@ router.post('/', async (req, res) => {
     const { name, email, subject, phone, website, date, time, isoDate, duration, timeZone } = req.body;
 
     try {
+        // 1. Save Meeting Immediately (Fast Response)
         const newMeeting = new Meeting({
-            name,
-            email,
-            subject,
-            phone,
-            website,
-            date,
-            time,
-            isoDate,
-            duration,
-            timeZone
+            name, email, subject, phone, website, date, time, isoDate, duration, timeZone
         });
+        const savedMeeting = await newMeeting.save();
+        res.json(savedMeeting); // Respond to client immediately
 
-        // --- Google Calendar Integration ---
-        // Calculate End Time
-        const startDateTime = new Date(isoDate);
-        const durationMinutes = parseInt(duration) || 30;
-        const endDateTime = new Date(startDateTime.getTime() + durationMinutes * 60000);
+        // 2. Background Process (Fire-and-Forget)
+        (async () => {
+            try {
+                // --- Google Calendar Integration ---
+                const startDateTime = new Date(isoDate);
+                const durationMinutes = parseInt(duration) || 30;
+                const endDateTime = new Date(startDateTime.getTime() + durationMinutes * 60000);
 
-        // Create Event in Google Calendar
-        const calendarResult = await createCalendarEvent({
-            summary: `Meeting: ${subject} with ${name}`,
-            description: `Scheduled via Shield Support.\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nWebsite: ${website}\n\nSubject: ${subject}`,
-            startTime: startDateTime.toISOString(),
-            endTime: endDateTime.toISOString(),
-            attendees: [] // User manually saves, only Admin gets auto-save (via Calendar ownership)
-        });
+                const calendarResult = await createCalendarEvent({
+                    summary: `Meeting: ${subject} with ${name}`,
+                    description: `Scheduled via Shield Support.\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nWebsite: ${website}\n\nSubject: ${subject}`,
+                    startTime: startDateTime.toISOString(),
+                    endTime: endDateTime.toISOString(),
+                    attendees: []
+                });
 
-        let finalMeetLink = '';
+                let finalMeetLink = '';
+                if (calendarResult && calendarResult.meetLink) {
+                    finalMeetLink = calendarResult.meetLink;
+                    // Update the existing meeting record asynchronously
+                    await Meeting.findByIdAndUpdate(savedMeeting._id, {
+                        meetLink: finalMeetLink,
+                        googleEventId: calendarResult.eventId
+                    });
+                } else {
+                    finalMeetLink = "Check Google Calendar";
+                }
 
-        if (calendarResult && calendarResult.meetLink) {
-            newMeeting.meetLink = calendarResult.meetLink;
-            newMeeting.googleEventId = calendarResult.eventId;
-            finalMeetLink = calendarResult.meetLink;
-        } else {
-            // Fallback: This should technically not happen if DWD is working, 
-            // but if it does, check the calendar.
-            finalMeetLink = "Check Google Calendar";
-            newMeeting.meetLink = "";
-        }
-        // -----------------------------------
+                // --- Emails ---
+                const message = `
+                    <h3>New Meeting Scheduled</h3>
+                    <p><strong>Name:</strong> ${name}</p>
+                    <p><strong>Email:</strong> ${email}</p>
+                    <p><strong>Phone:</strong> ${phone}</p>
+                    <p><strong>Subject:</strong> ${subject}</p>
+                    <p><strong>Date & Time:</strong> ${date} at ${time} (${timeZone})</p>
+                    <p><strong>Duration:</strong> ${duration}</p>
+                    <p><strong>Website:</strong> ${website}</p>
+                    <p><strong>Meeting Link:</strong> <a href="${finalMeetLink}" target="_blank">${finalMeetLink}</a></p>
+                    ${!calendarResult ? '<p><small>(Note: Using Jitsi Meet because Google Calendar integration is not fully configured)</small></p>' : ''}
+                `;
 
-        const meeting = await newMeeting.save();
+                sendEmail({
+                    to: process.env.EMAIL_USER,
+                    subject: `New Meeting Request from ${name}`,
+                    html: message
+                }).catch(err => console.error("Admin Email Failed:", err));
 
-        // Construct Email Message for Admin
-        const message = `
-            <h3>New Meeting Scheduled</h3>
-            <p><strong>Name:</strong> ${name}</p>
-            <p><strong>Email:</strong> ${email}</p>
-            <p><strong>Phone:</strong> ${phone}</p>
-            <p><strong>Subject:</strong> ${subject}</p>
-            <p><strong>Date & Time:</strong> ${date} at ${time} (${timeZone})</p>
-            <p><strong>Duration:</strong> ${duration}</p>
-            <p><strong>Website:</strong> ${website}</p>
-            <p><strong>Meeting Link:</strong> <a href="${finalMeetLink}" target="_blank">${finalMeetLink}</a></p>
-            ${!calendarResult ? '<p><small>(Note: Using Jitsi Meet because Google Calendar integration is not fully configured)</small></p>' : ''}
-        `;
+                const userMessage = `
+                    <h3>Meeting Confirmation</h3>
+                    <p>Dear ${name},</p>
+                    <p>Thank you for scheduling a meeting with Shield Support.</p>
+                    <p><strong>Your Meeting Details:</strong></p>
+                    <ul>
+                        <li><strong>Subject:</strong> ${subject}</li>
+                        <li><strong>Date:</strong> ${date}</li>
+                        <li><strong>Time:</strong> ${time} (${timeZone})</li>
+                        <li><strong>Duration:</strong> ${duration}</li>
+                        <li><strong>Meeting Link:</strong> <a href="${finalMeetLink}" target="_blank">${finalMeetLink}</a></li>
+                    </ul>
+                    <p>Please click the link above at the scheduled time to join the meeting.</p>
+                    <p>Best regards,<br>Shield Support Team</p>
+                `;
 
-        try {
-            await sendEmail({
-                to: process.env.EMAIL_USER, // Send validation to admin
-                subject: `New Meeting Request from ${name}`,
-                html: message
-            });
-            // Construct User Confirmation Email
-            const userMessage = `
-                <h3>Meeting Confirmation</h3>
-                <p>Dear ${name},</p>
-                <p>Thank you for scheduling a meeting with Shield Support.</p>
-                <p><strong>Your Meeting Details:</strong></p>
-                <ul>
-                    <li><strong>Subject:</strong> ${subject}</li>
-                    <li><strong>Date:</strong> ${date}</li>
-                    <li><strong>Time:</strong> ${time} (${timeZone})</li>
-                    <li><strong>Duration:</strong> ${duration}</li>
-                    <li><strong>Meeting Link:</strong> <a href="${finalMeetLink}" target="_blank">${finalMeetLink}</a></li>
-                </ul>
-                <p>Please click the link above at the scheduled time to join the meeting.</p>
-                <p>Best regards,<br>Shield Support Team</p>
-            `;
+                sendEmail({
+                    to: email,
+                    subject: `Meeting Confirmation: ${subject}`,
+                    html: userMessage
+                }).catch(err => console.error("User Email Failed:", err));
 
-            await sendEmail({
-                to: email, // Send confirmation to user
-                subject: `Meeting Confirmation: ${subject}`,
-                html: userMessage
-            });
+            } catch (bgError) {
+                console.error("Background Processing Error:", bgError);
+            }
+        })();
 
-        } catch (emailError) {
-            console.error("Email send failed:", emailError);
-            // We do NOT want to fail the request if email fails, just log it.
-        }
-
-        res.json(meeting);
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server Error');
