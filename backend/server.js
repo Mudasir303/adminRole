@@ -24,10 +24,10 @@ app.use("/api/users", require("./routes/users"));
 app.use("/api/meetings", require("./routes/meetings"));
 app.use("/api/subscribers", require("./routes/subscribers"));
 app.use("/api/messages", require("./routes/messages"));
+app.use("/api/careers", require("./routes/career"));
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.listen(process.env.PORT || 5000, () => {
   console.log(`Server running on http://localhost:${process.env.PORT || 5000}`);
 });
-

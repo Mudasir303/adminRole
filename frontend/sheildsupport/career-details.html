@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Details | Shield Support</title>
+    <meta name="description" content="View job details and apply for positions at Shield Support">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/animate.min.css" />
+    <link rel="stylesheet" href="assets/css/fontawesome.min.css" />
+    <link rel="stylesheet" href="assets/css/custom-icon.css" />
+    <link rel="stylesheet" href="assets/css/nice-select.min.css" />
+    <link rel="stylesheet" href="assets/css/magnific.min.css" />
+    <link rel="stylesheet" href="assets/css/owl.min.css" />
+    <link rel="stylesheet" href="assets/css/slick.min.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/responsive.css" />
+    <link rel="stylesheet" href="assets/css/masks.css" />
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #8b5cf6;
+            --accent: #ec4899;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --border: rgba(148, 163, 184, 0.2);
+        }
+
+        /* Custom File Input Styling */
+        input[type="file"]::file-selector-button {
+            border: none;
+            background: var(--primary);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 15px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        input[type="file"]::file-selector-button:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Hover effect for Apply Now button */
+        .btn-apply-glow {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-apply-glow:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.5);
+        }
+
+        /* Modal Form Visibility Fixes */
+        #applyModal .modal-content {
+            background: #1e293b;
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        #applyModal .form-label {
+            color: #fff;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        #applyModal .modal-title {
+            color: #ffffff !important;
+        }
+
+        #applyModal .form-control {
+            background: rgba(255, 255, 255, 0.05) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            color: #ffffff !important;
+        }
+
+        #applyModal .form-control:focus {
+            background: rgba(255, 255, 255, 0.1) !important;
+            border-color: var(--primary) !important;
+            box-shadow: 0 0 0 0.25rem rgba(99, 102, 241, 0.25);
+        }
+
+        #applyModal .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.6) !important;
+            opacity: 1;
+        }
+
+        /* Apply Button Alignment */
+        .btn-apply-glow {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+    </style>
+</head>
+
+<body class="sc5">
+
+    <!-- preloader, search popup, orb divs: Copied from layout -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-inner">
+            <div class="spinner">
+                <div class="dot1"></div>
+                <div class="dot2"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- navbar start -->
+    <div class="navbar-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <ul class="topbar-right text-md-start text-center">
+                        <li class="d-none d-lg-inline-block">
+                            <p>
+                                <i class="far fa-clock"></i> Opening Hour 9:00am - 10:00pm
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <i class="far fa-envelope"></i>
+                                <a
+                                    href="https://mail.google.com/mail/?view=cm&fs=1&to=care@shieldsupportllc.com">care@shieldsupportllc.com</a>
+                            </p>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="col-sm-6">
+                    <ul class="topbar-right text-md-end text-center">
+                        <li>
+                            <p>
+                                <i class="fas fa-briefcase"></i>
+                                <a href="career.html">Career</a>
+                            </p>
+                        </li>
+                        <li class="d-none d-lg-inline-block">
+                            <p>Hot Line: <span><a href="tel:+17327027324">+1 (732) 702-7324</a></span></p>
+                        </li>
+                        <li class="social-area">
+                            <p class="d-inline-block">Follow Us On:</p>
+                            <a href="https://www.linkedin.com/company/shieldsupport/posts/?feedView=all"
+                                target="_blank"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+                            <a href="https://wa.me/17327027324" target="_blank"><i class="fab fa-whatsapp"
+                                    aria-hidden="true"></i></a>
+                            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=care@shieldsupportllc.com"><i
+                                    class="far fa-envelope" aria-hidden="true"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav class="navbar navbar-area navbar-area-1 navbar-expand-lg">
+        <div class="container nav-container navbar-bg">
+            <div class="responsive-mobile-menu">
+                <button class="menu toggle-btn d-block d-lg-none" data-target="#Iitechie_main_menu"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="icon-left"></span>
+                    <span class="icon-right"></span>
+                </button>
+            </div>
+            <div class="logo">
+                <a href="index.html"><img src="assets/img/SheildSupportLogo.png" alt="Shield Support LLC Logo" /></a>
+            </div>
+            <div class="nav-right-part nav-right-part-mobile">
+                <!-- <a class="search-bar-btn" href="#">
+          <i class="fa fa-search"></i>
+        </a> -->
+            </div>
+            <div class="collapse navbar-collapse" id="Iitechie_main_menu">
+                <ul class="navbar-nav menu-open text-lg-end">
+                    <li>
+                        <a href="index.html">Home</a>
+                    </li>
+                    <li class="menu-item-has-children">
+                        <a href="#">Services</a>
+                        <ul class="sub-menu">
+                            <li><a href="service-personal.html">Personal Help Desk</a></li>
+                            <li><a href="service-backend.html">Backend Support</a></li>
+                            <li><a href="service-cyber.html">Cyber Security</a></li>
+                            <li><a href="service-digital.html">Digital Marketing</a></li>
+                            <li><a href="service-dedicated.html">Dedicated Resource Services</a></li>
+                            <li><a href="service-brand.html">Brand Design & Strategy</a></li>
+                            <li><a href="service-development.html">Web & App Development</a></li>
+                            <li><a href="service-hosting.html">Hosting</a></li>
+                            <li><a href="service-staffing.html">Staffing & Recruitment</a></li>
+                        </ul>
+
+                    </li>
+                    <li class="menu-item-has-children">
+                        <a href="service-staffing.html">Staffing</a>
+                        <ul class="sub-menu">
+                            <li><a href="staffing-services/noc-staffing.html">NOC</a></li>
+                            <li><a href="staffing-services/cyber-security-staffing.html">Cyber Security</a></li>
+                            <li><a href="staffing-services/cloud-computing-staffing.html">Cloud Computing</a></li>
+                            <li><a href="staffing-services/help-desk-staffing.html">Help Desk</a></li>
+                        </ul>
+                    </li>
+
+
+
+                    <li>
+                        <a href="about.html">About Us</a>
+                    </li>
+                    <!-- <a href="#">Pages</a> -->
+                    <!-- <ul class="sub-menu">
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="team.html">Team</a></li>
+              <li><a href="team-details.html">Team Details</a></li>
+              <li><a href="project.html">Project</a></li>
+              <li><a href="project-details.html">Project Details</a></li>
+            </ul> -->
+
+                    <li>
+                        <a href="blog.html">Blog</a>
+                    </li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="resources.html">Resources</a></li>
+                    <!-- <li> <a href="account.html">Account</a></li> -->
+
+                </ul>
+            </div>
+            <div class="nav-right-part nav-right-part-desktop align-self-center">
+                <!-- <a class="search-bar-btn" href="#">
+          <i class="fa fa-search"></i>
+        </a> -->
+                <a class="btn btn-base" href="schedule.html">Schedule
+                    Meeting</a>
+            </div>
+        </div>
+
+    </nav>
+    <!-- navbar end -->
+
+    <!-- PAGE TITLE SECTION (Copied from blog-details.html) -->
+    <div class="breadcrumb-area bg-black bg-relative">
+        <div class="banner-bg-img" style="background-image: url('assets/img/bg/1.png')"></div>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-10 col-lg-12">
+                    <div class="breadcrumb-inner text-center">
+                        <h1 class="page-title">Job Details</h1>
+                        <ul class="page-list">
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="career.html">Career</a></li>
+                            <li>Details</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Career Details Section -->
+    <div class="about-area pd-top-100 pd-bottom-100">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-12" id="jobDetailsContainer">
+                    <!-- Loading State -->
+                    <div class="text-center py-5">
+                        <div class="spinner-border text-primary" role="status"><span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer (Standard Footer) -->
+    <footer class="footer-area bg-black bg-cover" style="background-image: url('assets/img/bg/2.png')">
+        <div class="container">
+            <div class="row">
+                <!-- Column 1: About & Subscribe -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="widget widget_about">
+                        <a href="index.html" class="footer-logo">
+                            <img src="assets/img/unnamed footer logo.webp" alt="Shield Support LLC"
+                                style="max-width: 180px; margin-bottom: 2rem;">
+                        </a>
+                        <div class="details">
+                            <p>We are a leading provider of IT and support in the United States. We work with clients
+                                all over the
+                                world.</p>
+                        </div>
+                    </div>
+                    <div class="widget widget_subscribe mt-4">
+                        <h4 class="widget-title">Subscribe</h4>
+                        <div class="single-input-inner style-border style-bg-none">
+                            <input type="text" placeholder="Your email address" />
+                            <button><i class="fa fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Column 2: Quick Links -->
+                <div class="col-lg-2 col-md-4 col-sm-6">
+                    <div class="widget widget_nav_menu">
+                        <h4 class="widget-title">Quick Links</h4>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="blog.html">Blog</a></li>
+                            <li><a href="resources.html">Resources</a></li>
+                            <li><a href="contact.html">Contact Us</a></li>
+                            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                            <li><a href="career.html">Career</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Column 3: IT Services (Col-2) -->
+                <div class="col-lg-2 col-md-4 col-sm-6">
+                    <div class="widget widget_nav_menu">
+                        <h4 class="widget-title">IT Services</h4>
+                        <ul>
+                            <li><a href="service-personal.html">Personal Help Desk</a></li>
+                            <li><a href="service-backend.html">Backend Support</a></li>
+                            <li><a href="service-cyber.html">Cyber Security</a></li>
+                            <li><a href="service-digital.html">Digital Marketing</a></li>
+                            <li><a href="service-development.html">Web & App Development</a></li>
+                            <li><a href="service-staffing.html">Staffing & Recruitment</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Column 4: Staffing (Col-2) -->
+                <div class="col-lg-2 col-md-4 col-sm-6">
+                    <div class="widget widget_nav_menu">
+                        <h4 class="widget-title">Staffing</h4>
+                        <ul>
+                            <li><a href="staffing-services/noc-staffing.html">NOC Staffing</a></li>
+                            <li><a href="staffing-services/cyber-security-staffing.html">Cyber Staffing</a></li>
+                            <li><a href="staffing-services/cloud-computing-staffing.html">Cloud Staffing</a></li>
+                            <li><a href="staffing-services/help-desk-staffing.html">Help Desk Staffing</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Column 5: Get In Touch -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="widget widget_about">
+                        <h4 class="widget-title">Get In Touch</h4>
+                        <div class="details">
+                            <p class="mt-2 text-white"><strong>USA Office</strong></p>
+                            <p>2035 Sunset Lake Road, Suite B-2, Newark, DE, USA-19702</p>
+
+                            <p class="mt-2 text-white"><strong>Malaysian Office</strong></p>
+                            <p>RR Gemini Services No-7 Jalan Kesum 24/37 seksyen, 24 Shah Alam Selangor, Malaysia-40300
+                            </p>
+
+                            <p class="mt-2 text-white"><strong>Follow Us</strong></p>
+                            <ul class="social-media">
+                                <li><a href="https://www.linkedin.com/company/shieldsupport/posts/?feedView=all"
+                                        target="_blank" class="linkedin"><i class="fab fa-linkedin-in"></i></a></li>
+                                <li><a href="https://wa.me/17327027324" target="_blank" class="whatsapp"><i
+                                            class="fab fa-whatsapp"></i></a></li>
+                                <li><a href="https://mail.google.com/mail/?view=cm&fs=1&to=care@shieldsupportllc.com"
+                                        class="email"><i class="far fa-envelope"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 align-self-center">
+                        <p>&copy; 2025 Shield Support LLC. All Rights Reserved</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/fontawesome.min.js"></script>
+    <script src="assets/js/config.js"></script>
+    <script src="assets/js/main.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const jobId = urlParams.get('id');
+            const container = document.getElementById('jobDetailsContainer');
+
+            if (!jobId) {
+                container.innerHTML = `
+                <div class="alert alert-warning text-center">
+                    <h3>Job not found</h3>
+                    <p>No job ID specified. <a href="career.html">Back to Careers</a></p>
+                </div>`;
+                return;
+            }
+
+            fetch(`${AppConfig.API_BASE_URL}/api/careers/${jobId}`)
+                .then(res => {
+                    if (!res.ok) throw new Error("Job not found");
+                    return res.json();
+                })
+                .then(job => {
+                    renderJobDetails(job);
+                })
+                .catch(err => {
+                    console.error(err);
+                    container.innerHTML = `
+                    <div class="alert alert-danger text-center">
+                         <h3>Error loading job</h3>
+                         <p>${err.message}</p>
+                         <a href="career.html" class="btn btn-base">Back to Careers</a>
+                    </div>`;
+                });
+        });
+
+        function renderJobDetails(job) {
+            const locationStr = job.location ? `${job.location.city || ''}, ${job.location.state || ''}` : 'Remote';
+
+            // Layout inspired by blog-details.html
+            const html = `
+            <div class="blog-details-inner">
+                <!-- Header Section -->
+                 <div class="blog-header mb-5 text-center">
+                    <!-- <span class="badge bg-primary text-white mb-3 px-3 py-2" style="font-size: 1rem;">${job.department || 'General'}</span> -->
+                    <h1 class="title fw-bold text-dark mb-4" style="font-size: 2.5rem;">${job.jobTitle}</h1>
+                    
+                    <div class="meta-info mb-3 d-flex justify-content-center flex-wrap gap-3">
+                        <span class="text-muted"><i class="fas fa-briefcase me-1"></i> ${job.employmentType || 'Full-time'}</span>
+                        <span class="text-muted"><i class="fas fa-map-marker-alt me-1"></i> ${job.workModel || 'Onsite'} (${locationStr})</span>
+                        <span class="text-muted"><i class="far fa-calendar-alt me-1"></i> Posted: ${new Date(job.createdAt).toLocaleDateString()}</span>
+                    </div>
+
+                 </div>
+
+                 <!-- Content Body -->
+                 <div class="content-body text-dark px-lg-5" style="font-size: 1.1rem; line-height: 1.8; color: #444;">
+                    <!-- Short Description -->
+                    <div class="mb-5 p-4 bg-light rounded-3 border-start border-5 border-primary">
+                        <h4 class="fw-bold mb-3">Job Overview</h4>
+                        <p class="mb-0">${job.shortDescription || 'No overview available.'}</p>
+                    </div>
+
+                    <!-- Full Description -->
+                    ${job.fullDescription ? `<div class="mb-5">
+                        <h3 class="fw-bold mb-3">Description</h3>
+                        <p>${job.fullDescription}</p>
+                    </div>` : ''}
+
+                    <!-- Requirements -->
+                    ${job.requirements ? `<div class="mb-5">
+                        <h3 class="fw-bold mb-3">Requirements</h3>
+                        <ul class="list-unstyled">
+                             ${job.requirements.split('\n').map(req => req.trim() ? `<li class="mb-2"><i class="fas fa-check text-primary me-2"></i> ${req}</li>` : '').join('')}
+                        </ul>
+                    </div>` : ''}
+                 </div>
+
+                 <!-- Apply Section -->
+                 <div class="text-center mt-5 pt-5 border-top">
+                    <h3 class="fw-bold mb-4">Interested in this role?</h3>
+                     <button class="btn btn-base btn-lg px-5 py-3 btn-apply-glow" style="border-radius:50px; font-size:1.2rem;" 
+                        onclick="openApplyModal('${job._id}', '${job.jobTitle.replace(/'/g, "\\'")}')">
+                        Apply Now <i class="fas fa-paper-plane ms-2"></i>
+                    </button>
+
+                    ${job.applyEmail ? `
+                    <div class="mt-4">
+                        <p class="text-muted mb-2">Or email your resume directly to:</p>
+                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=${job.applyEmail}&su=Application for ${encodeURIComponent(job.jobTitle)}" 
+                           target="_blank"
+                           class="fw-bold text-primary fs-5 text-decoration-none">
+                           <i class="far fa-envelope me-2"></i>${job.applyEmail}
+                        </a>
+                    </div>
+                    ` : ''}
+                 </div>
+            </div>
+            `;
+            document.getElementById('jobDetailsContainer').innerHTML = html;
+        }
+
+        // Open Modal Helper (Copied logic)
+        window.openApplyModal = function (jobId, jobTitle) {
+            document.getElementById('jobId').value = jobId;
+            document.getElementById('jobTitle').value = jobTitle;
+            document.getElementById('modalTitle').innerText = 'Apply for: ' + jobTitle;
+            const modal = new bootstrap.Modal(document.getElementById('applyModal'));
+            modal.show();
+        }
+    </script>
+
+    <!-- Application Modal (Same as before) -->
+    <div class="modal fade" id="applyModal" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content"
+                style="background: #1e293b; color: #fff; border: 1px solid rgba(255,255,255,0.1);">
+                <div class="modal-header" style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                    <h5 class="modal-title" id="modalTitle">Apply for Job</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="applyForm">
+                        <input type="hidden" id="jobId">
+                        <input type="hidden" id="jobTitle">
+
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="name" required
+                                style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff;">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="email" required
+                                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                                title="Please enter a valid email address"
+                                style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff;">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="phoneNumber" class="form-label">Phone Number</label>
+                            <div class="input-group">
+                                <select class="form-select" id="countryCode"
+                                    style="max-width: 120px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff;">
+                                    <option value="+1" selected>+1 (USA)</option>
+                                    <option value="+91">+91 (IND)</option>
+                                    <option value="+44">+44 (UK)</option>
+                                    <option value="+60">+60 (MYS)</option>
+                                </select>
+                                <input type="tel" class="form-control" id="phoneNumber" required maxlength="10"
+                                    minlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                    onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"
+                                    pattern="[0-9]{10}" title="Please enter exactly 10 digits" placeholder="1234567890"
+                                    style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff;">
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="coverLetter" class="form-label">Details / Cover Letter</label>
+                            <textarea class="form-control" id="coverLetter" rows="4"
+                                style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff;"></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="resume" class="form-label">Upload Resume/CV (PDF, DOC, DOCX)</label>
+                            <input type="file" class="form-control" id="resume" required accept=".pdf,.doc,.docx"
+                                style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff;">
+                        </div>
+
+                        <button type="submit" id="submitBtn" class="btn btn-primary w-100"
+                            style="background: linear-gradient(135deg, var(--primary), var(--secondary)); border: none;">
+                            Send Application
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Form handling script (Copied from career.html)
+        document.addEventListener('DOMContentLoaded', function () {
+            const applyForm = document.getElementById('applyForm');
+            if (applyForm) {
+                applyForm.addEventListener('submit', function (e) {
+                    e.preventDefault();
+
+                    const submitBtn = document.getElementById('submitBtn');
+                    const originalBtnText = submitBtn.innerHTML;
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+                    submitBtn.disabled = true;
+
+                    const formData = new FormData();
+                    formData.append('name', document.getElementById('name').value);
+                    formData.append('email', document.getElementById('email').value);
+
+                    const fullPhone = document.getElementById('countryCode').value + " " + document.getElementById('phoneNumber').value;
+                    formData.append('phone', fullPhone);
+
+                    formData.append('coverLetter', document.getElementById('coverLetter').value);
+                    formData.append('jobId', document.getElementById('jobId').value);
+                    formData.append('jobTitle', document.getElementById('jobTitle').value);
+
+                    const resumeFile = document.getElementById('resume').files[0];
+                    if (resumeFile) {
+                        formData.append('resume', resumeFile);
+                    }
+
+                    fetch(AppConfig.API_BASE_URL + "/api/careers/apply", {
+                        method: "POST",
+                        body: formData
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.message === "Application submitted successfully") {
+                                alert("Application sent successfully!");
+                                const modalEl = document.getElementById('applyModal');
+                                const modal = bootstrap.Modal.getInstance(modalEl);
+                                modal.hide();
+                                applyForm.reset();
+                            } else {
+                                alert("Error: " + data.message);
+                            }
+                        })
+                        .catch(err => {
+                            console.error(err);
+                            alert("Failed to send application. Please try again.");
+                        })
+                        .finally(() => {
+                            submitBtn.innerHTML = originalBtnText;
+                            submitBtn.disabled = false;
+                        });
+                });
+            }
+        });
+    </script>
+
+</body>
+
+</html>
