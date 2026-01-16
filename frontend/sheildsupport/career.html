@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Details | Shield Support</title>
+    <meta name="description" content="View job details and apply for positions at Shield Support">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/fontawesome.min.js"></script>
+    <script src="assets/js/nice-select.min.js"></script>
+    <script src="assets/js/magnific.min.js"></script>
+    <script src="assets/js/isotope.min.js"></script>
+    <script src="assets/js/imageload.min.js"></script>
+    <script src="assets/js/owl.min.js"></script>
+    <script src="assets/js/slick.min.js"></script>
+    <script src="assets/js/tweenmax.min.js"></script>
+    <script src="assets/js/waypoint.js"></script>
+    <script src="assets/js/counterup.js"></script>
+    <script src="assets/js/config.js"></script>
+    <script src="assets/js/main.js"></script>
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/animate.min.css" />
+    <link rel="stylesheet" href="assets/css/fontawesome.min.css" />
+    <link rel="stylesheet" href="assets/css/custom-icon.css" />
+    <link rel="stylesheet" href="assets/css/nice-select.min.css" />
+    <link rel="stylesheet" href="assets/css/magnific.min.css" />
+    <link rel="stylesheet" href="assets/css/owl.min.css" />
+    <link rel="stylesheet" href="assets/css/slick.min.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/responsive.css" />
+    <link rel="stylesheet" href="assets/css/masks.css" />
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #8b5cf6;
+            --accent: #ec4899;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --border: rgba(148, 163, 184, 0.2);
+            --shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 25px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Custom File Input Styling */
+        input[type="file"]::file-selector-button {
+            border: none;
+            background: var(--primary);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 15px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        input[type="file"]::file-selector-button:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Hover effect for Apply Now button */
+        .btn-apply-glow {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-apply-glow:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.5);
+        }
+
+        /* Modal Form Visibility Fixes */
+        #applyModal .modal-content {
+            background: #1e293b;
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        #applyModal .form-label {
+            color: #fff;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        #applyModal .modal-title {
+            color: #ffffff !important;
+        }
+
+        #applyModal .form-control {
+            background: rgba(255, 255, 255, 0.05) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            color: #ffffff !important;
+        }
+
+        #applyModal .form-control:focus {
+            background: rgba(255, 255, 255, 0.1) !important;
+            border-color: var(--primary) !important;
+            box-shadow: 0 0 0 0.25rem rgba(99, 102, 241, 0.25);
+        }
+
+        #applyModal .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.6) !important;
+            opacity: 1;
+        }
+
+        /* Apply Button Alignment */
+        .btn-apply-glow {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        /* --- Blog/Career Card Styles (Restored) --- */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            animation: fadeIn 0.8s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .blog-card {
+            background: #ffffff;
+            border: 1px solid #afbac9;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            position: relative;
+            animation: slideUp 0.6s ease backwards;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .blog-card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .blog-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .blog-card:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .blog-card:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .blog-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+
+        .blog-card:hover::before {
+            opacity: 1;
+        }
+
+        .blog-card-image {
+            position: relative;
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .blog-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .blog-card:hover .blog-card-image img {
+            transform: scale(1.1);
+        }
+
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, transparent 0%, rgba(15, 23, 42, 0.7) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .blog-card:hover .image-overlay {
+            opacity: 1;
+        }
+
+        .blog-card-body {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .simple-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .simple-link:hover {
+            color: var(--secondary);
+            transform: translateX(5px);
+        }
+
+        .blog-meta {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .meta-item i {
+            color: var(--primary);
+        }
+
+        .blog-category {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .blog-category:hover {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.2));
+            transform: scale(1.05);
+        }
+
+        .blog-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+            transition: color 0.3s ease;
+        }
+
+        .blog-card:hover .blog-title {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .blog-excerpt {
+            color: #0c0d0e;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .blog-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+            margin-top: auto;
+        }
+
+        .read-more-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .read-more-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .read-more-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .read-more-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
+            color: white;
+        }
+
+        .read-more-btn i {
+            transition: transform 0.3s ease;
+        }
+
+        .read-more-btn:hover i {
+            transform: translateX(5px);
+        }
+
+        /* --- Sidebar & Filter Styles --- */
+        .filter-sidebar {
+            background: #1e293b;
+            /* Dark Blue from screenshot */
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            color: #fff;
+        }
+
+        .filter-title {
+            color: #ffffff;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            display: block;
+            font-size: 1rem;
+        }
+
+        .filter-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .filter-select,
+        .filter-input {
+            width: 100%;
+            padding: 12px 16px;
+            background: #ffffff;
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 10px;
+            color: #1e293b;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .filter-select {
+            appearance: auto;
+            /* Or use a custom arrow if needed, but defaults are safer for now */
+            cursor: pointer;
+        }
+
+        .filter-select:focus,
+        .filter-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        /* --- Search Bar Styles --- */
+        .search-bar {
+            position: relative;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border: 1px solid #a8b4c4;
+            /* Visible border added */
+            padding: 0;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-bar input {
+            border: none;
+            height: 60px;
+            font-size: 1.1rem;
+            color: #1e293b;
+            background: transparent;
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            box-shadow: none;
+            background: transparent;
+        }
+
+        .search-bar .search-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        .search-bar .clear-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .search-bar .clear-icon:hover {
+            color: var(--danger);
+        }
+    </style>
+</head>
+
+<body class="sc5">
+
+    <!-- preloader, search popup, orb divs: Copied from layout -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-inner">
+            <div class="spinner">
+                <div class="dot1"></div>
+                <div class="dot2"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- navbar start -->
+    <div class="navbar-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <ul class="topbar-right text-md-start text-center">
+                        <li class="d-none d-lg-inline-block">
+                            <p>
+                                <i class="far fa-clock"></i> Opening Hour 9:00am - 10:00pm
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <i class="far fa-envelope"></i>
+                                <a
+                                    href="https://mail.google.com/mail/?view=cm&fs=1&to=care@shieldsupportllc.com">care@shieldsupportllc.com</a>
+                            </p>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="col-sm-6">
+                    <ul class="topbar-right text-md-end text-center">
+                        <li>
+                            <p>
+                                <i class="fas fa-briefcase"></i>
+                                <a href="career.html">Career</a>
+                            </p>
+                        </li>
+                        <li class="d-none d-lg-inline-block">
+                            <p>Hot Line: <span><a href="tel:+17327027324">+1 (732) 702-7324</a></span></p>
+                        </li>
+                        <li class="social-area">
+                            <p class="d-inline-block">Follow Us On:</p>
+                            <a href="https://www.linkedin.com/company/shieldsupport/posts/?feedView=all"
+                                target="_blank"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+                            <a href="https://wa.me/17327027324" target="_blank"><i class="fab fa-whatsapp"
+                                    aria-hidden="true"></i></a>
+                            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=care@shieldsupportllc.com"><i
+                                    class="far fa-envelope" aria-hidden="true"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav class="navbar navbar-area navbar-area-1 navbar-expand-lg">
+        <div class="container nav-container navbar-bg">
+            <div class="responsive-mobile-menu">
+                <button class="menu toggle-btn d-block d-lg-none" data-target="#Iitechie_main_menu"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="icon-left"></span>
+                    <span class="icon-right"></span>
+                </button>
+            </div>
+            <div class="logo">
+                <a href="index.html"><img src="assets/img/SheildSupportLogo.png" alt="Shield Support LLC Logo" /></a>
+            </div>
+            <div class="nav-right-part nav-right-part-mobile">
+                <!-- <a class="search-bar-btn" href="#">
+          <i class="fa fa-search"></i>
+        </a> -->
+            </div>
+            <div class="collapse navbar-collapse" id="Iitechie_main_menu">
+                <ul class="navbar-nav menu-open text-lg-end">
+                    <li>
+                        <a href="index.html">Home</a>
+                    </li>
+                    <li class="menu-item-has-children">
+                        <a href="#">Services</a>
+                        <ul class="sub-menu">
+                            <li><a href="service-personal.html">Personal Help Desk</a></li>
+                            <li><a href="service-backend.html">Backend Support</a></li>
+                            <li><a href="service-cyber.html">Cyber Security</a></li>
+                            <li><a href="service-digital.html">Digital Marketing</a></li>
+                            <li><a href="service-dedicated.html">Dedicated Resource Services</a></li>
+                            <li><a href="service-brand.html">Brand Design & Strategy</a></li>
+                            <li><a href="service-development.html">Web & App Development</a></li>
+                            <li><a href="service-hosting.html">Hosting</a></li>
+                            <li><a href="service-staffing.html">Staffing & Recruitment</a></li>
+                        </ul>
+
+                    </li>
+                    <li class="menu-item-has-children">
+                        <a href="service-staffing.html">Staffing</a>
+                        <ul class="sub-menu">
+                            <li><a href="staffing-services/noc-staffing.html">NOC</a></li>
+                            <li><a href="staffing-services/cyber-security-staffing.html">Cyber Security</a></li>
+                            <li><a href="staffing-services/cloud-computing-staffing.html">Cloud Computing</a></li>
+                            <li><a href="staffing-services/help-desk-staffing.html">Help Desk</a></li>
+                        </ul>
+                    </li>
+
+
+
+                    <li>
+                        <a href="about.html">About Us</a>
+                    </li>
+                    <!-- <a href="#">Pages</a> -->
+                    <!-- <ul class="sub-menu">
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="team.html">Team</a></li>
+              <li><a href="team-details.html">Team Details</a></li>
+              <li><a href="project.html">Project</a></li>
+              <li><a href="project-details.html">Project Details</a></li>
+            </ul> -->
+
+                    <li>
+                        <a href="blog.html">Blog</a>
+                    </li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="resources.html">Resources</a></li>
+                    <!-- <li> <a href="account.html">Account</a></li> -->
+
+                </ul>
+            </div>
+            <div class="nav-right-part nav-right-part-desktop align-self-center">
+                <!-- <a class="search-bar-btn" href="#">
+          <i class="fa fa-search"></i>
+        </a> -->
+                <a class="btn btn-base" href="schedule.html">Schedule
+                    Meeting</a>
+            </div>
+        </div>
+
+    </nav>
+    <!-- navbar end -->
+
+    <!-- PAGE TITLE SECTION -->
+    <div class="breadcrumb-area bg-black bg-relative">
+        <div class="banner-bg-img" style="background-image: url('assets/img/bg/1.png')"></div>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-10 col-lg-12">
+                    <div class="breadcrumb-inner text-center">
+                        <h1 class="page-title">Join Our Team</h1>
+                        <ul class="page-list">
+                            <li><a href="index.html">Home</a></li>
+                            <li>Career</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- why choose area start -->
+    <div class="why-choose about-area-custom-bg pd-top-100 pd-bottom-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-9 order-lg-last align-self-center">
+                    <div class="about-mask-bg-wrap about-mask-bg-wrap-2 mb-4 mb-lg-0">
+                        <img class="shape-image-sm top_image_bounce" src="assets/img/about/2sm.png" alt="img" />
+                        <img class="shape-image" src="assets/img/about/2s.png" alt="img" />
+                        <div class="thumb">
+                            <img src="assets/img/about/2.png" alt="Why Join Shield Support" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 order-lg-first align-self-center">
+                    <div class="section-title px-lg-5 mb-0">
+                        <h5 class="sub-title right-line">Why Join Us</h5>
+                        <h2 class="title">
+                            Build Your Future With Shield Support
+                        </h2>
+                        <p class="content">
+                            We don't just offer jobs; we offer careers. Join a team where innovation meets impact, and
+                            your professional growth is our priority.
+                        </p>
+
+                        <div class="choose-wrap mt-4">
+
+                            <!-- Career Growth -->
+                            <div class="media single-choose-inner">
+                                <div class="media-left">
+                                    <div class="icon">
+                                        <i class="icomoon-gear"></i>
+                                    </div>
+                                </div>
+                                <div class="media-body">
+                                    <h4>Career Growth</h4>
+                                    <p>
+                                        We invest in your development with mentorship, training, and opportunities to
+                                        work on cutting-edge projects.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Inclusive Culture -->
+                            <div class="media single-choose-inner">
+                                <div class="media-left">
+                                    <div class="icon">
+                                        <i class="icomoon-time"></i>
+                                    </div>
+                                </div>
+                                <div class="media-body">
+                                    <h4>Inclusive Culture</h4>
+                                    <p>
+                                        Be part of a diverse and collaborative environment where every voice is heard
+                                        and valued.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Impactful Work -->
+                            <div class="media single-choose-inner">
+                                <div class="media-left">
+                                    <div class="icon">
+                                        <i class="icomoon-briefcase"></i>
+                                    </div>
+                                </div>
+                                <div class="media-body">
+                                    <h4>Impactful Work</h4>
+                                    <p>
+                                        Contribute to meaningful solutions that help businesses succeed and make a real
+                                        difference.
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- why choose area end -->
+
+    <!-- Career Section -->
+    <section class="blog-section career-section about-area-custom-bg">
+        <div class="container">
+            <div class="row">
+                <!-- Sidebar Filters -->
+                <div class="col-lg-3">
+                    <div class="filter-sidebar mb-4 mb-lg-0">
+                        <h3 class="mb-4" style="color:#ffffff; font-weight:800;">Filters</h3>
+
+                        <!-- Sort Order -->
+                        <div class="filter-group">
+                            <label class="filter-title">Sort Order</label>
+                            <select class="filter-select" id="sortFilter" onchange="filterJobs()">
+                                <option value="newest">Newest First</option>
+                                <option value="oldest">Oldest First</option>
+                            </select>
+                        </div>
+
+                        <!-- Work Model -->
+                        <div class="filter-group">
+                            <label class="filter-title">Work Model</label>
+                            <select class="filter-select" id="workModelFilter" onchange="filterJobs()">
+                                <option value="all">All Models</option>
+                                <option value="Remote">Remote</option>
+                                <option value="Onsite">Onsite</option>
+                                <option value="Hybrid">Hybrid</option>
+                            </select>
+                        </div>
+
+                        <!-- Industry / Department -->
+                        <div class="filter-group">
+                            <label class="filter-title">Industry</label>
+                            <select class="filter-select" id="industryFilter" onchange="filterJobs()">
+                                <option value="all">All</option>
+                                <!-- Options populated dynamically or statically -->
+                                <option value="Engineering">Engineering</option>
+                                <option value="Sales">Sales</option>
+                                <option value="Marketing">Marketing</option>
+                                <option value="Support">Support</option>
+                                <option value="HR">Human Resources</option>
+                            </select>
+                        </div>
+
+                        <!-- Location -->
+                        <div class="filter-group">
+                            <label class="filter-title">Location</label>
+                            <input type="text" id="locationCityFilter" class="filter-input" placeholder="City"
+                                onkeyup="filterJobs()">
+                        </div>
+
+                        <!-- Reset Button -->
+                        <div class="mt-4">
+                            <button class="btn btn-outline-light w-100" onclick="resetFilters()">Reset Filters</button>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Job Listings -->
+                <div class="col-lg-9">
+                    <!-- Search Bar -->
+                    <div class="search-bar mb-4">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" id="jobSearchInput" oninput="filterJobs()"
+                            style="padding-left: 3.5rem; padding-right: 3rem; width: 100%;"
+                            placeholder="Search for jobs...">
+                        <i class="fas fa-times clear-icon" id="clearSearchBtn" onclick="clearSearch()"
+                            style="display: none;"></i>
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h4 id="jobCount" style="color:#1e293b;">Current Openings</h4>
+                    </div>
+
+                    <div id="careerContainer">
+                        <!-- Loading state -->
+                        <div class="loading-state">
+                            <!-- <div class="loader"></div> -->
+                            <div class="spinner-border text-light" role="status"><span
+                                    class="visually-hidden">Loading...</span></div>
+                            <p class="loading-text text-light mt-2">Loading career opportunities...</p>
+                        </div>
+                    </div>
+
+                    <!-- Pagination Controls -->
+                    <div id="paginationContainer" class="d-flex justify-content-center mt-5"></div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Footer (Standard Footer) -->
+    <footer class="footer-area bg-black bg-cover" style="background-image: url('assets/img/bg/2.png')">
+        <div class="container">
+            <div class="row">
+                <!-- Column 1: About & Subscribe -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="widget widget_about">
+                        <a href="index.html" class="footer-logo">
+                            <img src="assets/img/unnamed footer logo.webp" alt="Shield Support LLC"
+                                style="max-width: 180px; margin-bottom: 2rem;">
+                        </a>
+                        <div class="details">
+                            <p>We are a leading provider of IT and support in the United States. We work with clients
+                                all over the
+                                world.</p>
+                        </div>
+                    </div>
+                    <div class="widget widget_subscribe mt-4">
+                        <h4 class="widget-title">Subscribe</h4>
+                        <div class="single-input-inner style-border style-bg-none">
+                            <input type="text" placeholder="Your email address" />
+                            <button><i class="fa fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Column 2: Quick Links -->
+                <div class="col-lg-2 col-md-4 col-sm-6">
+                    <div class="widget widget_nav_menu">
+                        <h4 class="widget-title">Quick Links</h4>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="blog.html">Blog</a></li>
+                            <li><a href="resources.html">Resources</a></li>
+                            <li><a href="contact.html">Contact Us</a></li>
+                            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                            <li><a href="career.html">Career</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Column 3: IT Services (Col-2) -->
+                <div class="col-lg-2 col-md-4 col-sm-6">
+                    <div class="widget widget_nav_menu">
+                        <h4 class="widget-title">IT Services</h4>
+                        <ul>
+                            <li><a href="service-personal.html">Personal Help Desk</a></li>
+                            <li><a href="service-backend.html">Backend Support</a></li>
+                            <li><a href="service-cyber.html">Cyber Security</a></li>
+                            <li><a href="service-digital.html">Digital Marketing</a></li>
+                            <li><a href="service-development.html">Web & App Development</a></li>
+                            <li><a href="service-staffing.html">Staffing & Recruitment</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Column 4: Staffing (Col-2) -->
+                <div class="col-lg-2 col-md-4 col-sm-6">
+                    <div class="widget widget_nav_menu">
+                        <h4 class="widget-title">Staffing</h4>
+                        <ul>
+                            <li><a href="staffing-services/noc-staffing.html">NOC Staffing</a></li>
+                            <li><a href="staffing-services/cyber-security-staffing.html">Cyber Staffing</a></li>
+                            <li><a href="staffing-services/cloud-computing-staffing.html">Cloud Staffing</a></li>
+                            <li><a href="staffing-services/help-desk-staffing.html">Help Desk Staffing</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Column 5: Get In Touch -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="widget widget_about">
+                        <h4 class="widget-title">Get In Touch</h4>
+                        <div class="details">
+                            <p class="mt-2 text-white"><strong>USA Office</strong></p>
+                            <p>2035 Sunset Lake Road, Suite B-2, Newark, DE, USA-19702</p>
+
+                            <p class="mt-2 text-white"><strong>Malaysian Office</strong></p>
+                            <p>RR Gemini Services No-7 Jalan Kesum 24/37 seksyen, 24 Shah Alam Selangor, Malaysia-40300
+                            </p>
+
+                            <p class="mt-2 text-white"><strong>Follow Us</strong></p>
+                            <ul class="social-media">
+                                <li><a href="https://www.linkedin.com/company/shieldsupport/posts/?feedView=all"
+                                        target="_blank" class="linkedin"><i class="fab fa-linkedin-in"></i></a></li>
+                                <li><a href="https://wa.me/17327027324" target="_blank" class="whatsapp"><i
+                                            class="fab fa-whatsapp"></i></a></li>
+                                <li><a href="https://mail.google.com/mail/?view=cm&fs=1&to=care@shieldsupportllc.com"
+                                        class="email"><i class="far fa-envelope"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 align-self-center">
+                        <p>&copy; 2025 Shield Support LLC. All Rights Reserved</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Application Modal (Same as before) -->
+    <div class="modal fade" id="applyModal" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content"
+                style="background: #1e293b; color: #fff; border: 1px solid rgba(255,255,255,0.1);">
+                <div class="modal-header" style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                    <h5 class="modal-title" id="modalTitle">Apply for Job</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="applyForm">
+                        <input type="hidden" id="jobId">
+                        <input type="hidden" id="jobTitle">
+
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="name" required
+                                style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff;">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="email" required
+                                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                                title="Please enter a valid email address"
+                                style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff;">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="phoneNumber" class="form-label">Phone Number</label>
+                            <div class="input-group">
+                                <select class="form-select" id="countryCode"
+                                    style="max-width: 120px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff;">
+                                    <option value="+1" selected>+1 (USA)</option>
+                                    <option value="+91">+91 (IND)</option>
+                                    <option value="+44">+44 (UK)</option>
+                                    <option value="+60">+60 (MYS)</option>
+                                </select>
+                                <input type="tel" class="form-control" id="phoneNumber" required maxlength="10"
+                                    minlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                    onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"
+                                    pattern="[0-9]{10}" title="Please enter exactly 10 digits" placeholder="1234567890"
+                                    style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff;">
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="coverLetter" class="form-label">Details / Cover Letter</label>
+                            <textarea class="form-control" id="coverLetter" rows="4"
+                                style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff;"></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="resume" class="form-label">Upload Resume/CV (PDF, DOC, DOCX)</label>
+                            <input type="file" class="form-control" id="resume" required accept=".pdf,.doc,.docx"
+                                style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff;">
+                        </div>
+
+                        <button type="submit" id="submitBtn" class="btn btn-primary w-100"
+                            style="background: linear-gradient(135deg, var(--primary), var(--secondary)); border: none;">
+                            Send Application
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = AppConfig.API_BASE_URL + "/api/careers";
+        const careerContainer = document.getElementById("careerContainer");
+        const jobCountLabel = document.getElementById("jobCount");
+
+        let allJobs = []; // Store all fetched jobs
+        let currentFilteredJobs = []; // Store currently filtered jobs
+        let currentPage = 1;
+        const itemsPerPage = 10;
+        let currentSearchTerm = "";
+
+        // Format date
+        function formatDate(dateString) {
+            const options = { year: 'numeric', month: 'short', day: 'numeric' };
+            return new Date(dateString).toLocaleDateString('en-US', options);
+        }
+
+        /*
+         * Main Render Function (Handles Grid + Pagination)
+         * Receives the FULL filtered list, then slices it for the current page.
+         */
+        function renderCareers(jobs, searchTerm = "") {
+            const totalItems = jobs.length;
+
+            // Update Count Label
+            if (jobCountLabel) jobCountLabel.innerText = `${totalItems} Job${totalItems !== 1 ? 's' : ''}`;
+
+            if (totalItems === 0) {
+                // Different message for "no jobs at all" vs "no jobs matching filter"
+                if (allJobs.length === 0 && searchTerm === "" && document.getElementById('workModelFilter').value === 'all' && document.getElementById('industryFilter').value === 'all') {
+                    careerContainer.innerHTML = `
+            <div class="empty-state text-center py-5">
+              <div class="empty-state-icon mb-3"><i class="far fa-folder-open fa-3x text-muted"></i></div>
+              <h3 class="text-white">No Current Openings</h3>
+              <p class="text-white-50">We don't have any open positions right now. Please check back later!</p>
+            </div>`;
+                } else {
+                    careerContainer.innerHTML = `
+            <div class="empty-state text-center py-5">
+              <div class="empty-state-icon mb-3"><i class="fas fa-search fa-3x text-muted"></i></div>
+              <h3 class="text-white">No positions match your search</h3>
+              <p class="text-white-50">Try adjusting your filters or search keywords.</p>
+            </div>`;
+                }
+
+                document.getElementById("paginationContainer").innerHTML = "";
+                return;
+            }
+
+            // 1. Slice Data for Pagination
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const jobsToShow = jobs.slice(startIndex, endIndex);
+
+            // Helper to highlight text
+            const highlightText = (text, term) => {
+                if (!term) return text;
+                const regex = new RegExp(`(${term})`, 'gi');
+                return text.replace(regex, '<span class="highlight">$1</span>');
+            };
+
+            // 2. Render Cards
+            const jobsHTML = jobsToShow.map((job) => {
+                let description = job.shortDescription || job.fullDescription || 'No description available';
+                if (description.length > 150) description = description.substring(0, 150) + '...';
+                const locationStr = job.location ? `${job.location.city || ''}, ${job.location.state || ''}` : 'Remote';
+
+                const highlightedTitle = highlightText(job.jobTitle, searchTerm);
+                const highlightedDesc = highlightText(description, searchTerm);
+
+                return `
+        <div class="blog-card" style="height: auto;">
+            <div class="blog-card-body">
+                <h2 class="blog-title" style="margin-top:0;">${highlightedTitle}</h2>
+                <div class="blog-meta">
+                    <div class="meta-item"><i class="fas fa-briefcase"></i><span>${job.employmentType || 'Full-time'}</span></div>
+                    <div class="meta-item"><i class="fas fa-map-marker-alt"></i><span>${job.workModel || 'Onsite'} (${locationStr})</span></div>
+                </div>
+                <p class="blog-excerpt">${highlightedDesc}</p>
+                <div class="blog-footer">
+                     <a href="career-details.html?id=${job._id}" class="simple-link">
+                        <span>View Details</span><i class="fas fa-arrow-right"></i>
+                    </a>
+                    <span class="meta-item" style="font-size: 0.85rem; margin-left: auto;">Posted: ${formatDate(job.createdAt)}</span>
+                </div>
+            </div>
+        </div>`;
+            }).join('');
+
+            // Fade-in effect
+            careerContainer.style.opacity = '0';
+            setTimeout(() => {
+                careerContainer.innerHTML = `<div class="blog-grid">${jobsHTML}</div>`;
+                careerContainer.style.opacity = '1';
+                careerContainer.style.transition = 'opacity 0.3s ease';
+            }, 200);
+
+            // 3. Render Pagination Controls
+            renderPaginationControls(totalItems);
+        }
+
+        function renderPaginationControls(totalItems) {
+            const totalPages = Math.ceil(totalItems / itemsPerPage);
+            const paginationContainer = document.getElementById("paginationContainer");
+
+            if (totalPages <= 1) {
+                paginationContainer.innerHTML = '';
+                return;
+            }
+
+            let paginationHTML = `
+        <nav aria-label="Job pagination">
+          <ul class="pagination pagination-lg">
+      `;
+
+            // Previous
+            paginationHTML += `
+        <li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
+          <a class="page-link" href="#" onclick="changePage(${currentPage - 1}); return false;" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+      `;
+
+            // Numbers
+            for (let i = 1; i <= totalPages; i++) {
+                paginationHTML += `
+          <li class="page-item ${i === currentPage ? 'active' : ''}">
+             <a class="page-link" href="#" onclick="changePage(${i}); return false;">${i}</a>
+          </li>
+        `;
+            }
+
+            // Next
+            paginationHTML += `
+        <li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
+          <a class="page-link" href="#" onclick="changePage(${currentPage + 1}); return false;" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      `;
+
+            paginationHTML += `</ul></nav>`;
+            paginationContainer.innerHTML = paginationHTML;
+        }
+
+        window.changePage = function (page) {
+            const totalPages = Math.ceil(currentFilteredJobs.length / itemsPerPage);
+            if (page < 1 || page > totalPages) return;
+
+            currentPage = page;
+            // Scroll to job list
+            document.querySelector('.col-lg-9').scrollIntoView({ behavior: 'smooth' });
+            renderCareers(currentFilteredJobs, currentSearchTerm);
+        }
+
+        // Main Filter Function
+        function filterJobs() {
+            // 1. Get current values from all filter inputs
+            const searchInput = document.getElementById('jobSearchInput');
+            const searchTerm = searchInput ? searchInput.value.toLowerCase() : "";
+
+            // Toggle Clear Icon
+            const clearBtn = document.getElementById('clearSearchBtn');
+            if (clearBtn) {
+                clearBtn.style.display = searchTerm.length > 0 ? 'inline-block' : 'none';
+            }
+
+            const sortOrder = document.getElementById('sortFilter').value;
+            const workModel = document.getElementById('workModelFilter').value;
+            const department = document.getElementById('industryFilter').value;
+            const city = document.getElementById('locationCityFilter').value.toLowerCase();
+
+            let filtered = allJobs.filter(job => {
+                // Search Term (Title, Desc, Specialization) - simplistic approach
+                const titleMatch = (job.jobTitle || "").toLowerCase().includes(searchTerm);
+                const descMatch = (job.shortDescription || "").toLowerCase().includes(searchTerm);
+                const searchMatch = titleMatch || descMatch;
+
+                // Work Model
+                const currentModel = (job.workModel || "Onsite");
+                const modelMatch = workModel === 'all' || currentModel.toLowerCase() === workModel.toLowerCase();
+
+                // Department
+                const currentDept = (job.department || "General");
+                const deptMatch = department === 'all' || currentDept.toLowerCase() === department.toLowerCase();
+
+                // Location
+                const jobCity = (job.location?.city || "").toLowerCase();
+                const cityMatch = !city || jobCity.includes(city);
+
+                return searchMatch && modelMatch && deptMatch && cityMatch;
+            });
+
+            // Sorting
+            filtered.sort((a, b) => {
+                const dateA = new Date(a.createdAt);
+                const dateB = new Date(b.createdAt);
+                return sortOrder === 'newest' ? dateB - dateA : dateA - dateB;
+            });
+
+            // Update Global State
+            currentFilteredJobs = filtered;
+            currentSearchTerm = searchTerm;
+            currentPage = 1; // Reset to page 1 on filter change
+
+            renderCareers(filtered, searchTerm);
+        }
+
+        function clearSearch() {
+            const searchInput = document.getElementById('jobSearchInput');
+            searchInput.value = '';
+            filterJobs(); // Re-filter with empty search
+        }
+
+        function resetFilters() {
+            if (document.getElementById('jobSearchInput')) document.getElementById('jobSearchInput').value = "";
+            document.getElementById('sortFilter').value = "newest";
+            document.getElementById('workModelFilter').value = "all";
+            document.getElementById('industryFilter').value = "all";
+            document.getElementById('locationCityFilter').value = "";
+            filterJobs();
+        }
+
+        // Setup Enter key for search
+        const searchInput = document.getElementById('jobSearchInput');
+        if (searchInput) {
+            searchInput.addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') filterJobs();
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Open Modal
+            window.openApplyModal = function (jobId, jobTitle) {
+                document.getElementById('jobId').value = jobId;
+                document.getElementById('jobTitle').value = jobTitle;
+                document.getElementById('modalTitle').innerText = 'Apply for: ' + jobTitle;
+
+                // Use Bootstrap modal
+                const modal = new bootstrap.Modal(document.getElementById('applyModal'));
+                modal.show();
+            }
+
+            // Handle Form Submission
+            const applyForm = document.getElementById('applyForm');
+            if (applyForm) {
+                applyForm.addEventListener('submit', function (e) {
+                    e.preventDefault();
+
+                    const submitBtn = document.getElementById('submitBtn');
+                    const originalBtnText = submitBtn.innerHTML;
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+                    submitBtn.disabled = true;
+
+                    const formData = new FormData();
+                    formData.append('name', document.getElementById('name').value);
+                    formData.append('email', document.getElementById('email').value);
+
+                    const fullPhone = document.getElementById('countryCode').value + " " + document.getElementById('phoneNumber').value;
+                    formData.append('phone', fullPhone);
+
+                    formData.append('coverLetter', document.getElementById('coverLetter').value);
+                    formData.append('jobId', document.getElementById('jobId').value);
+                    formData.append('jobTitle', document.getElementById('jobTitle').value);
+
+                    const resumeFile = document.getElementById('resume').files[0];
+                    if (resumeFile) {
+                        formData.append('resume', resumeFile);
+                    }
+
+                    fetch(AppConfig.API_BASE_URL + "/api/careers/apply", {
+                        method: "POST",
+                        // Remove Content-Type header to let browser set it with boundary for FormData
+                        body: formData
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.message === "Application submitted successfully") {
+                                alert("Application sent successfully!");
+                                // Close modal
+                                const modalEl = document.getElementById('applyModal');
+                                const modal = bootstrap.Modal.getInstance(modalEl);
+                                modal.hide();
+                                applyForm.reset();
+                            } else {
+                                alert("Error: " + data.message);
+                            }
+                        })
+                        .catch(err => {
+                            console.error(err);
+                            alert("Failed to send application. Please try again.");
+                        })
+                        .finally(() => {
+                            submitBtn.innerHTML = originalBtnText;
+                            submitBtn.disabled = false;
+                        });
+                });
+            }
+
+            // Fetch and display careers
+            const careerContainer = document.getElementById('careerContainer');
+            fetch(API_URL)
+                .then(res => {
+                    if (!res.ok) throw new Error("API Offline");
+                    return res.json();
+                })
+                .then(jobs => {
+                    try {
+                        allJobs = jobs; // Store globally
+                        filterJobs(); // Initial render with default filters (newest, all, etc)
+                    } catch (e) {
+                        console.error("Render failed:", e);
+                    }
+                })
+                .catch(err => {
+                    console.error('API failed:', err);
+                    if (careerContainer) {
+                        careerContainer.innerHTML = `
+                <div class="error-state text-center py-5">
+                <div class="error-state-icon mb-3"><i class="fas fa-exclamation-triangle fa-3x text-danger"></i></div>
+                <h3 class="text-white">Unable to load jobs</h3>
+                <p class="text-white-50">Please check if the backend server is running.</p>
+                <p style="font-size:0.8rem; color:red;">${err.message}</p>
+                </div>
+                `;
+                    }
+                });
+        });
+    </script>
+
+</body>
+
+</html>

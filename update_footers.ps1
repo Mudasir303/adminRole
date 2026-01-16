@@ -33,10 +33,12 @@ $footerTemplate = @"
                 <ul>
                   <li><a href="{{PATH_PREFIX}}index.html">Home</a></li>
                   <li><a href="{{PATH_PREFIX}}about.html">About Us</a></li>
-                  <li><a href="{{PATH_PREFIX}}blog-details.html">Blog</a></li>
+                  <li><a href="{{PATH_PREFIX}}blog.html">Blog</a></li>
                   <li><a href="{{PATH_PREFIX}}resources.html">Resources</a></li>
                   <li><a href="{{PATH_PREFIX}}contact.html">Contact Us</a></li>
                   <li><a href="{{PATH_PREFIX}}privacy-policy.html">Privacy Policy</a></li>
+                  <li><a href="{{PATH_PREFIX}}career.html">Career</a></li>
+                  <li><a href="{{PATH_PREFIX}}sitemap.html">Site Map</a></li>
                 </ul>
               </div>
             </div>
@@ -96,7 +98,7 @@ $footerTemplate = @"
           <div class="container">
             <div class="row">
               <div class="col-md-12 align-self-center">
-                <p>© 2025 Shield Support LLC. All Rights Reserved</p>
+                <p>&copy; 2025 Shield Support LLC. All Rights Reserved</p>
               </div>
             </div>
           </div>

@@ -7,10 +7,27 @@ const upload = require("../config/upload");
 const router = express.Router();
 
 // GET blogs (public)
+// GET blogs (public)
 router.get("/", async (req, res) => {
   try {
-    const blogs = await Blog.find().sort({ createdAt: -1 });
-    res.json(blogs);
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 6;
+    const skip = (page - 1) * limit;
+
+    const totalBlogs = await Blog.countDocuments();
+    const totalPages = Math.ceil(totalBlogs / limit);
+
+    const blogs = await Blog.find()
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit);
+
+    res.json({
+      blogs,
+      currentPage: page,
+      totalPages,
+      totalBlogs
+    });
   } catch (err) {
     res.status(500).json({ message: "Failed to fetch blogs" });
   }

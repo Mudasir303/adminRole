@@ -23,6 +23,7 @@ const sendEmail = async (options) => {
         to: options.to,
         subject: options.subject,
         html: options.html,
+        attachments: options.attachments, // Add this line
     };
 
     await transporter.sendMail(mailOptions);

@@ -79,7 +79,6 @@ router.post('/', async (req, res) => {
                 subject: `New Meeting Request from ${name}`,
                 html: message
             });
-
             // Construct User Confirmation Email
             const userMessage = `
                 <h3>Meeting Confirmation</h3>

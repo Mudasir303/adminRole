@@ -4,8 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog - Latest Articles & Updates | Itechie</title>
-  <meta name="description" content="Explore our latest blog posts, articles, and tech insights">
+  <title>Blog - Shield Support LLC</title>
+  <meta name="description"
+    content="Explore the latest tech insights, news, and updates from Shield Support LLC. Stay informed about IT trends and solutions." />
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -630,6 +631,12 @@
         </div>
         <div class="col-sm-6">
           <ul class="topbar-right text-md-end text-center">
+            <li>
+              <p>
+                <i class="fas fa-briefcase"></i>
+                <a href="career.html">Career</a>
+              </p>
+            </li>
             <li class="d-none d-lg-inline-block">
               <p>Hot Line: <span><a href="tel:+17327027324">+1 (732) 702-7324</a></span></p>
             </li>
@@ -757,6 +764,7 @@
           <p class="loading-text">Loading amazing content...</p>
         </div>
       </div>
+      <div id="paginationContainer" class="d-flex justify-content-center mt-5"></div>
     </div>
   </section>
 
@@ -797,7 +805,8 @@
               <li><a href="resources.html">Resources</a></li>
               <li><a href="contact.html">Contact Us</a></li>
               <li><a href="privacy-policy.html">Privacy Policy</a></li>
-              <li><a href="sitemap.html">Sitemap</a></li>
+              <li><a href="career.html">Career</a></li>
+              <li><a href="sitemap.html">Site Map</a></li>
             </ul>
           </div>
         </div>
@@ -843,12 +852,10 @@
 
               <p class="mt-2 text-white"><strong>Follow Us</strong></p>
               <ul class="social-media">
-                <li><a href="https://www.linkedin.com/company/shieldsupport/posts/?feedView=all" target="_blank"
-                    class="linkedin"><i class="fab fa-linkedin-in"></i></a></li>
-                <li><a href="https://wa.me/17327027324" target="_blank" class="whatsapp"><i
-                      class="fab fa-whatsapp"></i></a></li>
-                <li><a href="https://mail.google.com/mail/?view=cm&fs=1&to=care@shieldsupportllc.com" class="email"><i
-                      class="far fa-envelope"></i></a></li>
+                <li><a class="facebook" href="#"><i class="fab fa-facebook-f"></i></a></li>
+                <li><a class="twitter" href="#"><i class="fab fa-twitter"></i></a></li>
+                <li><a class="instagram" href="#"><i class="fab fa-instagram"></i></a></li>
+                <li><a class="youtube" href="#"><i class="fab fa-youtube"></i></a></li>
               </ul>
             </div>
           </div>
@@ -899,121 +906,163 @@
 
     const blogContainer = document.getElementById("blogContainer");
 
-    // Calculate reading time based on content length
+    let allBlogs = [];
+    let currentPage = 1;
+    let totalPages = 1;
+    const itemsPerPage = 6;
+
+    // Formatting Helpers (Keep existing ones)
     function calculateReadingTime(content) {
       if (!content) return 0;
       const wordsPerMinute = 200;
       const words = content.trim().split(/\s+/).length;
-      const minutes = Math.ceil(words / wordsPerMinute);
-      return minutes;
+      return Math.ceil(words / wordsPerMinute);
     }
-
-    // Get category from blog data (fallback to 'Technology' if not set)
-    function getCategory(blog) {
-      return blog.category || 'Technology';
-    }
-
-    // Format date
-    function formatDate(dateString) {
-      const options = { year: 'numeric', month: 'short', day: 'numeric' };
-      return new Date(dateString).toLocaleDateString('en-US', options);
-    }
-
-    // Get image URL
+    function getCategory(blog) { return blog.category || 'Technology'; }
+    function formatDate(dateString) { return new Date(dateString).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }); }
     function getImageUrl(imagePath) {
       if (!imagePath) return '';
-      if (imagePath.startsWith('http')) return imagePath;
-      if (imagePath.startsWith('assets')) return imagePath;
+      if (imagePath.startsWith('http') || imagePath.startsWith('assets')) return imagePath;
       return `${BACKEND_URL}${imagePath}`;
     }
 
-    function renderBlogs(blogs) {
-      if (!blogs || blogs.length === 0) {
+    // Main Render Function
+    function renderBlogs() {
+      if (!allBlogs || allBlogs.length === 0) {
         blogContainer.innerHTML = `
         <div class="empty-state">
           <div class="empty-state-icon">??</div>
           <h3>No blogs yet</h3>
           <p>Check back soon for exciting content!</p>
-        </div>
-        `;
+        </div>`;
+        document.getElementById("paginationContainer").innerHTML = "";
         return;
       }
 
-      const blogsHTML = blogs.map((blog, index) => {
+      // No client-side slicing needed anymore
+      const blogsToShow = allBlogs;
+
+      // 2. Grid Rendering
+      const blogsHTML = blogsToShow.map(blog => {
         const readingTime = calculateReadingTime(blog.content);
-        const category = getCategory(blog);
-        // Use shortDescription if available, otherwise fallback to truncated content
-        // Limit description to 120 characters for consistent card size
         let rawExcerpt = blog.shortDescription || (blog.content ? blog.content.replace(/<[^>]*>/g, '') : '');
-        if (rawExcerpt.length > 120) {
-          rawExcerpt = rawExcerpt.substring(0, 120) + '...';
-        }
-        const excerpt = rawExcerpt || 'No preview available';
-        const imageUrl = getImageUrl(blog.image);
+        if (rawExcerpt.length > 120) rawExcerpt = rawExcerpt.substring(0, 120) + '...';
 
         return `
-        <div class="blog-card">
+        <div class="blog-card" style="animation: none;">
           <div class="blog-card-image">
             <a href="blog-details.html?id=${blog._id}">
-              <img src="${imageUrl}" alt="${blog.title}" onerror="this.src='assets/img/blog/2.png'">
+              <img src="${getImageUrl(blog.image)}" alt="${blog.title}" onerror="this.src='assets/img/blog/2.png'">
               <div class="image-overlay"></div>
             </a>
           </div>
           <div class="blog-card-body">
-            <span class="blog-category">${category}</span>
-
-                <h2 class="blog-title"><a href="blog-details.html?id=${blog._id}" style="color:inherit; text-decoration:none;">${blog.title}</a></h2>
-
+            <span class="blog-category">${getCategory(blog)}</span>
+            <h2 class="blog-title"><a href="blog-details.html?id=${blog._id}" style="color:inherit; text-decoration:none;">${blog.title}</a></h2>
             <div class="blog-meta">
-              <div class="meta-item">
-                <i class="fas fa-user"></i>
-                <span>${blog.author || 'Admin'}</span>
-              </div>
-              <div class="meta-item">
-                <i class="fas fa-calendar-alt"></i>
-                <span>${formatDate(blog.createdAt)}</span>
-              </div>
+              <div class="meta-item"><i class="fas fa-user"></i><span>${blog.author || 'Admin'}</span></div>
+              <div class="meta-item"><i class="fas fa-calendar-alt"></i><span>${formatDate(blog.createdAt)}</span></div>
             </div>
-
-            <p class="blog-excerpt">${excerpt}</p>
-
+            <p class="blog-excerpt">${rawExcerpt}</p>
             <div class="blog-footer">
-              <a href="blog-details.html?id=${blog._id}" class="read-more-btn">
-                <span>Read More</span>
-                <i class="fas fa-arrow-right"></i>
-              </a>
-              <div class="reading-time">
-                <i class="fas fa-clock"></i>
-                <span>${readingTime} min read</span>
-              </div>
+              <a href="blog-details.html?id=${blog._id}" class="read-more-btn"><span>Read More</span><i class="fas fa-arrow-right"></i></a>
+              <div class="reading-time"><i class="fas fa-clock"></i><span>${readingTime} min read</span></div>
             </div>
           </div>
-        </div>
-        `;
+        </div>`;
       }).join('');
 
-      blogContainer.innerHTML = `<div class="blog-grid">${blogsHTML}</div>`;
+      // Fade-in effect for page transition
+      blogContainer.style.opacity = '0';
+      setTimeout(() => {
+        blogContainer.innerHTML = `<div class="blog-grid">${blogsHTML}</div>`;
+        blogContainer.style.opacity = '1';
+        blogContainer.style.transition = 'opacity 0.3s ease';
+      }, 200);
+
+      // 3. Render Pagination Controls
+      renderPaginationControls();
     }
 
-    // Fetch and display blogs
-    fetch(API_URL)
-      .then(res => {
-        if (!res.ok) throw new Error("API Offline");
-        return res.json();
-      })
-      .then(blogs => {
-        renderBlogs(blogs);
-      })
-      .catch(err => {
-        console.log('API failed:', err);
-        blogContainer.innerHTML = `
-        <div class="error-state">
-          <div class="error-state-icon">??</div>
-          <h3>Unable to load blogs</h3>
-          <p>Please check if the backend server is running.</p>
-        </div>
+    function renderPaginationControls() {
+      const paginationContainer = document.getElementById("paginationContainer");
+
+      // Clear container if no pagination needed
+      if (totalPages <= 1) {
+        paginationContainer.innerHTML = '';
+        return;
+      }
+
+      let paginationHTML = `
+        <nav aria-label="Blog pagination">
+          <ul class="pagination pagination-lg">
+      `;
+
+      // Previous Button
+      paginationHTML += `
+        <li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
+          <a class="page-link" href="javascript:void(0)" onclick="changePage(${currentPage - 1})" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+      `;
+
+      // Page Numbers
+      for (let i = 1; i <= totalPages; i++) {
+        paginationHTML += `
+          <li class="page-item ${i === currentPage ? 'active' : ''}">
+            <a class="page-link" href="javascript:void(0)" onclick="changePage(${i})">${i}</a>
+          </li>
         `;
-      });
+      }
+
+      // Next Button
+      paginationHTML += `
+        <li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
+          <a class="page-link" href="javascript:void(0)" onclick="changePage(${currentPage + 1})" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      `;
+
+      paginationHTML += `</ul></nav>`;
+      paginationContainer.innerHTML = paginationHTML;
+    }
+
+    // Change Page Handler
+    window.changePage = function (page) {
+      if (page < 1 || page > totalPages) return;
+      // Scroll to top of blog section
+      document.querySelector('.blog-section').scrollIntoView({ behavior: 'smooth' });
+      fetchBlogs(page);
+    }
+
+    function fetchBlogs(page = 1) {
+      const url = `${API_URL}?page=${page}&limit=${itemsPerPage}`;
+      fetch(url)
+        .then(res => {
+          if (!res.ok) throw new Error("API Offline");
+          return res.json();
+        })
+        .then(data => {
+          allBlogs = data.blogs;
+          currentPage = data.currentPage;
+          totalPages = data.totalPages;
+          renderBlogs();
+        })
+        .catch(err => {
+          console.log('API failed:', err);
+          blogContainer.innerHTML = `
+                <div class="error-state">
+                  <div class="error-state-icon">??</div>
+                  <h3>Unable to load blogs</h3>
+                  <p>Please check if the backend server is running.</p>
+                </div>`;
+        });
+    }
+
+    // Initial load
+    fetchBlogs(currentPage);
   </script>
   <div class="mobile-schedule-bar">
     <span class="label">Ready to start?</span>
@@ -1033,4 +1082,3 @@
 </body>
 
 </html>
-

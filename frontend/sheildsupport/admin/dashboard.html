@@ -686,6 +686,13 @@
         </svg>
         <span>Messages</span>
       </a>
+      <a class="nav-item" onclick="switchTab('careers')" id="nav-careers">
+        <svg class="icon" viewBox="0 0 24 24">
+          <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+          <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+        </svg>
+        <span>Careers</span>
+      </a>
       <a class="nav-item" href="../index.html" id="nav-home">
         <svg class="icon" viewBox="0 0 24 24">
           <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
@@ -751,12 +758,14 @@
         <div class="stat-card">
           <div class="stat-label">
             <svg class="icon" style="color: var(--success);" viewBox="0 0 24 24">
-              <circle cx="12" cy="12" r="10" />
-              <polyline points="12 6 12 12 16 14" />
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
             </svg>
-            Published Today
+            Total Subscribers
           </div>
-          <div class="stat-value" id="publishedToday">0</div>
+          <div class="stat-value" id="totalSubscribeDisplay">0</div>
         </div>
         <div class="stat-card">
           <div class="stat-label">
@@ -1120,6 +1129,118 @@
       </div>
     </div>
 
+    <!-- CAREERS SECTION -->
+    <div id="careers-section" class="section">
+      <div class="dashboard-grid" style="grid-template-columns: 1fr;">
+        <!-- Add Career Card -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon-box">
+              <svg class="icon" viewBox="0 0 24 24">
+                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+              </svg>
+            </div>
+            <h2 class="card-title" id="careerCardTitle">Post New Job</h2>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div class="form-group">
+              <label class="form-label">Job Title</label>
+              <input id="jobTitle" type="text" placeholder="e.g. Senior Backend Developer">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Department</label>
+              <select id="jobDepartment">
+                <option value="Engineering">Engineering</option>
+                <option value="Design">Design</option>
+                <option value="Marketing">Marketing</option>
+                <option value="Sales">Sales</option>
+                <option value="Support">Support</option>
+                <option value="HR">HR</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px;">
+            <div class="form-group">
+              <label class="form-label">Work Model</label>
+              <select id="jobWorkModel">
+                <option value="Onsite">Onsite</option>
+                <option value="Remote">Remote</option>
+                <option value="Hybrid">Hybrid</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Type</label>
+              <select id="jobType">
+                <option value="Full-time">Full-time</option>
+                <option value="Part-time">Part-time</option>
+                <option value="Contract">Contract</option>
+                <option value="Internship">Internship</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Experience</label>
+              <select id="jobExperience">
+                <option value="Entry">Entry Level</option>
+                <option value="Mid">Mid Level</option>
+                <option value="Senior">Senior Level</option>
+                <option value="Lead">Lead / Manager</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div class="form-group">
+              <label class="form-label">Location (City, State)</label>
+              <input id="jobLocation" type="text" placeholder="e.g. Newark, DE">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Apply Email</label>
+              <input id="jobEmail" type="email" placeholder="hr@shieldsupportllc.com">
+            </div>
+          </div>
+
+
+          <div class="form-group">
+            <label class="form-label">Short Description (Summary)</label>
+            <textarea id="jobShortDesc" rows="3" placeholder="Brief overview of the role..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Full Job Description</label>
+            <div id="career-editor-container" class="quill-editor"></div>
+          </div>
+
+          <button class="btn-primary" id="publishCareerBtn" onclick="handleCareerSubmit()">
+            <svg class="icon" viewBox="0 0 24 24">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+              <line x1="12" y1="18" x2="12" y2="12" />
+              <line x1="9" y1="15" x2="15" y2="15" />
+            </svg>
+            Publish Job
+          </button>
+          <button class="btn-danger" style="margin-left: 10px;" onclick="resetCareerForm()">Cancel</button>
+        </div>
+
+        <!-- Manage Careers Card -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon-box">
+              <svg class="icon" viewBox="0 0 24 24">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+              </svg>
+            </div>
+            <h2 class="card-title">Manage Jobs</h2>
+          </div>
+          <div id="careerList" class="blog-list"></div>
+        </div>
+      </div>
+    </div>
+
   </main>
 
   <!-- Profile Modal (Shared Logic) -->
@@ -1196,7 +1317,8 @@
       'blogs': { title: 'Blog Management', desc: 'Create and manage your blog posts' },
       'meetings': { title: 'Date & Time', desc: 'View all scheduled consultations' },
       'subscribers': { title: 'Subscribers', desc: 'Manage newsletter subscriptions' },
-      'messages': { title: 'Inquiries', desc: 'Messages from contact form' }
+      'messages': { title: 'Inquiries', desc: 'Messages from contact form' },
+      'careers': { title: 'Careers', desc: 'Manage job openings and applications' }
     };
 
     // Navigation
@@ -1225,7 +1347,9 @@
       if (tab === 'blogs') fetchBlogs();
       if (tab === 'meetings') loadMeetings();
       if (tab === 'subscribers') loadSubscribers();
+      if (tab === 'subscribers') loadSubscribers();
       if (tab === 'messages') fetchMessages();
+      if (tab === 'careers') loadCareers();
     }
 
     // Mobile Sidebar
@@ -1243,8 +1367,11 @@
     // --- BLOGS ---
     async function fetchBlogs() {
       try {
-        const res = await fetch(API, { headers: { "Authorization": "Bearer " + token } });
-        const blogs = await res.json();
+        // Fetch with a large limit to get all blogs for admin management, or implement admin pagination later
+        // For now, let's just get the first page with a large limit or handle the new structure
+        const res = await fetch(`${API}?limit=100`, { headers: { "Authorization": "Bearer " + token } });
+        const data = await res.json();
+        const blogs = data.blogs || []; // Handle new structure
         allBlogs = blogs; // Store globally
         renderBlogs(blogs);
         updateStats(blogs);
@@ -1612,10 +1739,7 @@
     // --- STATS & CHARTS ---
     function updateStats(blogs) {
       document.getElementById('totalBlogs').innerText = blogs.length;
-
-      const today = new Date().toDateString();
-      const todayCount = blogs.filter(b => new Date(b.createdAt).toDateString() === today).length;
-      document.getElementById('publishedToday').innerText = todayCount;
+      // Removed publishedToday logic
     }
 
     // --- PROFILE (Keep existing) ---
@@ -1652,6 +1776,10 @@
       })
         .then(res => res.json())
         .then(data => {
+          // Update Total Subscribers Count
+          const countEl = document.getElementById('totalSubscribeDisplay');
+          if (countEl) countEl.innerText = data.length;
+
           const tbody = document.getElementById('subscribersTableBody');
           tbody.innerHTML = '';
           data.forEach(sub => {
@@ -1736,6 +1864,150 @@
       }
     }
 
+
+    /* --- CAREERS FUNCTIONS --- */
+    let allCareers = [];
+    let editingCareerId = null;
+    let careerQuill;
+
+    async function loadCareers() {
+      try {
+        const res = await fetch(`${AppConfig.API_BASE_URL}/api/careers`, { headers: { "Authorization": "Bearer " + token } });
+        allCareers = await res.json();
+        renderCareersAdmin(allCareers);
+      } catch (err) { console.error(err); }
+    }
+
+    function renderCareersAdmin(jobs) {
+      const list = document.getElementById("careerList");
+      list.innerHTML = jobs.map(job => `
+                <div style="padding: 15px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <h4 style="margin-bottom: 4px;">${job.jobTitle} <span style="font-size:0.8rem; font-weight:normal; background:${job.isActive ? '#ecfdf5' : '#fef2f2'}; color:${job.isActive ? '#10b981' : '#ef4444'}; padding:2px 8px; border-radius:12px;">${job.isActive ? 'Active' : 'Closed'}</span></h4>
+                        <span style="font-size: 0.85rem; color: var(--text-muted);">${job.department} • ${job.employmentType} • ${job.workModel}</span>
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        <button class="btn-primary" style="padding: 6px 12px; font-size: 0.85rem;" onclick="editCareer('${job._id}')">Edit</button>
+                        <button class="btn-danger" onclick="deleteCareer('${job._id}')">Delete</button>
+                    </div>
+                </div>
+            `).join('');
+    }
+
+    function editCareer(id) {
+      const job = allCareers.find(j => j._id === id);
+      if (!job) return;
+
+      editingCareerId = id;
+      document.getElementById("jobTitle").value = job.jobTitle;
+      document.getElementById("jobDepartment").value = job.department;
+      document.getElementById("jobWorkModel").value = job.workModel;
+      document.getElementById("jobType").value = job.employmentType;
+      document.getElementById("jobExperience").value = job.experienceLevel;
+      document.getElementById("jobLocation").value = job.location ? (job.location.city + (job.location.state ? ", " + job.location.state : "")) : "";
+      document.getElementById("jobEmail").value = job.applyEmail || "";
+      document.getElementById("jobShortDesc").value = job.shortDescription;
+
+      if (careerQuill) {
+        careerQuill.root.innerHTML = job.fullDescription || "";
+      }
+
+      document.getElementById("careerCardTitle").innerText = "Edit Job";
+      document.getElementById("publishCareerBtn").innerHTML = `Update Job`;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function resetCareerForm() {
+      editingCareerId = null;
+      document.getElementById("jobTitle").value = "";
+      document.getElementById("jobDepartment").value = "Engineering";
+      document.getElementById("jobWorkModel").value = "Onsite";
+      document.getElementById("jobType").value = "Full-time";
+      document.getElementById("jobExperience").value = "Entry";
+      document.getElementById("jobLocation").value = "";
+      document.getElementById("jobEmail").value = "";
+      document.getElementById("jobShortDesc").value = "";
+
+      if (careerQuill) {
+        careerQuill.root.innerHTML = "";
+      }
+      document.getElementById("careerCardTitle").innerText = "Post New Job";
+      document.getElementById("publishCareerBtn").innerHTML = `Publish Job`;
+    }
+
+    async function handleCareerSubmit() {
+      const title = document.getElementById("jobTitle").value;
+      const dept = document.getElementById("jobDepartment").value;
+      const model = document.getElementById("jobWorkModel").value;
+      const type = document.getElementById("jobType").value;
+      const exp = document.getElementById("jobExperience").value;
+      const locStr = document.getElementById("jobLocation").value;
+      const email = document.getElementById("jobEmail").value;
+      const shortDesc = document.getElementById("jobShortDesc").value;
+      const fullDesc = careerQuill ? careerQuill.root.innerHTML : "";
+
+      if (!title || !shortDesc) {
+        alert("Title and Short Description are required.");
+        return;
+      }
+
+      // Parse location roughly
+      const locParts = locStr.split(",");
+      const location = {
+        city: locParts[0] ? locParts[0].trim() : "",
+        state: locParts[1] ? locParts[1].trim() : ""
+      };
+
+      const payload = {
+        jobTitle: title,
+        department: dept,
+        workModel: model,
+        employmentType: type,
+        experienceLevel: exp,
+        location: location,
+        applyEmail: email,
+        shortDescription: shortDesc,
+        fullDescription: fullDesc,
+        isActive: true
+      };
+
+      const url = editingCareerId ? `${AppConfig.API_BASE_URL}/api/careers/${editingCareerId}` : `${AppConfig.API_BASE_URL}/api/careers`;
+      const method = editingCareerId ? "PUT" : "POST";
+
+      try {
+        const res = await fetch(url, {
+          method: method,
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + token
+          },
+          body: JSON.stringify(payload)
+        });
+
+        if (res.ok) {
+          alert(editingCareerId ? "Job Updated" : "Job Posted");
+          resetCareerForm();
+          loadCareers();
+        } else {
+          alert("Failed to save job");
+        }
+      } catch (err) {
+        console.error(err);
+        alert("Error saving job");
+      }
+    }
+
+    async function deleteCareer(id) {
+      if (!confirm("Delete this job posting?")) return;
+      try {
+        await fetch(`${AppConfig.API_BASE_URL}/api/careers/${id}`, {
+          method: "DELETE",
+          headers: { "Authorization": "Bearer " + token }
+        });
+        loadCareers();
+      } catch (err) { console.error(err); }
+    }
+
     loadMeetings(); // Init meetings logic
 
     // Initialize Quill Global Instance
@@ -1759,6 +2031,20 @@
             [{ 'align': [] }],
             ['clean'],
             ['link', 'image']
+          ]
+        }
+      });
+
+      // Init Career Quill
+      careerQuill = new Quill('#career-editor-container', {
+        theme: 'snow',
+        placeholder: 'Detailed job description...',
+        modules: {
+          toolbar: [
+            ['bold', 'italic', 'underline'],
+            [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+            [{ 'header': [2, 3, false] }],
+            ['clean']
           ]
         }
       });
