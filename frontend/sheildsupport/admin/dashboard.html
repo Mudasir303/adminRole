@@ -506,6 +506,53 @@
       }
     }
 
+    @media (max-width: 576px) {
+      .top-bar {
+        gap: 10px;
+      }
+
+      .page-header h2 {
+        font-size: 1.25rem;
+      }
+
+      .page-header p {
+        display: none;
+      }
+
+      .user-actions {
+        gap: 8px;
+      }
+
+      .user-profile {
+        padding: 4px;
+        background: transparent;
+        border: none;
+        box-shadow: none;
+      }
+
+      .user-profile span {
+        display: none;
+      }
+
+      .btn-logout {
+        padding: 6px;
+      }
+
+      .btn-logout span {
+        display: none;
+      }
+
+      .main-content {
+        padding: 16px;
+        width: 100%;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+    }
+
     /* --- Modals --- */
     .modal-overlay {
       position: fixed;
@@ -733,7 +780,7 @@
             <polyline points="16 17 21 12 16 7" />
             <line x1="21" y1="12" x2="9" y2="12" />
           </svg>
-          Logout
+          <span>Logout</span>
         </button>
       </div>
     </div>
@@ -1149,7 +1196,7 @@
               <label class="form-label">Job Title</label>
               <input id="jobTitle" type="text" placeholder="e.g. Senior Backend Developer">
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
               <label class="form-label">Department</label>
               <select id="jobDepartment">
                 <option value="Engineering">Engineering</option>
@@ -1159,7 +1206,7 @@
                 <option value="Support">Support</option>
                 <option value="HR">HR</option>
               </select>
-            </div>
+            </div> -->
           </div>
 
           <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px;">
@@ -1196,10 +1243,10 @@
               <label class="form-label">Location (City, State)</label>
               <input id="jobLocation" type="text" placeholder="e.g. Newark, DE">
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
               <label class="form-label">Apply Email</label>
               <input id="jobEmail" type="email" placeholder="hr@shieldsupportllc.com">
-            </div>
+            </div> -->
           </div>
 
 
@@ -1361,7 +1408,7 @@
     // Logout
     function logout() {
       localStorage.clear();
-      window.location.href = "../account.html";
+      window.location.href = "../index.html";
     }
 
     // --- BLOGS ---

@@ -4,8 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Job Details | Shield Support</title>
-    <meta name="description" content="View job details and apply for positions at Shield Support">
+    <title>Job Details - Careers | Shield Support LLC</title>
+    <meta name="description"
+        content="View job details and apply for exciting positions at Shield Support LLC. Join our team of experts today.">
+    <meta property="og:title" content="Job Details - Shield Support LLC" />
+    <meta property="og:description" content="View job details and apply for positions at Shield Support LLC." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://shieldsupportllc.com/career-details.html" />
+    <meta property="og:image" content="assets/img/SheildSupportLogo.png" />
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -484,14 +490,14 @@
                     </button>
 
                     ${job.applyEmail ? `
-                    <div class="mt-4">
+                    <!-- <div class="mt-4">
                         <p class="text-muted mb-2">Or email your resume directly to:</p>
                         <a href="https://mail.google.com/mail/?view=cm&fs=1&to=${job.applyEmail}&su=Application for ${encodeURIComponent(job.jobTitle)}" 
                            target="_blank"
                            class="fw-bold text-primary fs-5 text-decoration-none">
                            <i class="far fa-envelope me-2"></i>${job.applyEmail}
                         </a>
-                    </div>
+                    </div> -->
                     ` : ''}
                  </div>
             </div>
@@ -542,7 +548,7 @@
                             <label for="phoneNumber" class="form-label">Phone Number</label>
                             <div class="input-group">
                                 <select class="form-select" id="countryCode"
-                                    style="max-width: 120px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff;">
+                                    style="max-width: 120px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #000000;">
                                     <option value="+1" selected>+1 (USA)</option>
                                     <option value="+91">+91 (IND)</option>
                                     <option value="+44">+44 (UK)</option>

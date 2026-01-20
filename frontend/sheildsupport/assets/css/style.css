@@ -47,8 +47,8 @@ Version: 1.0.5
 :root {
   --main-color: #0060FF;
   --main-color2: #EE0020;
-  --heading-color: #151423;
-  --paragraph-color: #616161;
+  --heading-color: #28419c;
+  --paragraph-color: #1f1919;
   --body-font: "Rubik", sans-serif;
   --heading-font: "Rajdhani", sans-serif;
   --body-font-size: 16px;
@@ -1088,7 +1088,7 @@ ul {
 }
 
 .breadcrumb-area .page-title {
-  font-size: 75px;
+  font-size: 54px;
   font-weight: 700;
   margin-bottom: 5px;
   color: #fff;
@@ -1534,7 +1534,7 @@ ul {
   width: 100%;
   left: 0;
   top: 0;
-  background: rgba(40, 65, 156, 0.9);
+  background: #28419c;
 }
 
 .bg-overlay-custom-blue .container {
@@ -1622,7 +1622,7 @@ ul {
 }
 
 .pd-top-120 {
-  padding-top: 120px;
+  padding-top: 95px;
 }
 
 .pd-top-200 {
@@ -9878,4 +9878,79 @@ ul {
 .contact-section-modern .row {
   align-items: center;
   /* Vertically center the columns */
+}
+
+/* Custom Separation Styles */
+.service-area .section-title {
+  position: relative;
+  padding-bottom: 30px;
+  margin-bottom: 50px;
+}
+
+.service-area .section-title:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: #fff;
+  border-radius: 2px;
+}
+
+.single-service-inner.style-white {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  border: none;
+  height: 100%;
+}
+
+.single-service-inner.style-white:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.single-service-inner .details p {
+  margin-bottom: 20px;
+}
+
+
+
+
+/* GLOBAL WAVE & SERVICE DESIGN UPDATE (Applies to all Service Pages) */
+/* 1. Wave Divider Removed (Using Background Image Curve Instead) */
+/*
+.breadcrumb-area:after {
+    content: '';
+    ...
+}
+*/
+
+/* 2. Global Override for Service Area Background */
+.service-area.bg-overlay-custom-blue {
+  background-image: url('../img/custom/about-bg.png') !important;
+  background-color: transparent !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  background-position: top center !important;
+}
+
+.service-area.bg-overlay-custom-blue:after {
+  display: none !important;
+}
+
+/* 3. Global Section Title Color Update */
+.service-area.bg-overlay-custom-blue .section-title.style-white h2.title,
+.service-area.bg-overlay-custom-blue .section-title.style-white h5,
+.service-area.bg-overlay-custom-blue .section-title.style-white p {
+  color: #28419c !important;
+}
+
+.service-area.bg-overlay-custom-blue .section-title.style-white .title::after,
+.service-area .section-title:after {
+  background: #28419c !important;
 }
