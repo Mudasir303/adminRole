@@ -8173,7 +8173,8 @@ fieldset:disabled .btn {
 }
 
 .text-center {
-    text-align: center !important
+    text-align: center !important;
+    padding-bottom: 20px;
 }
 
 .text-decoration-none {
@@ -8218,7 +8219,7 @@ fieldset:disabled .btn {
 }
 
 .text-secondary {
-    color: #6c757d !important
+    color: black !important
 }
 
 .text-success {

@@ -15,7 +15,7 @@
   <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
   <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
   <!-- Load AppConfig -->
-  <script src="../../assets/js/config.js"></script>
+  <script src="../assets/js/config.js"></script>
 
   <style>
     :root {
@@ -1196,7 +1196,7 @@
               <label class="form-label">Job Title</label>
               <input id="jobTitle" type="text" placeholder="e.g. Senior Backend Developer">
             </div>
-            <!-- <div class="form-group">
+            <div class="form-group">
               <label class="form-label">Department</label>
               <select id="jobDepartment">
                 <option value="Engineering">Engineering</option>
@@ -1206,7 +1206,7 @@
                 <option value="Support">Support</option>
                 <option value="HR">HR</option>
               </select>
-            </div> -->
+            </div>
           </div>
 
           <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px;">
@@ -1243,10 +1243,10 @@
               <label class="form-label">Location (City, State)</label>
               <input id="jobLocation" type="text" placeholder="e.g. Newark, DE">
             </div>
-            <!-- <div class="form-group">
+            <div class="form-group">
               <label class="form-label">Apply Email</label>
               <input id="jobEmail" type="email" placeholder="hr@shieldsupportllc.com">
-            </div> -->
+            </div>
           </div>
 
 
@@ -1359,6 +1359,48 @@
     // Global Quill Instance
     let quill;
 
+    // Check authentication
+    async function checkAuth() {
+      if (!token) {
+        alert("Please log in first");
+        window.location.href = "../account.html";
+        return false;
+      }
+      try {
+        const res = await fetch(`${AUTH_API}/me`, { headers: { "Authorization": "Bearer " + token } });
+        if (!res.ok) {
+          alert("Session expired. Please log in again.");
+          localStorage.removeItem("token");
+          localStorage.removeItem("role");
+          localStorage.removeItem("name");
+          window.location.href = "../account.html";
+          return false;
+        }
+        const user = await res.json();
+        if (user.role !== 'admin') {
+          alert("Access denied. Admin only.");
+          window.location.href = "../account.html";
+          return false;
+        }
+        return true;
+      } catch (error) {
+        alert("Authentication error. Please log in again.");
+        localStorage.removeItem("token");
+        localStorage.removeItem("role");
+        localStorage.removeItem("name");
+        window.location.href = "../account.html";
+        return false;
+      }
+    }
+
+    // Initialize on page load
+    window.onload = async function() {
+      if (await checkAuth()) {
+        // Load initial data
+        switchTab('dashboard');
+      }
+    };
+
     const titles = {
       'dashboard': { title: 'Overview', desc: 'Welcome back, Admin' },
       'blogs': { title: 'Blog Management', desc: 'Create and manage your blog posts' },
@@ -1396,7 +1438,10 @@
       if (tab === 'subscribers') loadSubscribers();
       if (tab === 'subscribers') loadSubscribers();
       if (tab === 'messages') fetchMessages();
-      if (tab === 'careers') loadCareers();
+      if (tab === 'careers') {
+        loadCareers();
+        resetCareerForm();
+      }
     }
 
     // Mobile Sidebar
@@ -1581,11 +1626,22 @@
 
     async function deleteBlog(id) {
       if (!confirm("Delete this blog?")) return;
-      await fetch(`${API}/${id}`, {
-        method: "DELETE",
-        headers: { "Authorization": "Bearer " + token }
-      });
-      fetchBlogs();
+      try {
+        const response = await fetch(`${API}/${id}`, {
+          method: "DELETE",
+          headers: { "Authorization": "Bearer " + token }
+        });
+        if (response.ok) {
+          alert("Blog deleted successfully!");
+          fetchBlogs();
+        } else {
+          const errorData = await response.json();
+          alert("Failed to delete blog: " + (errorData.message || "Unknown error"));
+        }
+      } catch (error) {
+        console.error("Error deleting blog:", error);
+        alert("Error deleting blog: " + error.message);
+      }
     }
 
     /* --- MEETINGS FUNCTIONS --- */
@@ -1920,9 +1976,17 @@
     async function loadCareers() {
       try {
         const res = await fetch(`${AppConfig.API_BASE_URL}/api/careers`, { headers: { "Authorization": "Bearer " + token } });
-        allCareers = await res.json();
-        renderCareersAdmin(allCareers);
-      } catch (err) { console.error(err); }
+        if (res.ok) {
+          allCareers = await res.json();
+          renderCareersAdmin(allCareers);
+        } else {
+          console.error("Failed to load careers:", res.status);
+          alert("Failed to load careers. Please check your connection.");
+        }
+      } catch (err) {
+        console.error("Error loading careers:", err);
+        alert("Error loading careers: " + err.message);
+      }
     }
 
     function renderCareersAdmin(jobs) {
@@ -2032,27 +2096,37 @@
         });
 
         if (res.ok) {
-          alert(editingCareerId ? "Job Updated" : "Job Posted");
+          alert(editingCareerId ? "Job Updated Successfully!" : "Job Posted Successfully!");
           resetCareerForm();
           loadCareers();
         } else {
-          alert("Failed to save job");
+          const errorData = await res.json();
+          alert("Failed to save job: " + (errorData.message || "Unknown error"));
         }
       } catch (err) {
         console.error(err);
-        alert("Error saving job");
+        alert("Error saving job: " + err.message);
       }
     }
 
     async function deleteCareer(id) {
       if (!confirm("Delete this job posting?")) return;
       try {
-        await fetch(`${AppConfig.API_BASE_URL}/api/careers/${id}`, {
+        const response = await fetch(`${AppConfig.API_BASE_URL}/api/careers/${id}`, {
           method: "DELETE",
           headers: { "Authorization": "Bearer " + token }
         });
-        loadCareers();
-      } catch (err) { console.error(err); }
+        if (response.ok) {
+          alert("Job deleted successfully!");
+          loadCareers();
+        } else {
+          const errorData = await response.json();
+          alert("Failed to delete job: " + (errorData.message || "Unknown error"));
+        }
+      } catch (error) {
+        console.error("Error deleting job:", error);
+        alert("Error deleting job: " + error.message);
+      }
     }
 
     loadMeetings(); // Init meetings logic

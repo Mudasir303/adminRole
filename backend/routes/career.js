@@ -101,7 +101,17 @@ router.post("/apply", upload.single('resume'), async (req, res) => {
 // ===============================
 router.get("/", async (req, res) => {
   try {
-    const jobs = await Career.find({ isActive: true })
+    // Check if this is an admin request (has Authorization header)
+    const isAdminRequest = req.headers.authorization && req.headers.authorization.startsWith('Bearer ');
+
+    let query = {};
+    if (!isAdminRequest) {
+      // Public request - only show active jobs
+      query.isActive = true;
+    }
+    // Admin request - show all jobs
+
+    const jobs = await Career.find(query)
       .sort({ createdAt: -1 });
 
     res.json(jobs);

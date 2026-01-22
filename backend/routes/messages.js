@@ -33,15 +33,14 @@ router.post("/", async (req, res) => {
             <p>${message}</p>
         `;
 
-        try {
-            await sendEmail({
-                to: process.env.EMAIL_USER,
-                subject: `New Message from ${name}: ${subject}`,
-                html: adminHtml
-            });
-        } catch (emailErr) {
+        // Email to Admin
+        sendEmail({
+            to: process.env.EMAIL_USER,
+            subject: `New Message from ${name}: ${subject}`,
+            html: adminHtml
+        }).catch(emailErr => {
             console.error("Failed to send admin email:", emailErr);
-        }
+        });
 
         // Email to User
         const userHtml = `
@@ -53,15 +52,14 @@ router.post("/", async (req, res) => {
             <p>Shield Support Team</p>
         `;
 
-        try {
-            await sendEmail({
-                to: email,
-                subject: "Message Received - Shield Support",
-                html: userHtml
-            });
-        } catch (emailErr) {
+        // Email to User
+        sendEmail({
+            to: email,
+            subject: "Message Received - Shield Support",
+            html: userHtml
+        }).catch(emailErr => {
             console.error("Failed to send user email:", emailErr);
-        }
+        });
 
         res.status(201).json(savedMessage);
     } catch (err) {
