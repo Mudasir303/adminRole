@@ -4067,8 +4067,8 @@ ul {
 }
 
 .single-service-inner.style-white.active {
-  transform: translateY(-7px);
-  background: rgba(3, 11, 24, 0.9) !important;
+  /* transform: translateY(-7px); */
+  background: #ffffff !important;
   box-shadow: 0 15px 40px rgba(0, 96, 255, 0.15);
   /* Neon blue glow */
   border-color: rgba(0, 96, 255, 0.4);
@@ -4086,10 +4086,7 @@ ul {
   animation: pulse-blue 2s infinite;
 }
 
-.single-service-inner.style-white.active h3 {
-  text-shadow: 0 0 20px rgba(0, 96, 255, 0.5);
-  /* Subtle text glow */
-}
+
 
 .single-service-inner.style-white .details h3:hover a {
   color: var(--main-color);
