@@ -532,18 +532,29 @@
         let recentBlogs = [];
 
         // Fetch Blog Details
+        console.log("Fetching blog from:", `${API_URL}/${blogId}`);
         const res = await fetch(`${API_URL}/${blogId}`);
-        if (!res.ok) throw new Error("Blog not found");
+        console.log("Blog fetch response status:", res.status, res.ok);
+        if (!res.ok) {
+          const errorText = await res.text();
+          console.error("Blog fetch error response:", errorText);
+          throw new Error("Blog not found");
+        }
         blog = await res.json();
+        console.log("Blog loaded:", blog);
 
         // Fetch Recent Blogs
         try {
           const resRecent = await fetch(API_URL);
+          console.log("Recent blogs fetch response status:", resRecent.status);
           if (resRecent.ok) {
-            recentBlogs = await resRecent.json();
+            const recentData = await resRecent.json();
+            console.log("Recent data:", recentData);
+            // Extract blogs array from response
+            recentBlogs = recentData.blogs || [];
           }
         } catch (e) {
-          console.warn("Could not fetch recent blogs");
+          console.warn("Could not fetch recent blogs", e);
         }
 
         if (!blog) {
@@ -663,8 +674,9 @@
         recentContainer.innerHTML = recentHtml || '<li>No recent posts</li>';
 
       } catch (error) {
-        console.error('Error:', error);
-        container.innerHTML = `<div class="alert alert-danger">Failed to load content.</div>`;
+        console.error('Error loading blog:', error);
+        const errorMessage = error.message || 'Unknown error';
+        container.innerHTML = `<div class="alert alert-danger"><strong>Failed to load content.</strong><br><small>Error: ${errorMessage}</small><br><small>Check console for details. API URL: ${API_URL}/${blogId}</small></div>`;
       }
     }
 
