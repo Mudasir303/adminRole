@@ -11,10 +11,17 @@ const storage = multer.diskStorage({
 });
 
 const fileFilter = (req, file, cb) => {
-  if (file.mimetype.startsWith("image/")) {
+  const allowedExts = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.bmp', '.tiff', '.svg', '.ico', '.avif'];
+  const ext = path.extname(file.originalname || '').toLowerCase();
+
+  // Accept by MIME type OR by extension (covers less common image types)
+  if (file.mimetype && file.mimetype.startsWith("image/")) {
+    cb(null, true);
+  } else if (allowedExts.includes(ext)) {
     cb(null, true);
   } else {
-    cb(null, false);
+    // Provide an explicit error so the client can be informed
+    cb(new Error('Invalid file type. Only image files are allowed.'), false);
   }
 };
 

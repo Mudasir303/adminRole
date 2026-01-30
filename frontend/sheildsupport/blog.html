@@ -947,7 +947,7 @@
         <div class="blog-card" style="animation: none;">
           <div class="blog-card-image">
             <a href="blog-details.html?id=${blog._id}">
-              <img src="${getImageUrl(blog.image)}" alt="${blog.title}" onerror="this.src='assets/img/blog/2.png'">
+              ${blog.image ? `<img src="${getImageUrl(blog.image)}" alt="${blog.title}">` : ''}
               <div class="image-overlay"></div>
             </a>
           </div>

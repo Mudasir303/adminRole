@@ -527,7 +527,7 @@
     }
 
     function getImageUrl(imagePath) {
-      if (!imagePath) return 'assets/img/blog/2.png';
+      if (!imagePath) return '';
       if (imagePath.startsWith('http')) return imagePath;
       if (imagePath.startsWith('assets')) return imagePath; // Local assets
       return `${BACKEND_URL}${imagePath}`;
@@ -581,6 +581,7 @@
         // Render Blog Details
         document.title = `${blog.title} - Shield Support`;
         const imageUrl = getImageUrl(blog.image);
+        const authorAvatarUrl = blog.authorAvatar ? getImageUrl(blog.authorAvatar) : 'https://ui-avatars.com/api/?name=' + encodeURIComponent(blog.author || 'Author') + '&background=random';
 
         // Professional, Centered, Full-Width Layout
 
@@ -590,11 +591,9 @@
   <div class="blog-details-inner">
     <!-- Header Section -->
     <div class="blog-header mb-5">
-      <div class="thumb mb-4">
-        <img src="${imageUrl}" class="rounded-3 shadow-lg blog-detail-image" alt="${blog.title}"
-                         width="1920" height="1080"
-                         onerror="this.src='assets/img/blog/2.png'">
-      </div>
+      ${imageUrl ? `<div class="thumb mb-4">
+        <img src="${imageUrl}" class="rounded-3 shadow-lg blog-detail-image" alt="${blog.title}" width="1920" height="1080">
+      </div>` : ''}
       <div class="meta-info mb-3">
         <span class="badge bg-primary text-white me-2 px-3 py-2">${blog.category || 'Technology'}</span>
                     <span class="text-muted ms-2 small"><i class="far fa-calendar-alt me-1"></i> ${formatDate(blog.createdAt)}</span>
@@ -624,8 +623,7 @@
     <!-- About the Author (Stabilized Layout) -->
     <div class="author-box mt-5 p-4 rounded-3 bg-light border-start border-5 border-primary d-flex align-items-center">
       <div class="flex-shrink-0">
-        <img src="assets/img/blog/author.png"
-          onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(blog.author || 'Author')}&background=random'"
+        <img src="${authorAvatarUrl}"
                          alt="${blog.author}" 
                          class="rounded-circle shadow-sm" 
                          style="width: 80px; height: 80px; object-fit: cover;">
@@ -647,14 +645,14 @@
             const category = b.category || 'Technology';
             let rawExcerpt = b.shortDescription || (b.content ? b.content.replace(/<[^>]*>/g, '') : '');
             if (rawExcerpt.length > 100) rawExcerpt = rawExcerpt.substring(0, 100) + '...';
-            const imageUrl = getImageUrl(b.image);
+            const imageUrl = b.image ? getImageUrl(b.image) : '';
 
             return `
     <div class="col-lg-4 col-md-6 mb-4">
       <div class="blog-card bg-white shadow-sm rounded">
         <div class="blog-card-image">
           <a href="blog-details.html?id=${b._id}">
-            <img src="${imageUrl}" alt="${b.title}" onerror="this.src='assets/img/blog/2.png'">
+            ${imageUrl ? `<img src="${imageUrl}" alt="${b.title}">` : ''}
             <div class="image-overlay"></div>
           </a>
         </div>

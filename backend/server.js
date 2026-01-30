@@ -28,6 +28,15 @@ app.use("/api/careers", require("./routes/career"));
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
+// Global error handler (captures multer and other errors)
+app.use((err, req, res, next) => {
+  console.error(err);
+  if (err && err.message && err.message.toLowerCase().includes('invalid file type')) {
+    return res.status(400).json({ message: err.message });
+  }
+  res.status(500).json({ message: 'Internal Server Error' });
+});
+
 app.listen(process.env.PORT || 5000, () => {
   console.log(`Server running on http://localhost:${process.env.PORT || 5000}`);
 });
