@@ -1,4 +1,4 @@
-$rootPath = "c:\Users\hp\Desktop\workspace\adminRole\adminRole\frontend\sheildsupport"
+$rootPath = "c:\Users\hp\Desktop\workspace\adminRole\frontend\sheildsupport"
 $files = Get-ChildItem -Path $rootPath -Recurse -Filter *.html
 
 $footerTemplate = @"
@@ -84,10 +84,7 @@ $footerTemplate = @"
                   
                   <p class="mt-2 text-white"><strong>Follow Us</strong></p>
                   <ul class="social-media">
-                    <li><a class="facebook" href="#"><i class="fab fa-facebook-f"></i></a></li>
-                    <li><a class="twitter" href="#"><i class="fab fa-twitter"></i></a></li>
-                    <li><a class="instagram" href="#"><i class="fab fa-instagram"></i></a></li>
-                    <li><a class="youtube" href="#"><i class="fab fa-youtube"></i></a></li>
+                    <li><a class="linkedin" href="https://www.linkedin.com/company/shieldsupport/posts/?feedView=all" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a></li>
                   </ul>
                 </div>
               </div>

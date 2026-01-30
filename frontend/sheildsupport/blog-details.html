@@ -187,6 +187,25 @@
     .ql-editor img {
       max-width: 100%;
     }
+
+    /* Blog Detail Main Image: enforce 16:9 (1920x1080) ratio ✅ */
+    .blog-header .thumb {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%; /* 16:9 ratio (1080 / 1920 = 0.5625) */
+      overflow: hidden;
+      border-radius: 0.75rem;
+    }
+    .blog-header .thumb img,
+    .blog-detail-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
   </style>
 
 
@@ -229,7 +248,7 @@
           <ul class="topbar-right text-md-start text-center">
             <li class="d-none d-lg-inline-block">
               <p>
-                <i class="far fa-clock"></i> Opening Hour 9:00am - 10:00pm
+                <i class="far fa-clock"></i> Opening Hour 10:00 am -05:00pm
               </p>
             </li>
             <li>
@@ -250,10 +269,10 @@
               </p>
             </li>
             <li class="d-none d-lg-inline-block">
-              <p>Hot Line: <span><a href="tel:+17327027324">+1 (732) 702-7324</a></span></p>
+              <p>Phone Number: <span><a href="tel:+17327027324">+1 (732) 702-7324</a></span></p>
             </li>
             <li class="social-area">
-              <p class="d-inline-block">Follow Us On:</p>
+              <p class="d-inline-block">Social:</p>
               <a href="https://www.linkedin.com/company/shieldsupport/posts/?feedView=all" target="_blank"><i
                   class="fab fa-linkedin-in" aria-hidden="true"></i></a>
               <a href="https://wa.me/17327027324" target="_blank"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
@@ -374,7 +393,7 @@
     </div>
   </div>
 
-              <!-- footer area start -->
+                          <!-- footer area start -->
       <footer class="footer-area bg-black bg-cover" style="background-image: url('assets/img/bg/2.png')">
         <div class="container">
           <div class="row">
@@ -456,10 +475,7 @@
                   
                   <p class="mt-2 text-white"><strong>Follow Us</strong></p>
                   <ul class="social-media">
-                    <li><a class="facebook" href="#"><i class="fab fa-facebook-f"></i></a></li>
-                    <li><a class="twitter" href="#"><i class="fab fa-twitter"></i></a></li>
-                    <li><a class="instagram" href="#"><i class="fab fa-instagram"></i></a></li>
-                    <li><a class="youtube" href="#"><i class="fab fa-youtube"></i></a></li>
+                    <li><a class="linkedin" href="https://www.linkedin.com/company/shieldsupport/posts/?feedView=all" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a></li>
                   </ul>
                 </div>
               </div>
@@ -575,9 +591,9 @@
     <!-- Header Section -->
     <div class="blog-header mb-5">
       <div class="thumb mb-4">
-        <img src="${imageUrl}" class="rounded-3 shadow-lg" alt="${blog.title}"
-                         onerror="this.src='assets/img/blog/2.png'" 
-                         style="max-height: 500px; width: 100%; object-fit: cover;">
+        <img src="${imageUrl}" class="rounded-3 shadow-lg blog-detail-image" alt="${blog.title}"
+                         width="1920" height="1080"
+                         onerror="this.src='assets/img/blog/2.png'">
       </div>
       <div class="meta-info mb-3">
         <span class="badge bg-primary text-white me-2 px-3 py-2">${blog.category || 'Technology'}</span>
@@ -696,4 +712,6 @@
 </body>
 
 </html>
+
+
 

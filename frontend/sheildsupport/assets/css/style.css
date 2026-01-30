@@ -45,9 +45,9 @@ Version: 1.0.5
 @import url("https://fonts.googleapis.com/css?family=Rajdhani:400,500,600,700|Poppins:400,500,600,700|Rubik:400,500,600,700|family=Inter:wght@300;400;500;600;700;800&amp;family=Roboto:wght@300;400;500;700&amp;display=swap");
 
 :root {
-  --main-color: #0060FF;
+  --main-color: #29419b;
   --main-color2: #EE0020;
-  --heading-color: #28419c;
+  --heading-color: #29419b;
   --paragraph-color: #1f1919;
   --body-font: "Rubik", sans-serif;
   --heading-font: "Rajdhani", sans-serif;
@@ -655,6 +655,34 @@ ul {
 
 .btn-base:hover {
   color: #fff;
+}
+
+/* Override: Keep the Schedule Meeting button black (desktop) and remove bluish hover */
+.nav-right-part-desktop .btn-base {
+  background: #000 !important;
+  color: #fff !important;
+  box-shadow: none !important;
+}
+
+.nav-right-part-desktop .btn-base:hover,
+.nav-right-part-desktop .btn-base:focus {
+  background: #000 !important;
+  color: #fff !important;
+  box-shadow: none !important;
+}
+
+/* Mobile sticky schedule button - keep black and remove bluish styling */
+.mobile-schedule-bar .btn-schedule {
+  background: #000 !important;
+  color: #fff !important;
+  box-shadow: none !important;
+}
+
+.mobile-schedule-bar .btn-schedule:hover,
+.mobile-schedule-bar .btn-schedule:focus {
+  background: #000 !important;
+  color: #fff !important;
+  box-shadow: none !important;
 }
 
 .btn-light-base {
@@ -1379,7 +1407,7 @@ ul {
 }
 
 .bg-blue {
-  background: #28419c;
+  background: #29419b;
 }
 
 .bg-red {
@@ -1822,7 +1850,7 @@ ul {
   position: relative;
   display: inline-block;
   margin-bottom: 4px;
-  color: var(--main-color);
+  color: #29419b;
   font-weight: 700;
 }
 
@@ -9424,13 +9452,13 @@ ul {
   overflow: hidden;
 }
 
-.cta-content-glass:hover {
+/* .cta-content-glass:hover {
   transform: translateY(-7px);
   background: #ffffff !important;
   border-color: rgba(0, 96, 255, 0.4);
   box-shadow: 0 15px 40px rgba(0, 96, 255, 0.15);
-  /* Neon Blue Glow */
-}
+  
+} */
 
 .cta-subtitle {
   display: block;
@@ -9734,7 +9762,7 @@ ul {
   height: 60px;
   line-height: 60px;
   text-align: center;
-  background: linear-gradient(135deg, var(--main-color) 0%, #2563eb 100%);
+  background: #29419b;
   border-radius: 50%;
   color: #fff;
   font-size: 24px;
@@ -9799,7 +9827,7 @@ ul {
   bottom: -2px;
   left: -2px;
   right: -2px;
-  background: linear-gradient(135deg, var(--main-color), #a2c4ff, #ffffff);
+  background: #29419b;
   z-index: -1;
   border-radius: 17px;
   /* Slightly larger than parent radius */

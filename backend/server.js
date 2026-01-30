@@ -19,7 +19,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/blogs", require("./routes/blog"));
-app.use("/api/users", require("./routes/users"));
+// app.use("/api/users", require("./routes/users"));
 // app.use("/api/tickets", require("./routes/tickets"));
 app.use("/api/meetings", require("./routes/meetings"));
 app.use("/api/subscribers", require("./routes/subscribers"));
