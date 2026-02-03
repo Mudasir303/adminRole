@@ -108,19 +108,9 @@
       filter: blur(40px);
     }
 
-    .branding .logo-circle {
-      width: 48px;
-      height: 48px;
-      background: linear-gradient(135deg, #3b82f6, #2563eb);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      font-size: 24px;
-      color: #fff;
+    .branding .logo-container {
+      width: 180px;
       margin-bottom: 32px;
-      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
       position: relative;
       z-index: 2;
     }
@@ -642,6 +632,41 @@
       background-color: #ff3b30;
     }
 
+    /* Toast Styling */
+    .toast-container {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      z-index: 10000;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .custom-toast {
+      background: #0f172a;
+      color: #fff;
+      padding: 16px 24px;
+      border-radius: 12px;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transform: translateX(-120%);
+      transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .custom-toast.show {
+      transform: translateX(0);
+    }
+
+    .custom-toast svg {
+      width: 20px;
+      height: 20px;
+      fill: #10b981;
+    }
+
     @media (max-width: 767px) {
       .fixed-sidebar-right {
         right: 10px;
@@ -662,12 +687,8 @@
     <!-- LEFT PANEL: Branding & Info -->
     <div class="schedule-left col-md-4 d-none d-md-flex">
       <div class="branding">
-        <div class="logo-circle">
-          <!-- Simple SVG Logo Placeholder -->
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-            stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-          </svg>
+        <div class="logo-container">
+          <img src="assets/img/unnamed footer logo.webp" alt="Shield Support Logo" style="width: 100%; height: auto;">
         </div>
         <h4>Schedule a Meeting</h4>
         <p>Choose a time for a consultation. Let's discuss your project goals.</p>
@@ -1138,8 +1159,39 @@
               window.open(url, "_blank");
             }
 
-            alert("Meeting scheduled successfully!");
-            // location.reload(); // Removed: Form is already reset and user stays on page
+            function showToast(message) {
+              const container = document.getElementById('toastContainer');
+              const toast = document.createElement('div');
+              toast.className = 'custom-toast';
+              toast.innerHTML = `
+                <svg viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                </svg>
+                <span>${message}</span>
+              `;
+              container.appendChild(toast);
+
+              // Trigger reflow
+              toast.offsetHeight;
+
+              toast.classList.add('show');
+
+              setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => {
+                  try {
+                    container.removeChild(toast);
+                  } catch (e) {
+                    // Toast might have been already removed
+                  }
+                }, 300);
+              }, 3000);
+            }
+
+            showToast("Meeting scheduled successfully!");
+            setTimeout(() => {
+              location.reload();
+            }, 3000);
           })
           .catch(err => {
             console.error(err);
@@ -1202,6 +1254,7 @@
     }
   </style>
 
+  <div id="toastContainer" class="toast-container"></div>
 </body>
 
 </html>

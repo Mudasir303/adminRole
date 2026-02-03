@@ -38,7 +38,6 @@ $footerTemplate = @"
                   <li><a href="{{PATH_PREFIX}}contact.html">Contact Us</a></li>
                   <li><a href="{{PATH_PREFIX}}privacy-policy.html">Privacy Policy</a></li>
                   <li><a href="{{PATH_PREFIX}}career.html">Career</a></li>
-                  <li><a href="{{PATH_PREFIX}}sitemap.html">Site Map</a></li>
                 </ul>
               </div>
             </div>
@@ -82,8 +81,8 @@ $footerTemplate = @"
                   <p class="mt-2 text-white"><strong>Malaysian Office</strong></p>
                   <p>RR Gemini Services No-7 Jalan Kesum 24/37 seksyen, 24 Shah Alam Selangor, Malaysia-40300</p>
                   
-                  <p class="mt-2 text-white"><strong>Follow Us</strong></p>
-                  <ul class="social-media">
+                  <p class="mt-2 mb-0 text-white"><strong>Follow Us</strong></p>
+                  <ul class="social-media" style="margin-top: 0; padding-left: 0;">
                     <li><a class="linkedin" href="https://www.linkedin.com/company/shieldsupport/posts/?feedView=all" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a></li>
                   </ul>
                 </div>

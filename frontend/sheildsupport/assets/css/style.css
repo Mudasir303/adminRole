@@ -659,7 +659,7 @@ ul {
 
 /* Override: Keep the Schedule Meeting button black (desktop) and remove bluish hover */
 .nav-right-part-desktop .btn-base {
-  background: #000 !important;
+  background: #B22335 !important;
   color: #fff !important;
   box-shadow: none !important;
 }
