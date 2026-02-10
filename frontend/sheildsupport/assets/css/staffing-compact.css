@@ -1,0 +1,16 @@
+/* Compact padding overrides for staffing pages */
+.pd-top-120 { padding-top: 0px !important; }
+.pd-top-115 { padding-top: 20px !important; }
+.pd-top-100 { padding-top: 80px !important; }
+.pd-bottom-120 { padding-bottom: 10px !important; }
+.pd-bottom-115 { padding-bottom: 20px !important; }
+.pd-bottom-100 { padding-bottom: 20px !important; }
+.pd-bottom-90 { padding-bottom: 20px !important; }
+
+/* Additional refinement for smaller components */
+.section-title { margin-bottom: 20px !important;
+margin-top: 10px !important; }
+.pd-top-110 { padding-top: 20px !important; }
+.pd-bottom-80 { padding-bottom: 20px !important; }
+.pd-bottom-70 { padding-bottom: 20px !important; }
+.pd-bottom-60 { padding-bottom: 20px !important; }

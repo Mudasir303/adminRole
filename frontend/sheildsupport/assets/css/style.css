@@ -45,6 +45,7 @@ Version: 1.0.5
 @import url("https://fonts.googleapis.com/css?family=Rajdhani:400,500,600,700|Poppins:400,500,600,700|Rubik:400,500,600,700|family=Inter:wght@300;400;500;600;700;800&amp;family=Roboto:wght@300;400;500;700&amp;display=swap");
 
 :root {
+  scroll-behavior: auto !important;
   --main-color: #29419b;
   --main-color2: #EE0020;
   --heading-color: #29419b;
@@ -650,7 +651,7 @@ ul {
 
 .btn-base {
   color: #fff;
-  background: var(--main-color);
+  background:#29419b; 
 }
 
 .btn-base:hover {
@@ -673,7 +674,7 @@ ul {
 
 /* Mobile sticky schedule button - keep black and remove bluish styling */
 .mobile-schedule-bar .btn-schedule {
-  background: #000 !important;
+  background: #B22335 !important;
   color: #fff !important;
   box-shadow: none !important;
 }
@@ -851,7 +852,7 @@ ul {
   background-color: var(--main-color);
   text-align: center;
   line-height: 44px;
-  z-index: 99;
+  z-index: 999;
   font-size: 25px;
   cursor: pointer;
   -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
@@ -1651,7 +1652,7 @@ ul {
 }
 
 .pd-top-120 {
-  padding-top: 95px;
+  padding-top: 40px;
 }
 
 .pd-top-200 {
@@ -1948,7 +1949,7 @@ ul {
 
 .section-title .title {
   margin-bottom: 0;
-  margin-top: 70px;
+  margin-top: 50px;
   font-weight: 700;
 }
 
@@ -1967,10 +1968,10 @@ ul {
   margin-bottom: 0;
 }
 
-.section-title .content-strong {
+/* .section-title .content-strong {
   font-weight: 500;
   color: var(--heading-color);
-}
+} */
 
 .section-title.style-white .sub-title {
   color: white;
@@ -9224,7 +9225,7 @@ ul {
 
 /* Section Spacing Helpers */
 .pd-top-80 {
-  padding-top: 100px;
+  padding-top: 45px;
 }
 
 .pd-bottom-80 {

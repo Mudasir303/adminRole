@@ -130,7 +130,7 @@
               <p>Phone Number: <span><a href="tel:+17327027324">+1 (732) 702-7324</a></span></p>
             </li>
             <li class="social-area">
-              <p class="d-inline-block">Social:</p>
+
               <a href="https://www.linkedin.com/company/shieldsupport/posts/?feedView=all" target="_blank"><i
                   class="fab fa-linkedin-in" aria-hidden="true"></i></a>
               <a href="https://wa.me/17327027324" target="_blank"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
@@ -165,7 +165,7 @@
             <a href="index.html">Home</a>
           </li>
           <li class="menu-item-has-children">
-            <a href="#">Services</a>
+            <a href="services.html">Services</a>
             <ul class="sub-menu">
               <li><a href="service-personal.html">Personal Help Desk</a></li>
               <li><a href="service-backend.html">Backend Support</a></li>
@@ -189,38 +189,22 @@
             </ul>
           </li>
 
-
-
           <li>
             <a href="about.html">About Us</a>
           </li>
-          <!-- <a href="#">Pages</a> -->
-          <!-- <ul class="sub-menu">
-              <li><a href="about.html">About Us</a></li>
-              <li><a href="team.html">Team</a></li>
-              <li><a href="team-details.html">Team Details</a></li>
-              <li><a href="project.html">Project</a></li>
-              <li><a href="project-details.html">Project Details</a></li>
-            </ul> -->
 
           <li>
             <a href="blog.html">Blog</a>
           </li>
           <li><a href="contact.html">Contact Us</a></li>
           <li><a href="resources.html">Resources</a></li>
-          <!-- <li> <a href="account.html">Account</a></li> -->
 
         </ul>
       </div>
       <div class="nav-right-part nav-right-part-desktop align-self-center">
-        <!-- <a class="search-bar-btn" href="#">
-          <i class="fa fa-search"></i>
-        </a> -->
-        <a class="btn btn-base" href="schedule.html">Schedule
-          Meeting</a>
+        <a class="btn btn-base" href="schedule.html">Schedule Meeting</a>
       </div>
     </div>
-
   </nav>
   <!-- navbar end -->
 
@@ -317,8 +301,9 @@
       </div>
       <div class="row">
         <div class="col-md">
-          <a class="video-play-btn mb-5 mb-md-0 video-play-btn-base" href="" data-effect="mfp-zoom-in"><i
-              class="fa fa-play"></i></a>
+          <a class="video-play-btn mb-5 mb-md-0 video-play-btn-base"
+            href="assets/img/output_progressive_10b389ef-f096-4110-8dbb-ca53c830713f%20(1).mp4"
+            data-effect="mfp-zoom-in"><i class="fa fa-play"></i></a>
         </div>
         <div class="col-md">
           <div class="single-exp-inner style-white">
@@ -1118,7 +1103,7 @@
           <div class="faq-image-wrap">
             <div class="thumb">
               <img src="assets/img/about/f1.png" alt="img" />
-              <img class="img-position-1" src="assets/img/about/f2.png" alt="img" />
+              <img class="img-position-1 " src="assets/img/about/f2.png" alt="img" />
               <img class="img-position-2 top_image_bounce" src="assets/img/about/f3.png" alt="img" />
             </div>
           </div>
@@ -1491,8 +1476,7 @@
       <div class="row justify-content-center">
         <div class="col-xl-6 col-lg-7 col-md-9">
           <div class="section-title style-white text-center">
-            <h5 class="sub-title double-line">Our Insights</h5>
-            <h2 class="title">Latest News & Articles</h2>
+            <h1 class="title double-line">Blogs</h1>
             <p class="content">
               Stay updated with the latest trends in technology, cybersecurity, and IT support
               to keep your digital life secure and efficient.
@@ -1508,7 +1492,7 @@
           </div>
         </div>
       </div>
-      <div class="row">
+      <div class="row" id="viewAllBlogsRow">
         <div class="col-12 text-center mt-4">
           <a class="btn btn-base" href="blog.html">View All Blogs</a>
         </div>
@@ -1801,6 +1785,8 @@
 
         if (recentBlogs.length === 0) {
           container.innerHTML = '<div class="col-12 text-center text-white"><p>No news available at the moment.</p></div>';
+          const btnRow = document.getElementById('viewAllBlogsRow');
+          if (btnRow) btnRow.style.display = 'none';
           return;
         }
 
@@ -1858,6 +1844,11 @@
       }
     });
   </script>
+  <!-- back to top area start -->
+  <div class="back-to-top">
+    <span class="back-top"><i class="fa fa-angle-up"></i></span>
+  </div>
+
   <!-- Fixed Social Sidebar Start -->
   <div class="fixed-sidebar-right">
     <ul class="list-unstyled mb-0">

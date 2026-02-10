@@ -596,7 +596,7 @@
           body: JSON.stringify({ email, password })
         });
         const data = await response.json();
-debugger;
+        debugger;
         if (response.ok && data.token) {
           localStorage.setItem("token", data.token);
           localStorage.setItem("role", data.role);
@@ -640,6 +640,10 @@ debugger;
     <span class="label">Ready to start?</span>
     <a href="schedule.html" target="_blank" class="btn-schedule">Schedule Meeting</a>
   </div> -->
+  <!-- back to top area start -->
+  <div class="back-to-top">
+    <span class="back-top"><i class="fa fa-angle-up"></i></span>
+  </div>
   <!-- Fixed Social Sidebar Start -->
   <div class="fixed-sidebar-right">
     <ul class="list-unstyled mb-0">

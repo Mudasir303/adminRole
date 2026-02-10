@@ -55,58 +55,63 @@
         /*--------------------------------------------------
             project-slider
         ---------------------------------------------------*/
-        $('.banner-slider').owlCarousel({
-            animateOut: 'fadeOut',
-            animateIn: 'fadeIn',
-            smartSpeed: 450,
-            loop: true,
-            autoplay: true,
-            autoplayTimeout: 10000,
-            nav: true,
-            dots: false,
-            items: 1,
-            smartSpeed: 1800,
-            navText: [leftArrow, rightArrow],
-        });
-
         /*--------------------------------------------------
-            client-slider
+            project-slider
         ---------------------------------------------------*/
-        $('.client-slider').owlCarousel({
-            loop: true,
-            margin: 30,
-            nav: false,
-            dots: false,
-            smartSpeed: 3000,
-            autoplay: true,
-            autoplayTimeout: 3000,
-            autoplayHoverPause: true,
-            slideTransition: 'linear',
-            navText: [leftArrow, rightArrow],
-            responsive: {
-                0: {
-                    items: 1
-                },
-                768: {
-                    items: 2
-                },
-                992: {
-                    items: 4
-                },
-            }
-        });
+        if ($.fn.owlCarousel) {
+            $('.banner-slider').owlCarousel({
+                animateOut: 'fadeOut',
+                animateIn: 'fadeIn',
+                smartSpeed: 450,
+                loop: true,
+                autoplay: true,
+                autoplayTimeout: 10000,
+                nav: true,
+                dots: false,
+                items: 1,
+                smartSpeed: 1800,
+                navText: [leftArrow, rightArrow],
+            });
 
-        /*--------------------------------------------------
-            client-slider
-        ---------------------------------------------------*/
-        $('.blog-thumb-slider').owlCarousel({
-            loop: true,
-            nav: true,
-            dots: false,
-            smartSpeed: 1500,
-            navText: [leftArrow, rightArrow],
-            items: 1,
-        });
+            /*--------------------------------------------------
+                client-slider
+            ---------------------------------------------------*/
+            $('.client-slider').owlCarousel({
+                loop: true,
+                margin: 30,
+                nav: false,
+                dots: false,
+                smartSpeed: 3000,
+                autoplay: true,
+                autoplayTimeout: 3000,
+                autoplayHoverPause: true,
+                slideTransition: 'linear',
+                navText: [leftArrow, rightArrow],
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    768: {
+                        items: 2
+                    },
+                    992: {
+                        items: 4
+                    },
+                }
+            });
+
+            /*--------------------------------------------------
+                client-slider
+            ---------------------------------------------------*/
+            $('.blog-thumb-slider').owlCarousel({
+                loop: true,
+                nav: true,
+                dots: false,
+                smartSpeed: 1500,
+                navText: [leftArrow, rightArrow],
+                items: 1,
+            });
+        }
 
         /*--------------------------------------------------
             client-slider
@@ -138,86 +143,94 @@
         /*--------------------------------------------------
             testimonial-slider
         ---------------------------------------------------*/
-        $('.testimonial-slider-2').owlCarousel({
-            loop: true,
-            margin: 30,
-            nav: true,
-            dots: false,
-            smartSpeed: 1500,
-            autoplay: true,
-            autoplayTimeout: 3000,
-            autoplayHoverPause: true,
-            center: true,
-            navText: [leftArrow, rightArrow],
-            responsive: {
-                0: {
-                    items: 1
-                },
-                768: {
-                    items: 2
-                },
-                992: {
-                    items: 3
-                },
-            }
-        });
-
         /*--------------------------------------------------
-            project-slider
+            testimonial-slider
         ---------------------------------------------------*/
-        $('.project-slider').owlCarousel({
-            loop: true,
-            margin: 30,
-            nav: false,
-            dots: false,
-            smartSpeed: 1500,
-            navText: [leftArrow, rightArrow],
-            responsive: {
-                0: {
-                    items: 1
-                },
-                768: {
-                    items: 2
-                },
-                992: {
-                    items: 3
-                },
-            }
-        });
+        if ($.fn.owlCarousel) {
+            $('.testimonial-slider-2').owlCarousel({
+                loop: true,
+                margin: 30,
+                nav: true,
+                dots: false,
+                smartSpeed: 1500,
+                autoplay: true,
+                autoplayTimeout: 3000,
+                autoplayHoverPause: true,
+                center: true,
+                navText: [leftArrow, rightArrow],
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    768: {
+                        items: 2
+                    },
+                    992: {
+                        items: 3
+                    },
+                }
+            });
 
-        /*--------------------------------------------------
-            project-slider
-        ---------------------------------------------------*/
-        $('.project-slider-2').owlCarousel({
-            loop: true,
-            margin: 30,
-            nav: false,
-            dots: false,
-            smartSpeed: 1500,
-            navText: [leftArrow, rightArrow],
-            responsive: {
-                0: {
-                    items: 1
-                },
-                768: {
-                    items: 3
-                },
-                992: {
-                    items: 3
-                },
-                1200: {
-                    items: 4
-                },
-                1600: {
-                    items: 5
-                },
-            }
-        });
+            /*--------------------------------------------------
+                project-slider
+            ---------------------------------------------------*/
+            $('.project-slider').owlCarousel({
+                loop: true,
+                margin: 30,
+                nav: false,
+                dots: false,
+                smartSpeed: 1500,
+                navText: [leftArrow, rightArrow],
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    768: {
+                        items: 2
+                    },
+                    992: {
+                        items: 3
+                    },
+                }
+            });
+
+            /*--------------------------------------------------
+                project-slider
+            ---------------------------------------------------*/
+            $('.project-slider-2').owlCarousel({
+                loop: true,
+                margin: 30,
+                nav: false,
+                dots: false,
+                smartSpeed: 1500,
+                navText: [leftArrow, rightArrow],
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    768: {
+                        items: 3
+                    },
+                    992: {
+                        items: 3
+                    },
+                    1200: {
+                        items: 4
+                    },
+                    1600: {
+                        items: 5
+                    },
+                }
+            });
+        }
 
         /*--------------------------------------------------
             select onput
         ---------------------------------------------------*/
-        if ($('.single-select').length) {
+        /*--------------------------------------------------
+            select onput
+        ---------------------------------------------------*/
+        if ($('.single-select').length && $.fn.niceSelect) {
             $('.single-select').niceSelect();
         }
 
@@ -262,33 +275,48 @@
         /* -------------------------------------------------
             Magnific JS Image
         ------------------------------------------------- */
-        $('.swp-image-popup').magnificPopup({
-            type: 'image',
-            mainClass: 'mfp-with-zoom',
-            gallery: {
-                enabled: true
-            },
-        });
+        /* -------------------------------------------------
+            Magnific JS Image
+        ------------------------------------------------- */
+        if ($.fn.magnificPopup) {
+            $('.swp-image-popup').magnificPopup({
+                type: 'image',
+                mainClass: 'mfp-with-zoom',
+                gallery: {
+                    enabled: true
+                },
+            });
 
-        /*------------------------------------------------
-            Magnific JS
-        ------------------------------------------------*/
-        $('.video-play-btn').magnificPopup({
-            type: 'iframe',
-            removalDelay: 260,
-            mainClass: 'mfp-zoom-in',
-        });
-        $.extend(true, $.magnificPopup.defaults, {
-            iframe: {
-                patterns: {
-                    youtube: {
-                        index: 'youtube.com/',
-                        id: 'v=',
-                        src: 'https://www.youtube.com/embed/Wimkqo8gDZ0'
-                    }
+            /*------------------------------------------------
+                Magnific JS
+            ------------------------------------------------*/
+            $('.video-play-btn').magnificPopup({
+                type: 'iframe',
+                removalDelay: 260,
+                mainClass: 'mfp-zoom-in',
+                iframe: {
+                    patterns: {
+                        youtube: {
+                            index: 'youtube.com/',
+                            id: 'v=',
+                            src: 'https://www.youtube.com/embed/%id%?autoplay=1'
+                        },
+                        vimeo: {
+                            index: 'vimeo.com/',
+                            id: '/',
+                            src: '//player.vimeo.com/video/%id%?autoplay=1'
+                        },
+                        gmaps: {
+                            index: '//maps.google.',
+                            src: '%id%&output=embed'
+                        }
+                    },
+                    srcAction: 'iframe_src',
                 }
-            }
-        });
+            });
+        }
+
+
 
 
 
@@ -331,81 +359,95 @@
         /* -----------------------------------------
             fact counter
         ----------------------------------------- */
-        $('.counter').counterUp({
-            delay: 15,
-            time: 2000
-        });
+        /* -----------------------------------------
+            fact counter
+        ----------------------------------------- */
+        if ($.fn.counterUp) {
+            $('.counter').counterUp({
+                delay: 15,
+                time: 2000
+            });
+        }
 
+        /* -------------------------------------------------------------
+           All-item isotope
+        ------------------------------------------------------------- */
         /* -------------------------------------------------------------
            All-item isotope
         ------------------------------------------------------------- */
         var $galleryFilterArea = $('.project-isotope'),
             $galleryFilterMenu = $('.project-isotope-btn');
         /*Filter*/
-        $galleryFilterMenu.on('click', 'button, a', function () {
-            var $this = $(this),
-                $filterValue = $this.attr('data-filter');
-            $galleryFilterMenu.find('button, a').removeClass('active');
-            $this.addClass('active');
-            $galleryFilterArea.isotope({ filter: $filterValue });
-        });
-        /*Grid*/
-        $galleryFilterArea.each(function () {
-            var $this = $(this),
-                $galleryFilterItem = '.all-isotope-item';
-            $this.imagesLoaded(function () {
-                $this.isotope({
-                    itemSelector: $galleryFilterItem,
-                    percentPosition: true,
-                    masonry: {
-                        columnWidth: '.item-sizer',
-                    }
-                });
+        if ($.fn.isotope) {
+            $galleryFilterMenu.on('click', 'button, a', function () {
+                var $this = $(this),
+                    $filterValue = $this.attr('data-filter');
+                $galleryFilterMenu.find('button, a').removeClass('active');
+                $this.addClass('active');
+                $galleryFilterArea.isotope({ filter: $filterValue });
             });
-        });
-
-        $('.testimonial-slider-3').owlCarousel({
-            loop: true,
-            thumbs: true,
-            items: 1,
-            responsiveClass: true, autoplayHoverPause: true,
-            autoplay: true,
-            slideSpeed: 1500,
-            paginationSpeed: 900,
-            thumbsPrerendered: true,
-            autoplayTimeout: 3000,
-            smartSpeed: 1500,
-            nav: false,
-            dots: false,
-            responsive: {
-                0: {
-                    items: 1,
-                    nav: false,
-                },
-                360: {
-                    items: 1,
-                    nav: false
-                },
-                768: {
-                    items: 1,
-                    nav: false,
-                },
-                1000: {
-                    items: 1,
-                    nav: false,
-                    loop: true
+            /*Grid*/
+            $galleryFilterArea.each(function () {
+                var $this = $(this),
+                    $galleryFilterItem = '.all-isotope-item';
+                if ($.fn.imagesLoaded) {
+                    $this.imagesLoaded(function () {
+                        $this.isotope({
+                            itemSelector: $galleryFilterItem,
+                            percentPosition: true,
+                            masonry: {
+                                columnWidth: '.item-sizer',
+                            }
+                        });
+                    });
                 }
-            }
-        });
+            });
+        }
+
+        if ($.fn.owlCarousel) {
+            $('.testimonial-slider-3').owlCarousel({
+                loop: true,
+                thumbs: true,
+                items: 1,
+                responsiveClass: true, autoplayHoverPause: true,
+                autoplay: true,
+                slideSpeed: 1500,
+                paginationSpeed: 900,
+                thumbsPrerendered: true,
+                autoplayTimeout: 3000,
+                smartSpeed: 1500,
+                nav: false,
+                dots: false,
+                responsive: {
+                    0: {
+                        items: 1,
+                        nav: false,
+                    },
+                    360: {
+                        items: 1,
+                        nav: false
+                    },
+                    768: {
+                        items: 1,
+                        nav: false,
+                    },
+                    1000: {
+                        items: 1,
+                        nav: false,
+                        loop: true
+                    }
+                }
+            });
+        }
 
 
         /*----------------------------------------
            back to top
         ----------------------------------------*/
         $(document).on('click', '.back-to-top', function () {
-            $("html,body").animate({
+            $("html,body").stop().animate({
                 scrollTop: 0
-            }, 2000);
+            }, 600);
         });
 
         /*--------------------------------------------------
@@ -450,10 +492,10 @@
             back-to-top
         -----------------------------------------*/
         var ScrollTop = $('.back-to-top');
-        if ($(window).scrollTop() > 1000) {
-            ScrollTop.fadeIn(1000);
+        if ($(window).scrollTop() > 400) {
+            ScrollTop.fadeIn(600);
         } else {
-            ScrollTop.fadeOut(1000);
+            ScrollTop.fadeOut(600);
         }
 
         /*---------------------------------------

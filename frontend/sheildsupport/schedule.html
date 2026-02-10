@@ -1190,7 +1190,7 @@
 
             showToast("Meeting scheduled successfully!");
             setTimeout(() => {
-              location.reload();
+              window.location.href = "index.html";
             }, 3000);
           })
           .catch(err => {
